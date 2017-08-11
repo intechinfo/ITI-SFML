@@ -1,212 +1,181 @@
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
-using SFML.Graphics;
-using SFML.Window;
-using SFML.System;
-using OpenTK;
-using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
+using System.Security;
 
 namespace opengl
 {
-    static class Program
+    static class GL
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        static void Main()
+        public enum Capability : int
         {
-            // Request a 24-bits depth buffer when creating the window
-            ContextSettings contextSettings = new ContextSettings();
-            contextSettings.DepthBits = 24;
+            DepthTest = 0x0B71,
+            Lighting = 0x0B50,
+            Texture2D = 0x0DE1,
+        }
 
-            // Create the main window
-            RenderWindow window = new RenderWindow(new VideoMode(800, 600), "SFML graphics with OpenGL", Styles.Default, contextSettings);
-            window.SetVerticalSyncEnabled(true);
+        public enum ClearBufferMask : int
+        {
+            Depth = 0x00000100,
+        }
 
-            // Initialize OpenTK
-            Toolkit.Init();
-            GraphicsContext context = new GraphicsContext(new ContextHandle(IntPtr.Zero), null);
+        public enum ClientCapability : int
+        {
+            VertexArray = 0x8074,
+            NormalArray = 0x8075,
+            ColorArray = 0x8076,
+            TextureCoordArray = 0x8078,
+        }
 
-            // Setup event handlers
-            window.Closed     += new EventHandler(OnClosed);
-            window.KeyPressed += new EventHandler<KeyEventArgs>(OnKeyPressed);
-            window.Resized    += new EventHandler<SizeEventArgs>(OnResized);
+        public enum Primitive : int
+        {
+            Triangles = 0x0004,
+        }
 
-            // Create a sprite for the background
-            Sprite background = new Sprite(new Texture("resources/background.jpg"));
+        public enum Format : int
+        {
+            RGBA = 0x1908,
+        }
 
-            // Create a text to display on top of the OpenGL object
-            Text text = new Text("SFML / OpenGL demo", new Font("resources/sansation.ttf"));
-            text.Position = new Vector2f(250, 450);
-            text.FillColor = new Color(255, 255, 255, 170);
+        public enum InternalFormat : int
+        {
+            RGBA = 0x1908,
+        }
 
-            // Make the window the active target for OpenGL calls
-            window.SetActive();
+        public enum Matrix : int
+        {
+            ModelView = 0x1700,
+            Projection = 0x1701,
+            Texture = 0x1702,
+            Color = 0x1703,
+        }
 
-            // Load an OpenGL texture.
-            // We could directly use a SFML.Graphics.Texture as an OpenGL texture (with its Bind() member function),
-            // but here we want more control on it (generate mipmaps, ...) so we create a new one
-            int texture = 0;
-            using (Image image = new Image("resources/texture.jpg"))
+        public enum PixelType : int
+        {
+            U8 = 0x1401,
+        }
+
+        public enum Target : int
+        {
+            Texture2D = 0x0DE1,
+        }
+
+        public enum TextureParameter : int
+        {
+            TextureMagFilter = 0x2800,
+            TextureMinFilter = 0x2801,
+        }
+
+        public enum TextureFilter : int
+        {
+            Linear = 0x2601,
+        }
+
+        public enum Type : int
+        {
+            Float = 0x1402,
+        }
+
+        [DllImport("OpenGL32", EntryPoint = "glBindTexture", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void BindTexture(Target target, uint texture);
+
+        [DllImport("OpenGL32", EntryPoint = "glClear", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void Clear(ClearBufferMask mask);
+
+        [DllImport("OpenGL32", EntryPoint = "glClearDepth", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void ClearDepth(double depth);
+
+        [DllImport("OpenGL32", EntryPoint = "glClearDepth", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void ClearDepth(float depth);
+
+        [DllImport("OpenGL32", EntryPoint = "glDeleteTextures", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void DeleteTextures(int count, ref uint texture);
+
+        public static void DepthMask(bool flag) => glDepthMask(flag ? 1 : 0);
+
+        [DllImport("OpenGL32", EntryPoint = "glDisable", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void Disable(Capability cap);
+
+        [DllImport("OpenGL32", EntryPoint = "glDisableClientState", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void DisableClientState(ClientCapability cap);
+
+        [DllImport("OpenGL32", EntryPoint = "glDrawArrays", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void DrawArrays(Primitive mode, int first, int count);
+
+        [DllImport("OpenGL32", EntryPoint = "glEnable", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void Enable(Capability cap);
+
+        [DllImport("OpenGL32", EntryPoint = "glEnableClientState", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void EnableClientState(ClientCapability cap);
+
+        [DllImport("OpenGL32", EntryPoint = "glFrustum", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void Frustum(double left, double right, double bottom, double top, double near, double far);
+
+        [DllImport("OpenGL32", EntryPoint = "glGenTextures", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void GenTextures(int count, out uint texture);
+
+        [DllImport("OpenGL32", EntryPoint = "glLoadIdentity", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void LoadIdentity();
+
+        [DllImport("OpenGL32", EntryPoint = "glMatrixMode", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void MatrixMode(Matrix mode);
+
+        [DllImport("OpenGL32", EntryPoint = "glRotatef", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void Rotate(float angle, float x, float y, float z);
+
+        public static void TexCoordPointer(int size, Type type, int stride, float[] data, int offset)
+        {
+            unsafe
             {
-                GL.GenTextures(1, out texture);
-                GL.BindTexture(TextureTarget.Texture2D, texture);
-                GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, (int)image.Size.X, (int)image.Size.Y, 0, PixelFormat.Rgba, PixelType.UnsignedByte, image.Pixels);
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
+                fixed (void* ptr = &data[offset])
+                {
+                    glTexCoordPointer(size, type, stride, ptr);
+                }
             }
+        }
 
-            // Enable Z-buffer read and write
-            GL.Enable(EnableCap.DepthTest);
-            GL.DepthMask(true);
-            GL.ClearDepth(1);
-
-            // Disable lighting
-            GL.Disable(EnableCap.Lighting);
-
-            // Configure the viewport (the same size as the window)
-            GL.Viewport(0, 0, (int)window.Size.X, (int)window.Size.Y);
-
-            // Setup a perspective projection
-            GL.MatrixMode(MatrixMode.Projection);
-            GL.LoadIdentity();
-            float ratio = (float)(window.Size.X) / window.Size.Y;
-            GL.Frustum(-ratio, ratio, -1, 1, 1, 500);
-
-            // Bind the texture
-            GL.Enable(EnableCap.Texture2D);
-            GL.BindTexture(TextureTarget.Texture2D, texture);
-
-            // Define a 3D cube (6 faces made of 2 triangles composed by 3 vertices)
-            float[] cube = new float[]
+        public static void TexImage2D(Target target, int level, InternalFormat internalFormat, int width, int height, int border, Format format, PixelType type, byte[] data)
+        {
+            unsafe
             {
-                // positions    // texture coordinates
-                -20, -20, -20,  0, 0,
-                -20,  20, -20,  1, 0,
-                -20, -20,  20,  0, 1,
-                -20, -20,  20,  0, 1,
-                -20,  20, -20,  1, 0,
-                -20,  20,  20,  1, 1,
-
-                 20, -20, -20,  0, 0,
-                 20,  20, -20,  1, 0,
-                 20, -20,  20,  0, 1,
-                 20, -20,  20,  0, 1,
-                 20,  20, -20,  1, 0,
-                 20,  20,  20,  1, 1,
-
-                -20, -20, -20,  0, 0,
-                 20, -20, -20,  1, 0,
-                -20, -20,  20,  0, 1,
-                -20, -20,  20,  0, 1,
-                 20, -20, -20,  1, 0,
-                 20, -20,  20,  1, 1,
-
-                -20,  20, -20,  0, 0,
-                 20,  20, -20,  1, 0,
-                -20,  20,  20,  0, 1,
-                -20,  20,  20,  0, 1,
-                 20,  20, -20,  1, 0,
-                 20,  20,  20,  1, 1,
-
-                -20, -20, -20,  0, 0,
-                 20, -20, -20,  1, 0,
-                -20,  20, -20,  0, 1,
-                -20,  20, -20,  0, 1,
-                 20, -20, -20,  1, 0,
-                 20,  20, -20,  1, 1,
-
-                -20, -20,  20,  0, 0,
-                 20, -20,  20,  1, 0,
-                -20,  20,  20,  0, 1,
-                -20,  20,  20,  0, 1,
-                 20, -20,  20,  1, 0,
-                 20,  20,  20,  1, 1
-            };
-
-            // Enable position and texture coordinates vertex components
-            GL.EnableClientState(ArrayCap.VertexArray);
-            GL.EnableClientState(ArrayCap.TextureCoordArray);
-            GL.VertexPointer(3, VertexPointerType.Float, 5 * sizeof(float), Marshal.UnsafeAddrOfPinnedArrayElement(cube, 0));
-            GL.TexCoordPointer(2, TexCoordPointerType.Float, 5 * sizeof(float), Marshal.UnsafeAddrOfPinnedArrayElement(cube, 3));
-
-            // Disable normal and color vertex components
-            GL.DisableClientState(ArrayCap.NormalArray);
-            GL.DisableClientState(ArrayCap.ColorArray);
-
-            Clock clock = new Clock();
-
-            // Start game loop
-            while (window.IsOpen)
-            {
-                // Process events
-                window.DispatchEvents();
-
-                // Clear the window
-                GL.Clear(ClearBufferMask.DepthBufferBit);
-
-                // Draw background
-                window.PushGLStates();
-                window.Draw(background);
-                window.PopGLStates();
-
-                // Clear the depth buffer
-                GL.Clear(ClearBufferMask.DepthBufferBit);
-
-                // We get the position of the mouse cursor, so that we can move the box accordingly
-                float x =  Mouse.GetPosition(window).X * 200.0F / window.Size.X - 100.0F;
-                float y = -Mouse.GetPosition(window).Y * 200.0F / window.Size.Y + 100.0F;
-
-                // Apply some transformations
-                GL.MatrixMode(MatrixMode.Modelview);
-                GL.LoadIdentity();
-                GL.Translate(x, y, -100.0F);
-                GL.Rotate(clock.ElapsedTime.AsSeconds() * 50, 1.0F, 0.0F, 0.0F);
-                GL.Rotate(clock.ElapsedTime.AsSeconds() * 30, 0.0F, 1.0F, 0.0F);
-                GL.Rotate(clock.ElapsedTime.AsSeconds() * 90, 0.0F, 0.0F, 1.0F);
-
-                // Draw the cube
-                GL.DrawArrays(OpenTK.Graphics.OpenGL.PrimitiveType.Triangles, 0, 36);
-
-                // Draw some text on top of our OpenGL object
-                window.PushGLStates();
-                window.Draw(text);
-                window.PopGLStates();
-
-                // Finally, display the rendered frame on screen
-                window.Display();
+                fixed (void* ptr = data)
+                {
+                    glTexImage2D(target, level, internalFormat, width, height, border, format, type, ptr);
+                }
             }
-
-            // Don't forget to destroy our texture
-            GL.DeleteTextures(1, ref texture);
         }
 
-        /// <summary>
-        /// Function called when the window is closed
-        /// </summary>
-        static void OnClosed(object sender, EventArgs e)
+        public static void TexParameter(Target target, TextureParameter param, TextureFilter paramValue) => TexParameter(target, param, (int)paramValue);
+
+        [DllImport("OpenGL32", EntryPoint = "glTexParameteri", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void TexParameter(Target target, TextureParameter param, int paramValue);
+
+        [DllImport("OpenGL32", EntryPoint = "glTranslatef", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void Translate(float x, float y, float z);
+
+        public static void VertexPointer(int size, Type type, int stride, float[] data, int offset)
         {
-            RenderWindow window = (RenderWindow)sender;
-            window.Close();
+            unsafe
+            {
+                fixed (void* ptr = &data[offset])
+                {
+                    glVertexPointer(size, type, stride, ptr);
+                }
+            }
         }
 
-        /// <summary>
-        /// Function called when a key is pressed
-        /// </summary>
-        static void OnKeyPressed(object sender, KeyEventArgs e)
-        {
-            RenderWindow window = (RenderWindow)sender;
-            if (e.Code == Keyboard.Key.Escape)
-                window.Close();
-        }
+        [DllImport("OpenGL32", EntryPoint = "glViewport", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        public static extern void Viewport(int x, int y, int width, int height);
 
-        /// <summary>
-        /// Function called when the window is resized
-        /// </summary>
-        static void OnResized(object sender, SizeEventArgs e)
-        {
-            GL.Viewport(0, 0, (int)e.Width, (int)e.Height);
-        }
+        [DllImport("OpenGL32", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static extern void glDepthMask(int flag);
+
+        [DllImport("OpenGL32", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static unsafe extern void glTexImage2D(Target target, int level, InternalFormat internalFormat, int width, int height, int border, Format format, PixelType type, void* data);
+
+        [DllImport("OpenGL32", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static unsafe extern void glTexCoordPointer(int size, Type type, int stride, void* pointer);
+
+        [DllImport("OpenGL32", CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        private static unsafe extern void glVertexPointer(int size, Type type, int stride, void* pointer);
     }
 }
