@@ -1,0 +1,13 @@
+language: csharp
+os:
+    - linux
+    - osx
+mono: none
+install: true
+dotnet: latest
+env:
+    - BUILD_OPTS="-c Debug"
+    - BUILD_OPTS="-c Release"
+script:
+    - dotnet build $(BUILD_OPTS) build/vc2015/SFML.net.sln
+
