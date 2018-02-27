@@ -4,7 +4,7 @@ os:
     - osx
 mono: none
 install: true
-dotnet: latest
+dotnet: 2.1.4
 env:
     - BUILD_OPTS="-c Debug"
     - BUILD_OPTS="-c Release"
