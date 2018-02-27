@@ -1,0 +1,3 @@
+language: csharp
+solution: build/vc2010/SFML.net.sln
+
