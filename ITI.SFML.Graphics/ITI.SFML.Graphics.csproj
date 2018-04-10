@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyTitle>SFML</AssemblyTitle>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\ITI.SFML.System\ITI.SFML.System.csproj" />
+    <ProjectReference Include="..\ITI.SFML.Window\ITI.SFML.Window.csproj" />
+  </ItemGroup>
+</Project>
