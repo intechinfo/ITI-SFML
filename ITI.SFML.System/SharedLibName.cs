@@ -30,20 +30,20 @@ namespace SFML.System
         }
 
 #if   _WINDOWS_
-        public const string audio       = "csfml-audio-2.dll";
-        public const string graphics    = "csfml-graphics-2.dll";
-        public const string system      = "csfml-system-2.dll";
-        public const string window      = "csfml-window-2.dll";
+        public const string Audio       = "csfml-audio-2.dll";
+        public const string Graphics    = "csfml-graphics-2.dll";
+        public const string System      = "csfml-system-2.dll";
+        public const string Window      = "csfml-window-2.dll";
 #elif _OSX_
-        public const string audio       = "libcsfml-audio.dylib";
-        public const string graphics    = "libcsfml-graphics.dylib";
-        public const string system      = "libcsfml-system.dylib";
-        public const string window      = "libcsfml-window.dylib";
+        public const string Audio       = "libcsfml-audio.dylib";
+        public const string Graphics    = "libcsfml-graphics.dylib";
+        public const string System      = "libcsfml-system.dylib";
+        public const string Window      = "libcsfml-window.dylib";
 #elif _LINUX_
-        public const string audio       = "libcsfml-audio.so";
-        public const string graphics    = "libcsfml-graphics.so";
-        public const string system      = "libcsfml-system.so";
-        public const string window      = "libcsfml-window.so";
+        public const string Audio       = "libcsfml-audio.so";
+        public const string Graphics    = "libcsfml-graphics.so";
+        public const string System      = "libcsfml-system.so";
+        public const string Window      = "libcsfml-window.so";
 #endif
 
 
