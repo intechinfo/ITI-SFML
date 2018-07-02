@@ -8,22 +8,18 @@ using SFML.Window;
 
 namespace SFML.Graphics
 {
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Font is the low-level class for loading and
     /// manipulating character fonts. This class is meant to
     /// be used by String2D
     /// </summary>
-    ////////////////////////////////////////////////////////////
     public class Font : ObjectBase
     {
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Construct the font from a file
         /// </summary>
         /// <param name="filename">Font file to load</param>
         /// <exception cref="LoadingFailedException" />
-        ////////////////////////////////////////////////////////////
         public Font(string filename) :
             base(sfFont_createFromFile(filename))
         {
@@ -31,13 +27,11 @@ namespace SFML.Graphics
                 throw new LoadingFailedException("font", filename);
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Construct the font from a custom stream
         /// </summary>
         /// <param name="stream">Source stream to read from</param>
         /// <exception cref="LoadingFailedException" />
-        ////////////////////////////////////////////////////////////
         public Font(Stream stream) :
             base(IntPtr.Zero)
         {
@@ -48,15 +42,13 @@ namespace SFML.Graphics
                 throw new LoadingFailedException("font");
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Construct the font from a file in memory
         /// </summary>
         /// <param name="bytes">Byte array containing the file contents</param>
         /// <exception cref="LoadingFailedException" />
-        ////////////////////////////////////////////////////////////
-        public Font(byte[] bytes) :
-            base(IntPtr.Zero)
+        public Font(byte[] bytes) 
+            : base(IntPtr.Zero)
         {
             GCHandle pin = GCHandle.Alloc(bytes, GCHandleType.Pinned);
             try
@@ -71,41 +63,35 @@ namespace SFML.Graphics
                 throw new LoadingFailedException("font");
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct the font from another font
+        /// Construct the font from another font.
         /// </summary>
         /// <param name="copy">Font to copy</param>
-        ////////////////////////////////////////////////////////////
-        public Font(Font copy) :
-            base(sfFont_copy(copy.CPointer))
+        public Font(Font copy) 
+            : base(sfFont_copy(copy.CPointer))
         {
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Get a glyph in the font
+        /// Get a glyph in the font.
         /// </summary>
         /// <param name="codePoint">Unicode code point of the character to get</param>
         /// <param name="characterSize">Character size</param>
         /// <param name="bold">Retrieve the bold version or the regular one?</param>
         /// <param name="outlineThickness">Thickness of outline (when != 0 the glyph will not be filled)</param>
         /// <returns>The glyph corresponding to the character</returns>
-        ////////////////////////////////////////////////////////////
         public Glyph GetGlyph(uint codePoint, uint characterSize, bool bold, float outlineThickness)
         {
             return sfFont_getGlyph(CPointer, codePoint, characterSize, bold, outlineThickness);
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Get the kerning offset between two glyphs
+        /// Get the kerning offset between two glyphs.
         /// </summary>
         /// <param name="first">Unicode code point of the first character</param>
         /// <param name="second">Unicode code point of the second character</param>
         /// <param name="characterSize">Character size</param>
         /// <returns>Kerning offset, in pixels</returns>
-        ////////////////////////////////////////////////////////////
         public float GetKerning(uint first, uint second, uint characterSize)
         {
             return sfFont_getKerning(CPointer, first, second, characterSize);

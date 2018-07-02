@@ -6,7 +6,7 @@ using SFML.Window;
 namespace shader
 {
     /// <summary>Base class for effects</summary>
-    abstract class Effect : Drawable
+    abstract class Effect : IDrawable
     {
         protected Effect(string name)
         {
@@ -21,7 +21,7 @@ namespace shader
                 OnUpdate(time, x, y);
         }
 
-        public void Draw(RenderTarget target, RenderStates states)
+        public void Draw(IRenderTarget target, in RenderStates states)
         {
             if (Shader.IsAvailable)
             {
@@ -42,7 +42,7 @@ namespace shader
         }
 
         protected abstract void OnUpdate(float time, float x, float y);
-        protected abstract void OnDraw(RenderTarget target, RenderStates states);
+        protected abstract void OnDraw(IRenderTarget target, in RenderStates states);
 
         protected Font GetFont()
         {
@@ -72,11 +72,9 @@ namespace shader
             myShader.SetUniform("pixel_threshold", (x + y) / 30);
         }
 
-        protected override void OnDraw(RenderTarget target, RenderStates states)
+        protected override void OnDraw(IRenderTarget target, in RenderStates states)
         {
-            states = new RenderStates(states);
-            states.Shader = myShader;
-            target.Draw(mySprite, states);
+            target.Draw(mySprite, states.WithShader(myShader));
         }
 
         private Texture myTexture;
@@ -124,11 +122,9 @@ namespace shader
             myShader.SetUniform("blur_radius", (x + y) * 0.008F);
         }
 
-        protected override void OnDraw(RenderTarget target, RenderStates states)
+        protected override void OnDraw(IRenderTarget target, in RenderStates states)
         {
-            states = new RenderStates(states);
-            states.Shader = myShader;
-            target.Draw(myText, states);
+            target.Draw(myText, states.WithShader(myShader) );
         }
 
         private Text myText;
@@ -167,11 +163,9 @@ namespace shader
             myShader.SetUniform("blink_alpha", 0.5F + (float)Math.Cos(time * 3) * 0.25F);
         }
 
-        protected override void OnDraw(RenderTarget target, RenderStates states)
+        protected override void OnDraw(IRenderTarget target, in RenderStates states)
         {
-            states = new RenderStates(states);
-            states.Shader = myShader;
-            target.Draw(myPoints, states);
+            target.Draw(myPoints, states.WithShader(myShader));
         }
 
         private VertexArray myPoints;
@@ -229,11 +223,9 @@ namespace shader
             mySurface.Display();
         }
 
-        protected override void OnDraw(RenderTarget target, RenderStates states)
+        protected override void OnDraw(IRenderTarget target, in RenderStates states)
         {
-            states = new RenderStates(states);
-            states.Shader = myShader;
-            target.Draw(new Sprite(mySurface.Texture), states);
+            target.Draw(new Sprite(mySurface.Texture), states.WithShader(myShader));
         }
 
         private RenderTexture mySurface;

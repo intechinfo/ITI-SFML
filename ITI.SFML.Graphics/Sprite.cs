@@ -5,61 +5,53 @@ using SFML.System;
 
 namespace SFML.Graphics
 {
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// This class defines a sprite : texture, transformations,
-    /// color, and draw on screen
+    /// color, and draw on screen.
     /// </summary>
     /// <remarks>
     /// See also the note on coordinates and undistorted rendering in SFML.Graphics.Transformable.
     /// </remarks>
-    ////////////////////////////////////////////////////////////
-    public class Sprite : Transformable, Drawable
+    public class Sprite : Transformable, IDrawable
     {
-        ////////////////////////////////////////////////////////////
+        Texture _texture;
+
         /// <summary>
-        /// Default constructor
+        /// Default constructor.
         /// </summary>
-        ////////////////////////////////////////////////////////////
-        public Sprite() :
-            base(sfSprite_create())
+        public Sprite() 
+            : base(sfSprite_create())
         {
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct the sprite from a source texture
+        /// Constructs the sprite from a source texture.
         /// </summary>
-        /// <param name="texture">Source texture to assign to the sprite</param>
-        ////////////////////////////////////////////////////////////
-        public Sprite(Texture texture) :
-            base(sfSprite_create())
+        /// <param name="texture">Source texture to assign to the sprite.</param>
+        public Sprite(Texture texture) 
+            : base(sfSprite_create())
         {
             Texture = texture;
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct the sprite from a source texture
+        /// Constructs the sprite from a source texture.
         /// </summary>
-        /// <param name="texture">Source texture to assign to the sprite</param>
-        /// <param name="rectangle">Sub-rectangle of the texture to assign to the sprite</param>
-        ////////////////////////////////////////////////////////////
-        public Sprite(Texture texture, IntRect rectangle) :
-            base(sfSprite_create())
+        /// <param name="texture">Source texture to assign to the sprite.</param>
+        /// <param name="rectangle">Sub-rectangle of the texture to assign to the sprite.</param>
+        public Sprite(Texture texture, IntRect rectangle) 
+            : base(sfSprite_create())
         {
             Texture = texture;
             TextureRect = rectangle;
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct the sprite from another sprite
+        /// Constructs the sprite from another sprite.
         /// </summary>
         /// <param name="copy">Sprite to copy</param>
-        ////////////////////////////////////////////////////////////
-        public Sprite(Sprite copy) :
-            base(sfSprite_copy(copy.CPointer))
+        public Sprite(Sprite copy) 
+            : base(sfSprite_copy(copy.CPointer))
         {
             Origin = copy.Origin;
             Position = copy.Position;
@@ -68,68 +60,60 @@ namespace SFML.Graphics
             Texture = copy.Texture;
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Global color of the object
+        /// Gets or sets the global color of the sprite.
         /// </summary>
-        ////////////////////////////////////////////////////////////
         public Color Color
         {
             get { return sfSprite_getColor(CPointer); }
             set { sfSprite_setColor(CPointer, value); }
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Source texture displayed by the sprite
+        /// Gets or sets the source texture displayed by the sprite.
         /// </summary>
-        ////////////////////////////////////////////////////////////
         public Texture Texture
         {
-            get { return myTexture; }
-            set { myTexture = value; sfSprite_setTexture(CPointer, value != null ? value.CPointer : IntPtr.Zero, false); }
+            get { return _texture; }
+            set { _texture = value; sfSprite_setTexture(CPointer, value != null ? value.CPointer : IntPtr.Zero, false); }
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Sub-rectangle of the source image displayed by the sprite
+        /// Gets or sets the sub-rectangle of the source image displayed by the sprite.
         /// </summary>
-        ////////////////////////////////////////////////////////////
         public IntRect TextureRect
         {
             get { return sfSprite_getTextureRect(CPointer); }
             set { sfSprite_setTextureRect(CPointer, value); }
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Get the local bounding rectangle of the entity.
-        ///
+        /// Gets the local bounding rectangle of the entity.
+        /// <para>
         /// The returned rectangle is in local coordinates, which means
         /// that it ignores the transformations (translation, rotation,
         /// scale, ...) that are applied to the entity.
         /// In other words, this function returns the bounds of the
         /// entity in the entity's coordinate system.
+        /// </para>
         /// </summary>
-        /// <returns>Local bounding rectangle of the entity</returns>
-        ////////////////////////////////////////////////////////////
+        /// <returns>Local bounding rectangle of the entity.</returns>
         public FloatRect GetLocalBounds()
         {
             return sfSprite_getLocalBounds(CPointer);
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Get the global bounding rectangle of the entity.
-        ///
+        /// Gets the global bounding rectangle of the entity.
+        /// <para>
         /// The returned rectangle is in global coordinates, which means
         /// that it takes in account the transformations (translation,
         /// rotation, scale, ...) that are applied to the entity.
         /// In other words, this function returns the bounds of the
         /// sprite in the global 2D world's coordinate system.
+        /// </para>
         /// </summary>
-        /// <returns>Global bounding rectangle of the entity</returns>
-        ////////////////////////////////////////////////////////////
+        /// <returns>Global bounding rectangle of the entity.</returns>
         public FloatRect GetGlobalBounds()
         {
             // we don't use the native getGlobalBounds function,
@@ -137,12 +121,10 @@ namespace SFML.Graphics
             return Transform.TransformRect(GetLocalBounds());
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Provide a string describing the object
+        /// Provides a string describing the object
         /// </summary>
         /// <returns>String description of the object</returns>
-        ////////////////////////////////////////////////////////////
         public override string ToString()
         {
             return "[Sprite]" +
@@ -151,40 +133,32 @@ namespace SFML.Graphics
                    " TextureRect(" + TextureRect + ")";
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Draw the sprite to a render target
+        /// Draws the sprite to a render target.
         /// </summary>
         /// <param name="target">Render target to draw to</param>
-        /// <param name="states">Current render states</param>
-        ////////////////////////////////////////////////////////////
-        public void Draw(RenderTarget target, RenderStates states)
+        /// <param name="states">The render states to use.</param>
+        public void Draw(IRenderTarget target, in RenderStates states)
         {
-            states.Transform *= Transform;
-            RenderStates.MarshalData marshaledStates = states.Marshal();
-
+            RenderStates.MarshalData marshaled = states.WithAppliedTransform(Transform).Marshal();
             if (target is RenderWindow)
             {
-                sfRenderWindow_drawSprite(((RenderWindow)target).CPointer, CPointer, ref marshaledStates);
+                sfRenderWindow_drawSprite(((RenderWindow)target).CPointer, CPointer, ref marshaled);
             }
             else if (target is RenderTexture)
             {
-                sfRenderTexture_drawSprite(((RenderTexture)target).CPointer, CPointer, ref marshaledStates);
+                sfRenderTexture_drawSprite(((RenderTexture)target).CPointer, CPointer, ref marshaled);
             }
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Handle the destruction of the object
+        /// Handles the destruction of the object.
         /// </summary>
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        ////////////////////////////////////////////////////////////
         protected override void Destroy(bool disposing)
         {
             sfSprite_destroy(CPointer);
         }
-
-        private Texture myTexture = null;
 
         #region Imports
 

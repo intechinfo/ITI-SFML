@@ -398,15 +398,12 @@ namespace SFML.Graphics.Glsl
     #endregion
 
     #region Matrices
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// <see cref="Mat3"/> is a struct representing a glsl mat3 value
     /// </summary>
-    ////////////////////////////////////////////////////////////
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct Mat3
     {
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Construct the <see cref="Mat3"/> from its components
         /// </summary>
@@ -414,7 +411,6 @@ namespace SFML.Graphics.Glsl
         /// <remarks>
         /// Arguments are in row-major order
         /// </remarks>
-        ////////////////////////////////////////////////////////////
         public Mat3(float a00, float a01, float a02,
                     float a10, float a11, float a12,
                     float a20, float a21, float a22)
@@ -427,13 +423,11 @@ namespace SFML.Graphics.Glsl
             }
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Construct the <see cref="Mat3"/> from a SFML <see cref="Transform"/>
         /// </summary>
         /// <param name="transform">A SFML <see cref="Transform"/></param>
-        ////////////////////////////////////////////////////////////
-        public Mat3(Transform transform)
+        public Mat3(in Transform transform)
         {
             fixed (float* m = array)
             {
@@ -447,15 +441,12 @@ namespace SFML.Graphics.Glsl
         private fixed float array[3 * 3];
     }
 
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// <see cref="Mat4"/> is a struct representing a glsl mat4 value
     /// </summary>
-    ////////////////////////////////////////////////////////////
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct Mat4
     {
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Provides easy-access to an identity matrix
         /// </summary>
@@ -463,7 +454,6 @@ namespace SFML.Graphics.Glsl
         /// <remarks>
         /// Keep in mind that a Mat4 cannot be modified after construction
         /// </remarks>
-        ////////////////////////////////////////////////////////////
         public static Mat4 Identity
         {
             get
@@ -475,7 +465,6 @@ namespace SFML.Graphics.Glsl
             }
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Construct the <see cref="Mat4"/> from its components
         /// </summary>
@@ -483,7 +472,6 @@ namespace SFML.Graphics.Glsl
         /// <remarks>
         /// Arguments are in row-major order
         /// </remarks>
-        ////////////////////////////////////////////////////////////
         public Mat4(float a00, float a01, float a02, float a03,
                     float a10, float a11, float a12, float a13,
                     float a20, float a21, float a22, float a23,
@@ -499,13 +487,11 @@ namespace SFML.Graphics.Glsl
             }
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Construct the <see cref="Mat3"/> from a SFML <see cref="Transform"/> and expand it to a 4x4 matrix
         /// </summary>
         /// <param name="transform">A SFML <see cref="Transform"/></param>
-        ////////////////////////////////////////////////////////////
-        public Mat4(Transform transform)
+        public Mat4(in Transform transform)
         {
             fixed (float* m = array)
             {

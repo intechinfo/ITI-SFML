@@ -6,50 +6,42 @@ using SFML.System;
 
 namespace SFML.Window
 {
-    //////////////////////////////////////////////////////////////////
     /// <summary>
     /// This class defines a .NET interface to an SFML OpenGL Context
     /// </summary>
-    //////////////////////////////////////////////////////////////////
     public class Context : CriticalFinalizerObject
     {
-        ////////////////////////////////////////////////////////////
+        private IntPtr myThis = IntPtr.Zero;
+        
         /// <summary>
         /// Default constructor
         /// </summary>
-        ////////////////////////////////////////////////////////////
         public Context()
         {
             myThis = sfContext_create();
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Finalizer
         /// </summary>
-        ////////////////////////////////////////////////////////////
         ~Context()
         {
             sfContext_destroy(myThis);
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Activate or deactivate the context
         /// </summary>
         /// <param name="active">True to activate, false to deactivate</param>
         /// <returns>true on success, false on failure</returns>
-        ////////////////////////////////////////////////////////////
         public bool SetActive(bool active)
         {
             return sfContext_setActive(myThis, active);
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Get the settings of the context.
         /// </summary>
-        ////////////////////////////////////////////////////////////
         public ContextSettings Settings
         {
             get { return sfContext_getSettings(myThis); }
@@ -83,8 +75,6 @@ namespace SFML.Window
         }
 
         private static Context ourGlobalContext = null;
-
-        private IntPtr myThis = IntPtr.Zero;
 
         #region Imports
         [DllImport(CSFML.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]

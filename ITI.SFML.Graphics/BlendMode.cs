@@ -3,19 +3,46 @@ using System.Runtime.InteropServices;
 
 namespace SFML.Graphics
 {
-    ////////////////////////////////////////////////////////////
     /// <summary>
-    /// Blending modes for drawing
+    /// Blending modes for drawing.
     /// </summary>
-    ////////////////////////////////////////////////////////////
     [StructLayout(LayoutKind.Sequential)]
-    public struct BlendMode : IEquatable<BlendMode>
+    public readonly struct BlendMode : IEquatable<BlendMode>
     {
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Enumeration of the blending factors
+        /// Source blending factor for the color channels.
         /// </summary>
-        ////////////////////////////////////////////////////////////
+        public readonly Factor ColorSrcFactor;
+
+        /// <summary>
+        /// Destination blending factor for the color channels.
+        /// </summary>
+        public readonly Factor ColorDstFactor;
+
+        /// <summary>
+        /// Blending equation for the color channels.
+        /// </summary>
+        public readonly Equation ColorEquation;
+
+        /// <summary>
+        /// Source blending factor for the alpha channel.
+        /// </summary>
+        public readonly Factor AlphaSrcFactor;
+
+        /// <summary>
+        /// Destination blending factor for the alpha channel.
+        /// </summary>
+        public readonly Factor AlphaDstFactor;
+
+        /// <summary>
+        /// Blending equation for the alpha channel.
+        /// </summary>
+        public readonly Equation AlphaEquation;
+
+
+        /// <summary>
+        /// Enumeration of the blending factors.
+        /// </summary>
         public enum Factor
         {
             /// <summary>(0, 0, 0, 0)</summary>
@@ -49,11 +76,9 @@ namespace SFML.Graphics
             OneMinusDstAlpha
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Enumeration of the blending equations
         /// </summary>
-        ////////////////////////////////////////////////////////////
         public enum Equation
         {
             /// <summary>Pixel = Src * SrcFactor + Dst * DstFactor</summary>
@@ -81,34 +106,29 @@ namespace SFML.Graphics
         public static readonly BlendMode None = new BlendMode(Factor.One, Factor.Zero);
 
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct the blend mode given the factors and equation
+        /// Construct the blend mode given the factors and equation.
         /// </summary>
         /// <param name="SourceFactor">Specifies how to compute the source factor for the color and alpha channels.</param>
         /// <param name="DestinationFactor">Specifies how to compute the destination factor for the color and alpha channels.</param>
-        ////////////////////////////////////////////////////////////
         public BlendMode(Factor SourceFactor, Factor DestinationFactor)
             : this(SourceFactor, DestinationFactor, Equation.Add)
         {
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct the blend mode given the factors and equation
+        /// Constructs the blend mode given the factors and equation.
         /// </summary>
         /// <param name="SourceFactor">Specifies how to compute the source factor for the color and alpha channels.</param>
         /// <param name="DestinationFactor">Specifies how to compute the destination factor for the color and alpha channels.</param>
         /// <param name="BlendEquation">Specifies how to combine the source and destination colors and alpha.</param>
-        ////////////////////////////////////////////////////////////
         public BlendMode(Factor SourceFactor, Factor DestinationFactor, Equation BlendEquation)
             : this(SourceFactor, DestinationFactor, BlendEquation, SourceFactor, DestinationFactor, BlendEquation)
         {
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct the blend mode given the factors and equation
+        /// Constructs the blend mode given the factors and equation.
         /// </summary>
         /// <param name="ColorSourceFactor">Specifies how to compute the source factor for the color channels.</param>
         /// <param name="ColorDestinationFactor">Specifies how to compute the destination factor for the color channels.</param>
@@ -116,8 +136,13 @@ namespace SFML.Graphics
         /// <param name="AlphaSourceFactor">Specifies how to compute the source factor.</param>
         /// <param name="AlphaDestinationFactor">Specifies how to compute the destination factor.</param>
         /// <param name="AlphaBlendEquation">Specifies how to combine the source and destination alphas.</param>
-        ////////////////////////////////////////////////////////////
-        public BlendMode(Factor ColorSourceFactor, Factor ColorDestinationFactor, Equation ColorBlendEquation, Factor AlphaSourceFactor, Factor AlphaDestinationFactor, Equation AlphaBlendEquation)
+        public BlendMode(
+                Factor ColorSourceFactor, 
+                Factor ColorDestinationFactor, 
+                Equation ColorBlendEquation, 
+                Factor AlphaSourceFactor, 
+                Factor AlphaDestinationFactor, 
+                Equation AlphaBlendEquation)
         {
             ColorSrcFactor = ColorSourceFactor;
             ColorDstFactor = ColorDestinationFactor;
@@ -127,47 +152,30 @@ namespace SFML.Graphics
             AlphaEquation = AlphaBlendEquation;
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Compare two blend modes and checks if they are equal
+        /// Compares two blend modes and checks if they are equal.
         /// </summary>
-        /// <returns>Blend Modes are equal</returns>
-        ////////////////////////////////////////////////////////////
-        public static bool operator ==(BlendMode left, BlendMode right)
-        {
-            return left.Equals(right);
-        }
+        /// <returns>Blend Modes are equal.</returns>
+        public static bool operator ==(BlendMode left, BlendMode right) => left.Equals(right);
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Compare two blend modes and checks if they are not equal
+        /// Compares two blend modes and checks if they are not equal.
         /// </summary>
-        /// <returns>Blend Modes are not equal</returns>
-        ////////////////////////////////////////////////////////////
-        public static bool operator !=(BlendMode left, BlendMode right)
-        {
-            return !left.Equals(right);
-        }
+        /// <returns>Blend Modes are not equal.</returns>
+        public static bool operator !=(BlendMode left, BlendMode right) => !left.Equals(right);
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Compare blend mode and object and checks if they are equal
+        /// Compares blend mode and object and checks if they are equal.
         /// </summary>
-        /// <param name="obj">Object to check</param>
-        /// <returns>Object and blend mode are equal</returns>
-        ////////////////////////////////////////////////////////////
-        public override bool Equals(object obj)
-        {
-            return (obj is BlendMode) && Equals((BlendMode)obj);
-        }
+        /// <param name="obj">Object to check.</param>
+        /// <returns>Object and blend mode are equal;</returns>
+        public override bool Equals(object obj) =>  obj is BlendMode b && Equals( b );
 
-        ///////////////////////////////////////////////////////////
         /// <summary>
-        /// Compare two blend modes and checks if they are equal
+        /// Compares two blend modes and checks if they are equal.
         /// </summary>
-        /// <param name="other">Blend Mode to check</param>
-        /// <returns>blend modes are equal</returns>
-        ////////////////////////////////////////////////////////////
+        /// <param name="other">Blend Mode to check.</param>
+        /// <returns>blend modes are equal.</returns>
         public bool Equals(BlendMode other)
         {
             return (ColorSrcFactor == other.ColorSrcFactor) &&
@@ -178,12 +186,10 @@ namespace SFML.Graphics
                    (AlphaEquation == other.AlphaEquation);
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Provide a integer describing the object
+        /// Provides a integer describing the object.
         /// </summary>
-        /// <returns>Integer description of the object</returns>
-        ////////////////////////////////////////////////////////////
+        /// <returns>Integer description of the object.</returns>
         public override int GetHashCode()
         {
             return ColorSrcFactor.GetHashCode() ^
@@ -194,22 +200,5 @@ namespace SFML.Graphics
                    AlphaEquation.GetHashCode();
         }
 
-        /// <summary>Source blending factor for the color channels</summary>
-        public Factor ColorSrcFactor;
-
-        /// <summary>Destination blending factor for the color channels</summary>
-        public Factor ColorDstFactor;
-
-        /// <summary>Blending equation for the color channels</summary>
-        public Equation ColorEquation;
-
-        /// <summary>Source blending factor for the alpha channel</summary>
-        public Factor AlphaSrcFactor;
-
-        /// <summary>Destination blending factor for the alpha channel</summary>
-        public Factor AlphaDstFactor;
-
-        /// <summary>Blending equation for the alpha channel</summary>
-        public Equation AlphaEquation;
     }
 }

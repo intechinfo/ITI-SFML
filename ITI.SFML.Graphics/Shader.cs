@@ -8,32 +8,25 @@ using SFML.System;
 
 namespace SFML.Graphics
 {
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Wrapper for pixel shaders
     /// </summary>
-    ////////////////////////////////////////////////////////////
     public class Shader : ObjectBase
     {
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Special type that can be passed to SetParameter,
         /// and that represents the texture of the object being drawn
         /// </summary>
-        ////////////////////////////////////////////////////////////
         public class CurrentTextureType { }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Special value that can be passed to SetParameter,
         /// and that represents the texture of the object being drawn
         /// </summary>
-        ////////////////////////////////////////////////////////////
         public static readonly CurrentTextureType CurrentTexture = null;
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Load the vertex, geometry and fragment shaders from files
+        /// Loads the vertex, geometry and fragment shaders from files.
         /// </summary>
         /// <remarks>
         /// This function loads the vertex, geometry and fragment
@@ -48,19 +41,16 @@ namespace SFML.Graphics
         /// <param name="geometryShaderFilename">Path of the geometry shader file to load, or null to skip this shader</param>
         /// <param name="fragmentShaderFilename">Path of the fragment shader file to load, or null to skip this shader</param>
         /// <exception cref="LoadingFailedException" />
-        ////////////////////////////////////////////////////////////
-        public Shader(string vertexShaderFilename, string geometryShaderFilename, string fragmentShaderFilename) :
-            base(sfShader_createFromFile(vertexShaderFilename, geometryShaderFilename, fragmentShaderFilename))
+        public Shader(string vertexShaderFilename, string geometryShaderFilename, string fragmentShaderFilename) 
+            : base(sfShader_createFromFile(vertexShaderFilename, geometryShaderFilename, fragmentShaderFilename))
         {
             if (CPointer == IntPtr.Zero)
                 throw new LoadingFailedException("shader", vertexShaderFilename + " " + fragmentShaderFilename);
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Load the vertex, geometry and fragment shaders from custom streams
         /// </summary>
-        ///
         /// <remarks>
         /// This function loads the vertex, geometry and fragment
         /// shaders. Pass NULL if you don't want to load
@@ -74,9 +64,8 @@ namespace SFML.Graphics
         /// <param name="geometryShaderStream">Source stream to read the geometry shader from, or null to skip this shader</param>
         /// <param name="fragmentShaderStream">Source stream to read the fragment shader from, or null to skip this shader</param>
         /// <exception cref="LoadingFailedException" />
-        ////////////////////////////////////////////////////////////
-        public Shader(Stream vertexShaderStream, Stream geometryShaderStream, Stream fragmentShaderStream) :
-            base(IntPtr.Zero)
+        public Shader(Stream vertexShaderStream, Stream geometryShaderStream, Stream fragmentShaderStream) 
+            : base(IntPtr.Zero)
         {
             // using these funky conditional operators because StreamAdaptor doesn't have some method for dealing with
             // its constructor argument being null
@@ -146,13 +135,11 @@ namespace SFML.Graphics
             sfShader_setFloatUniform(CPointer, name, x);
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Specify value for <c>vec2</c> uniform
         /// </summary>
         /// <param name="name">Name of the uniform variable in GLSL</param>
         /// <param name="vector">Value of the vec2 vector</param>
-        ////////////////////////////////////////////////////////////
         public void SetUniform(string name, Glsl.Vec2 vector)
         {
             sfShader_setVec2Uniform(CPointer, name, vector);

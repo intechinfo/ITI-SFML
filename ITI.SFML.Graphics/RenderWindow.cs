@@ -7,13 +7,11 @@ using SFML.Window;
 
 namespace SFML.Graphics
 {
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Simple wrapper for Window that allows easy
     /// 2D rendering
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    public class RenderWindow : Window.Window, RenderTarget
+    public class RenderWindow : Window.Window, IRenderTarget
     {
         ////////////////////////////////////////////////////////////
         /// <summary>
@@ -493,7 +491,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="drawable">Object to draw</param>
         ////////////////////////////////////////////////////////////
-        public void Draw(Drawable drawable)
+        public void Draw(IDrawable drawable)
         {
             Draw(drawable, RenderStates.Default);
         }
@@ -505,7 +503,7 @@ namespace SFML.Graphics
         /// <param name="drawable">Object to draw</param>
         /// <param name="states">Render states to use for drawing</param>
         ////////////////////////////////////////////////////////////
-        public void Draw(Drawable drawable, RenderStates states)
+        public void Draw(IDrawable drawable, RenderStates states)
         {
             drawable.Draw(this, states);
         }
