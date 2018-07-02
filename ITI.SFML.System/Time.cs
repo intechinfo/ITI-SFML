@@ -10,6 +10,9 @@ namespace SFML.System
     [StructLayout(LayoutKind.Sequential)]
     public struct Time : IEquatable<Time>
     {
+        readonly long _microseconds;
+
+
         /// <summary>
         /// Predefined "zero" time value
         /// </summary>
@@ -105,7 +108,7 @@ namespace SFML.System
         /// <returns>times are equal</returns>
         public bool Equals(Time other)
         {
-            return microseconds == other.microseconds;
+            return _microseconds == other._microseconds;
         }
 
         /// <summary>
@@ -240,10 +243,8 @@ namespace SFML.System
         /// <returns>Integer description of the object</returns>
         public override int GetHashCode()
         {
-            return microseconds.GetHashCode();
+            return _microseconds.GetHashCode();
         }
-
-        private long microseconds;
 
         #region Imports
         [DllImport(CSFML.System, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]

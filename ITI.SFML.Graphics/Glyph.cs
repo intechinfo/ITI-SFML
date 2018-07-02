@@ -6,7 +6,7 @@ namespace SFML.Graphics
     /// Structure describing a glyph (a visual character).
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct Glyph
+    public readonly struct Glyph
     {
         /// <summary>
         /// Offset to move horizontally to the next character.

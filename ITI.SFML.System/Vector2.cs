@@ -8,7 +8,7 @@ namespace SFML.System
     /// vectors with float components
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct Vector2f : IEquatable<Vector2f>
+    public readonly struct Vector2f : IEquatable<Vector2f>
     {
         /// <summary>
         /// X (horizontal) component of the vector.

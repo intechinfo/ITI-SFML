@@ -3,14 +3,32 @@ using System.Runtime.InteropServices;
 
 namespace SFML.Graphics
 {
-    ////////////////////////////////////////////////////////////
     /// <summary>
-    /// Utility class for manipulating 32-bits RGBA colors
+    /// Immutable value type for manipulating 32-bits RGBA colors.
     /// </summary>
-    ////////////////////////////////////////////////////////////
     [StructLayout(LayoutKind.Sequential)]
-    public struct Color : IEquatable<Color>
+    public readonly struct Color : IEquatable<Color>
     {
+        /// <summary>
+        /// Red component of the color.
+        /// </summary>
+        public readonly byte R;
+
+        /// <summary>
+        /// Green component of the color.
+        /// </summary>
+        public readonly byte G;
+
+        /// <summary>
+        /// Blue component of the color.
+        /// </summary>
+        public readonly byte B;
+
+        /// <summary>
+        /// Alpha (transparent) component of the color.
+        /// </summary>
+        public readonly byte A;
+
         ////////////////////////////////////////////////////////////
         /// <summary>
         /// Construct the color from its red, green and blue components
@@ -95,25 +113,18 @@ namespace SFML.Graphics
                    " A(" + A + ")";
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Compare color and object and checks if they are equal
+        /// Compares color and object and checks if they are equal.
         /// </summary>
-        /// <param name="obj">Object to check</param>
-        /// <returns>Object and color are equal</returns>
-        ////////////////////////////////////////////////////////////
-        public override bool Equals(object obj)
-        {
-            return (obj is Color) && Equals((Color)obj);
-        }
+        /// <param name="obj">Object to check.</param>
+        /// <returns>Object and color are equal.</returns>
+        public override bool Equals(object obj) =>  obj is Color c && Equals(c );
 
-        ///////////////////////////////////////////////////////////
         /// <summary>
-        /// Compare two colors and checks if they are equal
+        /// Compare stwo colors and checks if they are equal
         /// </summary>
         /// <param name="other">Color to check</param>
         /// <returns>Colors are equal</returns>
-        ////////////////////////////////////////////////////////////
         public bool Equals(Color other)
         {
             return (R == other.R) &&
@@ -144,24 +155,20 @@ namespace SFML.Graphics
             return left.Equals(right);
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Compare two colors and checks if they are not equal
         /// </summary>
         /// <returns>Colors are not equal</returns>
-        ////////////////////////////////////////////////////////////
         public static bool operator !=(Color left, Color right)
         {
             return !left.Equals(right);
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// This operator returns the component-wise sum of two colors.
         /// Components that exceed 255 are clamped to 255.
         /// </summary>
         /// <returns>Result of left + right</returns>
-        ////////////////////////////////////////////////////////////
         public static Color operator +(Color left, Color right)
         {
             return new Color((byte)Math.Min(left.R + right.R, 255),
@@ -170,13 +177,11 @@ namespace SFML.Graphics
                              (byte)Math.Min(left.A + right.A, 255));
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// This operator returns the component-wise subtraction of two colors.
         /// Components below 0 are clamped to 0.
         /// </summary>
         /// <returns>Result of left - right</returns>
-        ////////////////////////////////////////////////////////////
         public static Color operator -(Color left, Color right)
         {
             return new Color((byte)Math.Max(left.R - right.R, 0),
@@ -185,13 +190,11 @@ namespace SFML.Graphics
                              (byte)Math.Max(left.A - right.A, 0));
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// This operator returns the component-wise multiplication of two colors.
         /// Components above 255 are clamped to 255.
         /// </summary>
-        /// <returns>Result of left * right</returns>
-        ////////////////////////////////////////////////////////////
+        /// <returns>Result of left * right.</returns>
         public static Color operator *(Color left, Color right)
         {
             return new Color((byte)((int)left.R * right.R / 255),
@@ -199,18 +202,6 @@ namespace SFML.Graphics
                              (byte)((int)left.B * right.B / 255),
                              (byte)((int)left.A * right.A / 255));
         }
-
-        /// <summary>Red component of the color</summary>
-        public byte R;
-
-        /// <summary>Green component of the color</summary>
-        public byte G;
-
-        /// <summary>Blue component of the color</summary>
-        public byte B;
-
-        /// <summary>Alpha (transparent) component of the color</summary>
-        public byte A;
         
         /// <summary>Predefined black color</summary>
         public static readonly Color Black = new Color(0, 0, 0);

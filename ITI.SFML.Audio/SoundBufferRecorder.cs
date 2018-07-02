@@ -2,12 +2,10 @@ using System.Collections.Generic;
 
 namespace SFML.Audio
 {
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Specialized SoundRecorder which saves the captured
     /// audio data into a sound buffer
     /// </summary>
-    ////////////////////////////////////////////////////////////
     public class SoundBufferRecorder : SoundRecorder
     {
         ////////////////////////////////////////////////////////////

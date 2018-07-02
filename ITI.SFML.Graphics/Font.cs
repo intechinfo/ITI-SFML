@@ -32,14 +32,14 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="stream">Source stream to read from</param>
         /// <exception cref="LoadingFailedException" />
-        public Font(Stream stream) :
-            base(IntPtr.Zero)
+        public Font(Stream stream) 
+            : base(IntPtr.Zero)
         {
-            myStream = new StreamAdaptor(stream);
-            CPointer = sfFont_createFromStream(myStream.InputStreamPtr);
-
-            if (CPointer == IntPtr.Zero)
-                throw new LoadingFailedException("font");
+            using (var myStream = new StreamAdaptor(stream))
+            {
+                CPointer = sfFont_createFromStream(myStream.InputStreamPtr);
+                if (CPointer == IntPtr.Zero) throw new LoadingFailedException("font");
+            }
         }
 
         /// <summary>

@@ -4,18 +4,24 @@ using SFML.System;
 namespace SFML.Graphics
 {
     /// <summary>
-    /// Define a point with color and texture coordinates
+    /// Define a point with color and texture coordinates.
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct Vertex
+    public readonly struct Vertex
     {
-        /// <summary>2D position of the vertex</summary>
+        /// <summary>
+        /// 2D position of the vertex.
+        /// </summary>
         public readonly Vector2f Position;
 
-        /// <summary>Color of the vertex</summary>
+        /// <summary>
+        /// Color of the vertex.
+        /// </summary>
         public readonly Color Color;
 
-        /// <summary>Coordinates of the texture's pixel to map to the vertex</summary>
+        /// <summary>
+        /// Coordinates of the texture's pixel to map to the vertex.
+        /// </summary>
         public readonly Vector2f TexCoords;
 
         /// <summary>

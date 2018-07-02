@@ -55,8 +55,8 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="stream">Stream containing the file contents</param>
         /// <exception cref="LoadingFailedException" />
-        public Image(Stream stream) :
-            base(IntPtr.Zero)
+        public Image(Stream stream) 
+            : base(IntPtr.Zero)
         {
             using (StreamAdaptor adaptor = new StreamAdaptor(stream))
             {
@@ -68,12 +68,12 @@ namespace SFML.Graphics
         }
 
         /// <summary>
-        /// Construct the image from a file in memory
+        /// Constructs the image from a file in memory.
         /// </summary>
-        /// <param name="bytes">Byte array containing the file contents</param>
+        /// <param name="bytes">Byte array containing the file contents.</param>
         /// <exception cref="LoadingFailedException" />
-        public Image(byte[] bytes) :
-            base(IntPtr.Zero)
+        public Image(byte[] bytes) 
+            : base(IntPtr.Zero)
         {
             GCHandle pin = GCHandle.Alloc(bytes, GCHandleType.Pinned);
             try
@@ -89,12 +89,12 @@ namespace SFML.Graphics
         }
 
         /// <summary>
-        /// Construct the image directly from an array of pixels
+        /// Construct the image directly from an array of pixels.
         /// </summary>
         /// <param name="pixels">2 dimensions array containing the pixels</param>
         /// <exception cref="LoadingFailedException" />
-        public Image(Color[,] pixels) :
-            base(IntPtr.Zero)
+        public Image(Color[,] pixels) 
+            : base(IntPtr.Zero)
         {
             uint Width = (uint)pixels.GetLength(0);
             uint Height = (uint)pixels.GetLength(1);
@@ -118,7 +118,7 @@ namespace SFML.Graphics
         }
 
         /// <summary>
-        /// Construct the image directly from an array of pixels
+        /// Constructs the image directly from an array of pixels.
         /// </summary>
         /// <param name="width">Image width</param>
         /// <param name="height">Image height</param>
@@ -143,25 +143,25 @@ namespace SFML.Graphics
         /// Construct the image from another image
         /// </summary>
         /// <param name="copy">Image to copy</param>
-        public Image(Image copy) :
-            base(sfImage_copy(copy.CPointer))
+        public Image(Image copy) 
+            : base(sfImage_copy(copy.CPointer))
         {
         }
 
         /// <summary>
-        /// Save the contents of the image to a file
+        /// Saves the contents of the image to a file.
         /// </summary>
-        /// <param name="filename">Path of the file to save (overwritten if already exist)</param>
-        /// <returns>True if saving was successful</returns>
+        /// <param name="filename">Path of the file to save (overwritten if already exist).</param>
+        /// <returns>True if saving was successful.</returns>
         public bool SaveToFile(string filename)
         {
             return sfImage_saveToFile(CPointer, filename);
         }
 
         /// <summary>
-        /// Create a transparency mask from a specified colorkey
+        /// Creates a transparency mask from a specified colorkey.
         /// </summary>
-        /// <param name="color">Color to become transparent</param>
+        /// <param name="color">Color to become transparent.</param>
         public void CreateMaskFromColor(Color color)
         {
             CreateMaskFromColor(color, 0);
@@ -170,8 +170,8 @@ namespace SFML.Graphics
         /// <summary>
         /// Create a transparency mask from a specified colorkey
         /// </summary>
-        /// <param name="color">Color to become transparent</param>
-        /// <param name="alpha">Alpha value to use for transparent pixels</param>
+        /// <param name="color">Color to become transparent.</param>
+        /// <param name="alpha">Alpha value to use for transparent pixels.</param>
         public void CreateMaskFromColor(Color color, byte alpha)
         {
             sfImage_createMaskFromColor(CPointer, color, alpha);
@@ -220,10 +220,10 @@ namespace SFML.Graphics
         }
 
         /// <summary>
-        /// Get a pixel from the image
+        /// Get a pixel from the image.
         /// </summary>
-        /// <param name="x">X coordinate of pixel in the image</param>
-        /// <param name="y">Y coordinate of pixel in the image</param>
+        /// <param name="x">X coordinate of pixel in the image.</param>
+        /// <param name="y">Y coordinate of pixel in the image.</param>
         /// <returns>Color of pixel (x, y)</returns>
         public Color GetPixel(uint x, uint y)
         {
@@ -231,21 +231,21 @@ namespace SFML.Graphics
         }
 
         /// <summary>
-        /// Change the color of a pixel
+        /// Changes the color of a pixel.
         /// </summary>
-        /// <param name="x">X coordinate of pixel in the image</param>
-        /// <param name="y">Y coordinate of pixel in the image</param>
-        /// <param name="color">New color for pixel (x, y)</param>
+        /// <param name="x">X coordinate of pixel in the image.</param>
+        /// <param name="y">Y coordinate of pixel in the image.</param>
+        /// <param name="color">New color for pixel (x, y).</param>
         public void SetPixel(uint x, uint y, Color color)
         {
             sfImage_setPixel(CPointer, x, y, color);
         }
 
         /// <summary>
-        /// Get a copy of the array of pixels (RGBA 8 bits integers components)
-        /// Array size is Width x Height x 4
+        /// Gets a copy of the array of pixels (RGBA 8 bits integers components)
+        /// Array size is Width x Height x 4.
         /// </summary>
-        /// <returns>Array of pixels</returns>
+        /// <returns>Array of pixels.</returns>
         public byte[] Pixels
         {
             get

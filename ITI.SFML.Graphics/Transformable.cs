@@ -21,20 +21,29 @@ namespace SFML.Graphics
     /// </remarks>
     public class Transformable : ObjectBase
     {
+        Vector2f _origin = new Vector2f(0, 0);
+        Vector2f _position = new Vector2f(0, 0);
+        float _rotation = 0;
+        Vector2f _scale = new Vector2f(1, 1);
+        Transform _transform;
+        Transform _inverseTransform;
+        bool _transformNeedUpdate = true;
+        bool _inverseNeedUpdate = true;
+
         /// <summary>
         /// Default constructor
         /// </summary>
-        public Transformable() :
-            base(IntPtr.Zero)
+        public Transformable() 
+            : base(IntPtr.Zero)
         {
         }
 
         /// <summary>
-        /// Construct the transformable from another transformable
+        /// Constructs the transformable from another transformable.
         /// </summary>
-        /// <param name="transformable">Transformable to copy</param>
-        public Transformable(Transformable transformable) :
-            base(IntPtr.Zero)
+        /// <param name="transformable">Transformable to copy.</param>
+        public Transformable(Transformable transformable) 
+            : base(IntPtr.Zero)
         {
             Origin = transformable.Origin;
             Position = transformable.Position;
@@ -43,128 +52,129 @@ namespace SFML.Graphics
         }
 
         /// <summary>
-        /// Position of the object
+        /// Gets or sets the position of this object.
         /// </summary>
         public Vector2f Position
         {
             get
             {
-                return myPosition;
+                return _position;
             }
             set
             {
-                myPosition = value;
-                myTransformNeedUpdate = true;
-                myInverseNeedUpdate = true;
+                _position = value;
+                _transformNeedUpdate = true;
+                _inverseNeedUpdate = true;
             }
         }
 
         /// <summary>
-        /// Rotation of the object
+        /// Gets or sets the rotation of this objec in degrees.
         /// </summary>
         public float Rotation
         {
             get
             {
-                return myRotation;
+                return _rotation;
             }
             set
             {
-                myRotation = value;
-                myTransformNeedUpdate = true;
-                myInverseNeedUpdate = true;
+                _rotation = value;
+                _transformNeedUpdate = true;
+                _inverseNeedUpdate = true;
             }
         }
 
         /// <summary>
-        /// Scale of the object
+        /// Gets or sets the scale of this object.
         /// </summary>
         public Vector2f Scale
         {
             get
             {
-                return myScale;
+                return _scale;
             }
             set
             {
-                myScale = value;
-                myTransformNeedUpdate = true;
-                myInverseNeedUpdate = true;
+                _scale = value;
+                _transformNeedUpdate = true;
+                _inverseNeedUpdate = true;
             }
         }
 
         /// <summary>
+        /// Gets or sets the origin of this object.
         /// The origin of an object defines the center point for
         /// all transformations (position, scale, rotation).
         /// The coordinates of this point must be relative to the
-        /// top-left corner of the object, and ignore all
+        /// top-left corner of the object, and ignores all
         /// transformations (position, scale, rotation).
         /// </summary>
         public Vector2f Origin
         {
             get
             {
-                return myOrigin;
+                return _origin;
             }
             set
             {
-                myOrigin = value;
-                myTransformNeedUpdate = true;
-                myInverseNeedUpdate = true;
+                _origin = value;
+                _transformNeedUpdate = true;
+                _inverseNeedUpdate = true;
             }
         }
 
         /// <summary>
-        /// The combined transform of the object
+        /// Gets the combined transform of the object.
         /// </summary>
         public Transform Transform
         {
             get
             {
-                if (myTransformNeedUpdate)
+                if (_transformNeedUpdate)
                 {
-                    myTransformNeedUpdate = false;
+                    _transformNeedUpdate = false;
 
-                    float angle = -myRotation * 3.141592654F / 180.0F;
+                    float angle = -_rotation * 3.141592654F / 180.0F;
                     float cosine = (float)Math.Cos(angle);
                     float sine = (float)Math.Sin(angle);
-                    float sxc = myScale.X * cosine;
-                    float syc = myScale.Y * cosine;
-                    float sxs = myScale.X * sine;
-                    float sys = myScale.Y * sine;
-                    float tx = -myOrigin.X * sxc - myOrigin.Y * sys + myPosition.X;
-                    float ty = myOrigin.X * sxs - myOrigin.Y * syc + myPosition.Y;
+                    float sxc = _scale.X * cosine;
+                    float syc = _scale.Y * cosine;
+                    float sxs = _scale.X * sine;
+                    float sys = _scale.Y * sine;
+                    float tx = -_origin.X * sxc - _origin.Y * sys + _position.X;
+                    float ty = _origin.X * sxs - _origin.Y * syc + _position.Y;
 
-                    myTransform = new Transform(sxc, sys, tx,
+                    _transform = new Transform(sxc, sys, tx,
                                                 -sxs, syc, ty,
                                                 0.0F, 0.0F, 1.0F);
                 }
-                return myTransform;
+                return _transform;
             }
         }
 
         /// <summary>
-        /// The combined transform of the object
+        /// Gets the combined transform of the object.
         /// </summary>
         public Transform InverseTransform
         {
             get
             {
-                if (myInverseNeedUpdate)
+                if (_inverseNeedUpdate)
                 {
-                    myInverseTransform = Transform.GetInverse();
-                    myInverseNeedUpdate = false;
+                    _inverseTransform = Transform.GetInverse();
+                    _inverseNeedUpdate = false;
                 }
-                return myInverseTransform;
+                return _inverseTransform;
             }
         }
 
         /// <summary>
-        /// Construct the object from its internal C pointer
+        /// Constructs the object from its internal C pointer.
         /// </summary>
-        /// <param name="cPointer">Pointer to the object in the C library</param>
-        protected Transformable(IntPtr cPointer) :
-            base(cPointer)
+        /// <param name="cPointer">Pointer to the object in the C library.</param>
+        protected Transformable(IntPtr cPointer) 
+            : base(cPointer)
         {
         }
 
@@ -178,13 +188,5 @@ namespace SFML.Graphics
             // or not the final object (if used as a base for a drawable class)
         }
 
-        private Vector2f  myOrigin              = new Vector2f(0, 0);
-        private Vector2f  myPosition            = new Vector2f(0, 0);
-        private float     myRotation            = 0;
-        private Vector2f  myScale               = new Vector2f(1, 1);
-        private Transform myTransform;
-        private Transform myInverseTransform;
-        private bool      myTransformNeedUpdate = true;
-        private bool      myInverseNeedUpdate   = true;
     }
 }
