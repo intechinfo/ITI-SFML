@@ -6,77 +6,65 @@ using SFML.System;
 
 namespace SFML.Window
 {
-    //////////////////////////////////////////////////////////////////
     /// <summary>
     /// This class defines a .NET interface to an SFML OpenGL Context
     /// </summary>
-    //////////////////////////////////////////////////////////////////
     public class Context : CriticalFinalizerObject
     {
-        ////////////////////////////////////////////////////////////
+        private IntPtr _this = IntPtr.Zero;
+
         /// <summary>
         /// Default constructor
         /// </summary>
-        ////////////////////////////////////////////////////////////
         public Context()
         {
-            myThis = sfContext_create();
+            _this = sfContext_create();
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Finalizer
         /// </summary>
-        ////////////////////////////////////////////////////////////
         ~Context()
         {
-            sfContext_destroy(myThis);
+            sfContext_destroy( _this );
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Activate or deactivate the context
         /// </summary>
         /// <param name="active">True to activate, false to deactivate</param>
         /// <returns>true on success, false on failure</returns>
-        ////////////////////////////////////////////////////////////
-        public bool SetActive(bool active)
+        public bool SetActive( bool active )
         {
-            return sfContext_setActive(myThis, active);
+            return sfContext_setActive( _this, active );
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Get the settings of the context.
+        /// Gets the settings of the context.
         /// </summary>
-        ////////////////////////////////////////////////////////////
         public ContextSettings Settings
         {
-            get { return sfContext_getSettings(myThis); }
+            get { return sfContext_getSettings( _this ); }
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Global helper context
+        /// Gets the global helper context.
         /// </summary>
-        ////////////////////////////////////////////////////////////
         public static Context Global
         {
             get
             {
-                if (ourGlobalContext == null)
+                if( ourGlobalContext == null )
                     ourGlobalContext = new Context();
 
                 return ourGlobalContext;
             }
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Provide a string describing the object
+        /// Provides a string describing the object.
         /// </summary>
         /// <returns>String description of the object</returns>
-        ////////////////////////////////////////////////////////////
         public override string ToString()
         {
             return "[Context]";
@@ -84,20 +72,18 @@ namespace SFML.Window
 
         private static Context ourGlobalContext = null;
 
-        private IntPtr myThis = IntPtr.Zero;
-
         #region Imports
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern IntPtr sfContext_create();
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfContext_destroy(IntPtr View);
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfContext_destroy( IntPtr View );
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfContext_setActive(IntPtr View, bool Active);
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern bool sfContext_setActive( IntPtr View, bool Active );
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern ContextSettings sfContext_getSettings(IntPtr View);
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern ContextSettings sfContext_getSettings( IntPtr View );
         #endregion
     }
 }

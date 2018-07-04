@@ -3,67 +3,80 @@ using System.Runtime.InteropServices;
 
 namespace SFML.Graphics
 {
-    ////////////////////////////////////////////////////////////
     /// <summary>
-    /// Define the states used for drawing to a RenderTarget
+    /// Defines the states used for drawing to a RenderTarget.
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    public struct RenderStates
+    public readonly struct RenderStates
     {
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct a default set of render states with a custom blend mode
+        /// Special value holding the default render states.
         /// </summary>
-        /// <param name="blendMode">Blend mode to use</param>
-        ////////////////////////////////////////////////////////////
-        public RenderStates(BlendMode blendMode) :
-            this(blendMode, Transform.Identity, null, null)
+        public static readonly RenderStates Default = new RenderStates( BlendMode.Alpha, Transform.Identity, null, null );
+
+        /// <summary>
+        /// Blending mode.
+        /// </summary>
+        public readonly BlendMode BlendMode;
+
+        /// <summary>
+        /// Transform.
+        /// </summary>
+        public readonly Transform Transform;
+
+        /// <summary>
+        /// Texture.
+        /// </summary>
+        public readonly Texture Texture;
+
+        /// <summary>
+        /// Shader.
+        /// </summary>
+        public readonly Shader Shader;
+
+        /// <summary>
+        /// Constructs a default set of render states with a custom blend mode.
+        /// </summary>
+        /// <param name="blendMode">Blend mode to use.</param>
+        public RenderStates( BlendMode blendMode )
+            : this( blendMode, Transform.Identity, null, null )
         {
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct a default set of render states with a custom transform
+        /// Constructs a default set of render states with a custom transform.
         /// </summary>
-        /// <param name="transform">Transform to use</param>
-        ////////////////////////////////////////////////////////////
-        public RenderStates(Transform transform) :
-            this(BlendMode.Alpha, transform, null, null)
+        /// <param name="transform">Transform to use.</param>
+        public RenderStates( Transform transform )
+            : this( BlendMode.Alpha, transform, null, null )
         {
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct a default set of render states with a custom texture
+        /// Constructs a default set of render states with a custom texture.
         /// </summary>
-        /// <param name="texture">Texture to use</param>
-        ////////////////////////////////////////////////////////////
-        public RenderStates(Texture texture) :
-            this(BlendMode.Alpha, Transform.Identity, texture, null)
+        /// <param name="texture">Texture to use.</param>
+        public RenderStates( Texture texture )
+            : this( BlendMode.Alpha, Transform.Identity, texture, null )
         {
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct a default set of render states with a custom shader
+        /// Constructs a default set of render states with a custom shader.
         /// </summary>
-        /// <param name="shader">Shader to use</param>
-        ////////////////////////////////////////////////////////////
-        public RenderStates(Shader shader) :
-            this(BlendMode.Alpha, Transform.Identity, null, shader)
+        /// <param name="shader">Shader to use.</param>
+        public RenderStates( Shader shader )
+            : this( BlendMode.Alpha, Transform.Identity, null, shader )
         {
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct a set of render states with all its attributes
+        /// Constructs a set of render states with all its attributes.
         /// </summary>
-        /// <param name="blendMode">Blend mode to use</param>
-        /// <param name="transform">Transform to use</param>
-        /// <param name="texture">Texture to use</param>
-        /// <param name="shader">Shader to use</param>
-        ////////////////////////////////////////////////////////////
-        public RenderStates(BlendMode blendMode, Transform transform, Texture texture, Shader shader)
+        /// <param name="blendMode">Blend mode to use.</param>
+        /// <param name="transform">Transform to use.</param>
+        /// <param name="texture">Texture to use.</param>
+        /// <param name="shader">Shader to use.</param>
+        public RenderStates( BlendMode blendMode, Transform transform, Texture texture, Shader shader )
         {
             BlendMode = blendMode;
             Transform = transform;
@@ -71,13 +84,11 @@ namespace SFML.Graphics
             Shader = shader;
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Copy constructor
+        /// Copy constructor.
         /// </summary>
-        /// <param name="copy">States to copy</param>
-        ////////////////////////////////////////////////////////////
-        public RenderStates(RenderStates copy)
+        /// <param name="copy">States to copy.</param>
+        public RenderStates( RenderStates copy )
         {
             BlendMode = copy.BlendMode;
             Transform = copy.Transform;
@@ -85,27 +96,32 @@ namespace SFML.Graphics
             Shader = copy.Shader;
         }
 
-        ////////////////////////////////////////////////////////////
-        /// <summary>Special instance holding the default render states</summary>
-        ////////////////////////////////////////////////////////////
-        public static RenderStates Default
-        {
-            get { return new RenderStates(BlendMode.Alpha, Transform.Identity, null, null); }
-        }
+        /// <summary>
+        /// Returns a new render states based on this one but with a new <see cref="Shader"/>.
+        /// </summary>
+        /// <param name="s">The new Shader.</param>
+        /// <returns>A render state.</returns>
+        public RenderStates WithShader( Shader s ) => new RenderStates( BlendMode, Transform, Texture, s );
 
-        /// <summary>Blending mode</summary>
-        public BlendMode BlendMode;
+        /// <summary>
+        /// Returns a new render states based on this one but with a new <see cref="Transform"/>.
+        /// </summary>
+        /// <param name="t">The new Transform.</param>
+        /// <returns>A render state.</returns>
+        public RenderStates WithNewTransform( Transform t ) => new RenderStates( BlendMode, t, Texture, Shader );
 
-        /// <summary>Transform</summary>
-        public Transform Transform;
+        /// <summary>
+        /// Returns a new render states based on this one but with a new <see cref="Transform"/>.
+        /// </summary>
+        /// <param name="t">The new Transform.</param>
+        /// <returns>A render state.</returns>
+        public RenderStates WithAppliedTransform( Transform t ) => new RenderStates( BlendMode, Transform.Combine( t ), Texture, Shader );
 
-        /// <summary>Texture</summary>
-        public Texture Texture;
 
-        /// <summary>Shader</summary>
-        public Shader Shader;
-
-        // Return a marshalled version of the instance, that can directly be passed to the C API
+        /// <summary>
+        /// Returns a marshalled version of the instance, that can directly be passed to the C API.
+        /// </summary>
+        /// <returns>The data.</returns>
         internal MarshalData Marshal()
         {
             MarshalData data = new MarshalData();
@@ -113,11 +129,10 @@ namespace SFML.Graphics
             data.transform = Transform;
             data.texture = Texture != null ? Texture.CPointer : IntPtr.Zero;
             data.shader = Shader != null ? Shader.CPointer : IntPtr.Zero;
-
             return data;
         }
 
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout( LayoutKind.Sequential )]
         internal struct MarshalData
         {
             public BlendMode blendMode;

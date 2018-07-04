@@ -7,4 +7,13 @@
   <ItemGroup>
     <ProjectReference Include="..\ITI.SFML.System\ITI.SFML.System.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="runtimes\win-x64\native\*.*">
+      <PackagePath>lib/runtimes/win-x64/native/</PackagePath>
+      <Pack>true</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  
 </Project>

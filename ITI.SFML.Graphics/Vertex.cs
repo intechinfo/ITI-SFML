@@ -3,49 +3,56 @@ using SFML.System;
 
 namespace SFML.Graphics
 {
-    ////////////////////////////////////////////////////////////
     /// <summary>
-    /// Define a point with color and texture coordinates
+    /// Define a point with color and texture coordinates.
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
-    public struct Vertex
+    [StructLayout( LayoutKind.Sequential )]
+    public readonly struct Vertex
     {
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct the vertex from its position
+        /// 2D position of the vertex.
+        /// </summary>
+        public readonly Vector2f Position;
+
+        /// <summary>
+        /// Color of the vertex.
+        /// </summary>
+        public readonly Color Color;
+
+        /// <summary>
+        /// Coordinates of the texture's pixel to map to the vertex.
+        /// </summary>
+        public readonly Vector2f TexCoords;
+
+        /// <summary>
+        /// Constructs the vertex from its position.
         /// The vertex color is white and texture coordinates are (0, 0).
         /// </summary>
-        /// <param name="position">Vertex position</param>
-        ////////////////////////////////////////////////////////////
-        public Vertex(Vector2f position) :
-            this(position, Color.White, new Vector2f(0, 0))
+        /// <param name="position">Vertex position.</param>
+        public Vertex( Vector2f position )
+            : this( position, Color.White, new Vector2f( 0, 0 ) )
         {
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct the vertex from its position and color
+        /// Constructs the vertex from its position and color.
         /// The texture coordinates are (0, 0).
         /// </summary>
-        /// <param name="position">Vertex position</param>
-        /// <param name="color">Vertex color</param>
-        ////////////////////////////////////////////////////////////
-        public Vertex(Vector2f position, Color color) :
-            this(position, color, new Vector2f(0, 0))
+        /// <param name="position">Vertex position.</param>
+        /// <param name="color">Vertex color.</param>
+        public Vertex( Vector2f position, Color color )
+            : this( position, color, new Vector2f( 0, 0 ) )
         {
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct the vertex from its position and texture coordinates
+        /// Constructs the vertex from its position and texture coordinates.
         /// The vertex color is white.
         /// </summary>
         /// <param name="position">Vertex position</param>
         /// <param name="texCoords">Vertex texture coordinates</param>
-        ////////////////////////////////////////////////////////////
-        public Vertex(Vector2f position, Vector2f texCoords) :
-            this(position, Color.White, texCoords)
+        public Vertex( Vector2f position, Vector2f texCoords )
+            : this( position, Color.White, texCoords )
         {
         }
 
@@ -57,19 +64,17 @@ namespace SFML.Graphics
         /// <param name="color">Vertex color</param>
         /// <param name="texCoords">Vertex texture coordinates</param>
         ////////////////////////////////////////////////////////////
-        public Vertex(Vector2f position, Color color, Vector2f texCoords)
+        public Vertex( Vector2f position, Color color, Vector2f texCoords )
         {
             Position = position;
             Color = color;
             TexCoords = texCoords;
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Provide a string describing the object
+        /// Provides a string describing the object
         /// </summary>
         /// <returns>String description of the object</returns>
-        ////////////////////////////////////////////////////////////
         public override string ToString()
         {
             return "[Vertex]" +
@@ -77,14 +82,5 @@ namespace SFML.Graphics
                    " Color(" + Color + ")" +
                    " TexCoords(" + TexCoords + ")";
         }
-
-        /// <summary>2D position of the vertex</summary>
-        public Vector2f Position;
-
-        /// <summary>Color of the vertex</summary>
-        public Color Color;
-
-        /// <summary>Coordinates of the texture's pixel to map to the vertex</summary>
-        public Vector2f TexCoords;
     }
 }

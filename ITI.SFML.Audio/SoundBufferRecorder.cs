@@ -2,35 +2,33 @@ using System.Collections.Generic;
 
 namespace SFML.Audio
 {
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Specialized SoundRecorder which saves the captured
-    /// audio data into a sound buffer
+    /// audio data into a sound buffer.
     /// </summary>
-    ////////////////////////////////////////////////////////////
     public class SoundBufferRecorder : SoundRecorder
     {
-        ////////////////////////////////////////////////////////////
+        readonly List<short> _samplesArray = new List<short>();
+        SoundBuffer _soundBuffer;
+
         /// <summary>
-        /// Sound buffer containing the captured audio data
-        ///
+        /// Gets the sound buffer containing the captured audio data.
+        /// <para>
         /// The sound buffer is valid only after the capture has ended.
         /// This function provides a reference to the internal
         /// sound buffer, but you should make a copy of it if you want
         /// to make any modifications to it.
+        /// </para>
         /// </summary>
-        ////////////////////////////////////////////////////////////
         public SoundBuffer SoundBuffer
         {
-            get { return mySoundBuffer; }
+            get { return _soundBuffer; }
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Provide a string describing the object
+        /// Provides a string describing the object.
         /// </summary>
-        /// <returns>String description of the object</returns>
-        ////////////////////////////////////////////////////////////
+        /// <returns>String description of the object.</returns>
         public override string ToString()
         {
             return "[SoundBufferRecorder]" +
@@ -38,42 +36,34 @@ namespace SFML.Audio
                    " SoundBuffer(" + SoundBuffer + ")";
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Called when a new capture starts
+        /// Called when a new capture starts.
         /// </summary>
-        /// <returns>False to abort recording audio data, true to continue</returns>
-        ////////////////////////////////////////////////////////////
+        /// <returns>False to abort recording audio data, true to continue.</returns>
         protected override bool OnStart()
         {
-            mySamplesArray.Clear();
+            _samplesArray.Clear();
             return true;
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Process a new chunk of recorded samples
+        /// Processes a new chunk of recorded samples.
         /// </summary>
-        /// <param name="samples">Array of samples to process</param>
-        /// <returns>False to stop recording audio data, true to continue</returns>
-        ////////////////////////////////////////////////////////////
-        protected override bool OnProcessSamples(short[] samples)
+        /// <param name="samples">Array of samples to process.</param>
+        /// <returns>False to stop recording audio data, true to continue.</returns>
+        protected override bool OnProcessSamples( short[] samples )
         {
-            mySamplesArray.AddRange(samples);
+            _samplesArray.AddRange( samples );
             return true;
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Called when the current capture stops
+        /// Called when the current capture stops.
         /// </summary>
-        ////////////////////////////////////////////////////////////
         protected override void OnStop()
         {
-            mySoundBuffer = new SoundBuffer(mySamplesArray.ToArray(), 1, SampleRate);
+            _soundBuffer = new SoundBuffer( _samplesArray.ToArray(), 1, SampleRate );
         }
 
-        private List<short> mySamplesArray = new List<short>();
-        private SoundBuffer mySoundBuffer = null;
     }
 }

@@ -5,11 +5,9 @@ using System.Security;
 
 namespace SFML.Window
 {
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Give access to the real-time state of the joysticks
     /// </summary>
-    ////////////////////////////////////////////////////////////
     public static class Joystick
     {
         /// <summary>Maximum number of supported joysticks</summary>
@@ -21,11 +19,9 @@ namespace SFML.Window
         /// <summary>Maximum number of supported axes</summary>
         public static readonly uint AxisCount = 8;
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Axes supported by SFML joysticks
         /// </summary>
-        ////////////////////////////////////////////////////////////
         public enum Axis
         {
             /// <summary>The X axis</summary>
@@ -53,46 +49,39 @@ namespace SFML.Window
             PovY
         };
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Check if a joystick is connected
+        /// Checks if a joystick is connected.
         /// </summary>
-        /// <param name="joystick">Index of the joystick to check</param>
+        /// <param name="joystick">Index of the joystick to check.</param>
         /// <returns>True if the joystick is connected, false otherwise</returns>
-        ////////////////////////////////////////////////////////////
-        public static bool IsConnected(uint joystick)
+        public static bool IsConnected( uint joystick )
         {
-            return sfJoystick_isConnected(joystick);
+            return sfJoystick_isConnected( joystick );
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Return the number of buttons supported by a joystick
+        /// Returns the number of buttons supported by a joystick.
         /// </summary>
         /// If the joystick is not connected, this function returns 0.
         /// <param name="joystick">Index of the joystick</param>
         /// <returns>Number of buttons supported by the joystick</returns>
-        ////////////////////////////////////////////////////////////
-        public static uint GetButtonCount(uint joystick)
+        public static uint GetButtonCount( uint joystick )
         {
-            return sfJoystick_getButtonCount(joystick);
+            return sfJoystick_getButtonCount( joystick );
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Check if a joystick supports a given axis
+        /// Checks if a joystick supports a given axis.
         /// </summary>
         /// If the joystick is not connected, this function returns false.
         /// <param name="joystick">Index of the joystick</param>
         /// <param name="axis">Axis to check</param>
         /// <returns>True if the joystick supports the axis, false otherwise</returns>
-        ////////////////////////////////////////////////////////////
-        public static bool HasAxis(uint joystick, Axis axis)
+        public static bool HasAxis( uint joystick, Axis axis )
         {
-            return sfJoystick_hasAxis(joystick, axis);
+            return sfJoystick_hasAxis( joystick, axis );
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Check if a joystick button is pressed
         /// </summary>
@@ -100,83 +89,76 @@ namespace SFML.Window
         /// <param name="joystick">Index of the joystick</param>
         /// <param name="button">Button to check</param>
         /// <returns>True if the button is pressed, false otherwise</returns>
-        ////////////////////////////////////////////////////////////
-        public static bool IsButtonPressed(uint joystick, uint button)
+        public static bool IsButtonPressed( uint joystick, uint button )
         {
-            return sfJoystick_isButtonPressed(joystick, button);
+            return sfJoystick_isButtonPressed( joystick, button );
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Get the current position of a joystick axis
+        /// Gets the current position of a joystick axis
         /// </summary>
         /// If the joystick is not connected, this function returns 0.
         /// <param name="joystick">Index of the joystick</param>
         /// <param name="axis">Axis to check</param>
         /// <returns>Current position of the axis, in range [-100 .. 100]</returns>
-        ////////////////////////////////////////////////////////////
-        public static float GetAxisPosition(uint joystick, Axis axis)
+        public static float GetAxisPosition( uint joystick, Axis axis )
         {
-            return sfJoystick_getAxisPosition(joystick, axis);
+            return sfJoystick_getAxisPosition( joystick, axis );
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Update the states of all joysticks
+        /// Updates the states of all joysticks
         /// </summary>
         /// This function is used internally by SFML, so you normally
         /// don't have to call it explicitly. However, you may need to
         /// call it if you have no window yet (or no window at all):
         /// in this case the joysticks states are not updated automatically.
-        ////////////////////////////////////////////////////////////
         public static void Update()
         {
             sfJoystick_update();
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Get the joystick information
+        /// Gets the joystick information.
         /// </summary>
-        /// <param name="joystick">Index of the joystick</param>
-        /// <returns>Structure containing joystick information</returns>
-        ////////////////////////////////////////////////////////////
-        public static Identification GetIdentification(uint joystick)
+        /// <param name="joystick">Index of the joystick.</param>
+        /// <returns>Structure containing joystick information.</returns>
+        public static Identification GetIdentification( uint joystick )
         {
-            IdentificationMarshalData identification = sfJoystick_getIdentification(joystick);
+            IdentificationMarshalData identification = sfJoystick_getIdentification( joystick );
             Identification retIdentification = new Identification();
 
-            retIdentification.Name = Marshal.PtrToStringAnsi(identification.Name);
-            retIdentification.VendorId = identification.VendorId;
-            retIdentification.ProductId = identification.ProductId;
 
             return retIdentification;
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Identification holds a joystick's identification
+        /// Identification holds a joystick's identification.
         /// </summary>
-        ////////////////////////////////////////////////////////////
-        public struct Identification
+        public readonly struct Identification
         {
+            internal Identification( IdentificationMarshalData i )
+            {
+                Name = Marshal.PtrToStringAnsi( i.Name );
+                VendorId = i.VendorId;
+                ProductId = i.ProductId;
+            }
+
             /// <summary>Name of the joystick</summary>
-            public string Name;
+            public readonly string Name;
 
             /// <summary>Manufacturer identifier</summary>
-            public uint VendorId;
+            public readonly uint VendorId;
 
             /// <summary>Product identifier</summary>
-            public uint ProductId;
+            public readonly uint ProductId;
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
         /// Internal struct used for marshaling the joystick
         /// identification struct from unmanaged code.
         /// </summary>
-        ////////////////////////////////////////////////////////////
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout( LayoutKind.Sequential )]
         internal struct IdentificationMarshalData
         {
             public IntPtr Name;
@@ -185,26 +167,26 @@ namespace SFML.Window
         }
 
         #region Imports
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfJoystick_isConnected(uint joystick);
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern bool sfJoystick_isConnected( uint joystick );
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern uint sfJoystick_getButtonCount(uint joystick);
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern uint sfJoystick_getButtonCount( uint joystick );
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfJoystick_hasAxis(uint joystick, Axis axis);
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern bool sfJoystick_hasAxis( uint joystick, Axis axis );
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfJoystick_isButtonPressed(uint joystick, uint button);
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern bool sfJoystick_isButtonPressed( uint joystick, uint button );
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern float sfJoystick_getAxisPosition(uint joystick, Axis axis);
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern float sfJoystick_getAxisPosition( uint joystick, Axis axis );
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfJoystick_update();
 
-        [DllImport(CSFML.window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IdentificationMarshalData sfJoystick_getIdentification(uint joystick);
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern IdentificationMarshalData sfJoystick_getIdentification( uint joystick );
         #endregion
     }
 }
