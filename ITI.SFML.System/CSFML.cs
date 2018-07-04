@@ -14,68 +14,48 @@ namespace SFML.System
         public const string System = "csfml-system-2.4.0";
         public const string Window = "csfml-window-2.4.0";
 
-        static readonly string _executingAssemblyDirectory;
 
-        static CSFML()
+        /// <summary>
+        /// Attempts to load native library path in runtimes, depending on the <see cref="OperatingSystem"/>
+        /// relative to the given assembly location.
+        /// </summary>
+        /// <param name="a">Assembly from which runtimes will be searched.</param>
+        /// <param name="name">Name of the component (no extension).</param>
+        public static void LoadNative( Assembly a, string name )
         {
-            _executingAssemblyDirectory = GetExecutingAssemblyDirectory();
-        }
-
-        static bool _system;
-        static bool _audio;
-        static bool _graphics;
-        static bool _window;
-
-        /// <summary>
-        /// Ensures that <see cref="System"/> is loaded.
-        /// </summary>
-        /// <returns>True on success, false on error.</returns>
-        public static bool EnsureSystem() => _system || (_system = Load( System ));
-
-        /// <summary>
-        /// Ensures that <see cref="System"/> and <see cref="Audio"/> are loaded.
-        /// </summary>
-        /// <returns>True on success, false on error.</returns>
-        public static bool EnsureAudio() => _audio || (_audio = EnsureSystem() | Load( Audio ));
-
-        /// <summary>
-        /// Ensures that <see cref="System"/> and <see cref="Window"/> are loaded.
-        /// </summary>
-        /// <returns>True on success, false on error.</returns>
-        public static bool EnsureWindow() => _window || (_window = EnsureSystem() | Load( Window ));
-
-        /// <summary>
-        /// Ensures that <see cref="System"/>, <see cref="Window"/> and <see cref="Graphics"/> are loaded.
-        /// </summary>
-        /// <returns>True on success, false on error.</returns>
-        public static bool EnsureGraphics() => _graphics || (_graphics = EnsureWindow() | Load( Graphics ));
-
-        static bool Load( string name )
-        {
-            var path = GetNativeLibraryPath( name ) ?? throw new FileNotFoundException( "Unable to locate native file.", GetNativeLibraryPath( _executingAssemblyDirectory, name ) );
+            string baseDirectory = GetExecutingAssemblyDirectory( a );
+            string path = FindNativeLibraryPath( baseDirectory, name );
+            if( path == null ) throw new FileNotFoundException( $"Unable to find native file {name} from {baseDirectory}." );
             var fName = Path.GetFileNameWithoutExtension( path );
             var local = Path.Combine( AppContext.BaseDirectory, fName );
             if( !File.Exists( local ) ) File.Copy( path, local );
             if( RuntimeInformation.IsOSPlatform( OSPlatform.Windows ) )
             {
-                return LoadWindowsLibrary( name ) != IntPtr.Zero;
+                if( LoadWindowsLibrary( name ) == IntPtr.Zero )
+                {
+                    throw new FileNotFoundException( $"Unable to load '{name}' (Windows)." );
+                }
             }
-            return LoadUnixLibrary( name, RTLD_NOW ) != IntPtr.Zero;
+            if( LoadUnixLibrary( name, RTLD_NOW ) == IntPtr.Zero )
+            {
+                throw new FileNotFoundException( $"Unable to load '{name}' (Unix)." );
+            }
         }
 
         /// <summary>
-        /// Gets the native library path in runtimes, depending on the <see cref="OperatingSystem"/>.
+        /// Finds the native library path in runtimes, depending on the <see cref="OperatingSystem"/>
+        /// relative to the starting point.
         /// </summary>
+        /// <param name="startingPoint">Starting directory from which runtimes will be searched.</param>
         /// <param name="name">Name of the component (no extension).</param>
         /// <returns>The full file path or null if not found.</returns>
-        static string GetNativeLibraryPath( string name )
+        static string FindNativeLibraryPath( string startingPoint, string name )
         {
-            string p = _executingAssemblyDirectory;
-            while( p.Length > 3 )
+            while( startingPoint.Length > 3 )
             {
-                string file = GetNativeLibraryPath( p, name );
+                string file = GetNativeFilePath( startingPoint, name );
                 if( File.Exists( file ) ) return file;
-                p = Path.GetDirectoryName( p );
+                startingPoint = Path.GetDirectoryName( startingPoint );
             }
             return null;
         }
@@ -86,7 +66,7 @@ namespace SFML.System
         /// <param name="path">Starting path.</param>
         /// <param name="name">Name of the component (no extension).</param>
         /// <returns>The full file path.</returns>
-        static string GetNativeLibraryPath( string path, string name )
+        static string GetNativeFilePath( string path, string name )
         {
             switch( Platform.OperatingSystem )
             {
@@ -102,14 +82,14 @@ namespace SFML.System
             throw new PlatformNotSupportedException();
         }
 
-        static string GetExecutingAssemblyDirectory()
+        static string GetExecutingAssemblyDirectory( Assembly a )
         {
             // Assembly.CodeBase is not actually a correctly formatted
             // URI.  It's merely prefixed with `file:///` and has its
             // backslashes flipped.  This is superior to EscapedCodeBase,
             // which does not correctly escape things, and ambiguates a
             // space (%20) with a literal `%20` in the path.  Sigh.
-            var managedPath = Assembly.GetExecutingAssembly().CodeBase;
+            var managedPath = a.CodeBase;
             if( managedPath == null )
             {
                 managedPath = Assembly.GetExecutingAssembly().Location;

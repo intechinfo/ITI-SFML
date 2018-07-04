@@ -12,7 +12,7 @@ namespace DemoApp
         /// </summary>
         static void Main()
         {
-            CSFML.EnsureGraphics();
+            //SFML.WindowNative.Load();
             var w = new EffectDemo.EffectDemoWindow();
             // Start the game loop
             var clock = new Clock();
