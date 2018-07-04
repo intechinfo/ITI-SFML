@@ -27,6 +27,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5D18F5A5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoApp", "Tests\DemoApp\DemoApp.csproj", "{80A07161-755D-4DC0-9F59-00031E33FFA1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{1BD5EA31-3EEC-4730-84D1-AB5FDE419045}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoAppWithPackages", "Tests\Integration\DemoAppWithPackages\DemoAppWithPackages.csproj", "{1E6BD81F-A534-49AE-B350-83EFEC6D4DFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,12 +61,18 @@ Global
 		{80A07161-755D-4DC0-9F59-00031E33FFA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80A07161-755D-4DC0-9F59-00031E33FFA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80A07161-755D-4DC0-9F59-00031E33FFA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E6BD81F-A534-49AE-B350-83EFEC6D4DFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E6BD81F-A534-49AE-B350-83EFEC6D4DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E6BD81F-A534-49AE-B350-83EFEC6D4DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E6BD81F-A534-49AE-B350-83EFEC6D4DFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{80A07161-755D-4DC0-9F59-00031E33FFA1} = {5D18F5A5-9842-4551-AF17-3A909F3137EA}
+		{1BD5EA31-3EEC-4730-84D1-AB5FDE419045} = {5D18F5A5-9842-4551-AF17-3A909F3137EA}
+		{1E6BD81F-A534-49AE-B350-83EFEC6D4DFF} = {1BD5EA31-3EEC-4730-84D1-AB5FDE419045}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B4E334B5-8A58-419E-A0FD-DECB95D9A398}

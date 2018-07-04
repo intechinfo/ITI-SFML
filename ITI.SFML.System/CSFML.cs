@@ -52,7 +52,7 @@ namespace SFML.System
 
         static bool Load( string name )
         {
-            var path = GetNativeLibraryPath( name );
+            var path = GetNativeLibraryPath( name ) ?? throw new FileNotFoundException( "Unable to locate native file.", GetNativeLibraryPath( _executingAssemblyDirectory, name ) );
             var fName = Path.GetFileNameWithoutExtension( path );
             var local = Path.Combine( AppContext.BaseDirectory, fName );
             if( !File.Exists( local ) ) File.Copy( path, local );
@@ -66,19 +66,38 @@ namespace SFML.System
         /// <summary>
         /// Gets the native library path in runtimes, depending on the <see cref="OperatingSystem"/>.
         /// </summary>
-        /// <returns>The full file path.</returns>
+        /// <param name="name">Name of the component (no extension).</param>
+        /// <returns>The full file path or null if not found.</returns>
         static string GetNativeLibraryPath( string name )
+        {
+            string p = _executingAssemblyDirectory;
+            while( p.Length > 3 )
+            {
+                string file = GetNativeLibraryPath( p, name );
+                if( File.Exists( file ) ) return file;
+                p = Path.GetDirectoryName( p );
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Gets the native library path in runtimes, depending on the <see cref="OperatingSystem"/>.
+        /// </summary>
+        /// <param name="path">Starting path.</param>
+        /// <param name="name">Name of the component (no extension).</param>
+        /// <returns>The full file path.</returns>
+        static string GetNativeLibraryPath( string path, string name )
         {
             switch( Platform.OperatingSystem )
             {
                 case OperatingSystemType.Windows:
-                    return $"{_executingAssemblyDirectory}/runtimes/win-x64/native/{name}.dll";
+                    return $"{path}/runtimes/win-x64/native/{name}.dll";
 
                 case OperatingSystemType.MacOSX:
-                    return $"{_executingAssemblyDirectory}/runtimes/os-x64/native/{name}.dylib";
+                    return $"{path}/runtimes/os-x64/native/{name}.dylib";
 
                 case OperatingSystemType.Unix:
-                    return $"{_executingAssemblyDirectory}/runtimes/linux-x64/native/{name}.so";
+                    return $"{path}/runtimes/linux-x64/native/{name}.so";
             }
             throw new PlatformNotSupportedException();
         }
