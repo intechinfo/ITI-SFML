@@ -29,16 +29,14 @@ namespace SFML.System
             var fName = Path.GetFileNameWithoutExtension( path );
             var local = Path.Combine( AppContext.BaseDirectory, fName );
             if( !File.Exists( local ) ) File.Copy( path, local );
-            if( RuntimeInformation.IsOSPlatform( OSPlatform.Windows ) )
+
+            IntPtr hLib = RuntimeInformation.IsOSPlatform( OSPlatform.Windows )
+                            ? LoadWindowsLibrary( name )
+                            : LoadUnixLibrary( name, RTLD_NOW );
+
+            if( hLib == IntPtr.Zero )
             {
-                if( LoadWindowsLibrary( name ) == IntPtr.Zero )
-                {
                     throw new FileNotFoundException( $"Unable to load '{name}' (Windows)." );
-                }
-            }
-            if( LoadUnixLibrary( name, RTLD_NOW ) == IntPtr.Zero )
-            {
-                throw new FileNotFoundException( $"Unable to load '{name}' (Unix)." );
             }
         }
 
