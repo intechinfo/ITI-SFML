@@ -23,9 +23,9 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="ITI.SFML.Graphics" Version="0.0.0-a00-00-0004-develop" />
-    <PackageReference Include="ITI.SFML.System" Version="0.0.0-a00-00-0004-develop" />
-    <PackageReference Include="ITI.SFML.Window" Version="0.0.0-a00-00-0004-develop" />
+    <PackageReference Include="ITI.SFML.Graphics" Version="0.0.0-b" />
+    <PackageReference Include="ITI.SFML.System" Version="0.0.0-b" />
+    <PackageReference Include="ITI.SFML.Window" Version="0.0.0-b" />
   </ItemGroup>
   
 </Project>
