@@ -244,7 +244,6 @@ namespace SFML.System
             return _microseconds.GetHashCode();
         }
 
-        static readonly bool _ensureSystem = CSFML.EnsureSystem();
         #region Imports
         [DllImport( CSFML.System, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern Time sfSeconds( float Amount );

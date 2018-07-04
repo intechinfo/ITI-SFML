@@ -30,7 +30,7 @@ namespace SFML.System
         /// Ensures that <see cref="System"/> is loaded.
         /// </summary>
         /// <returns>True on success, false on error.</returns>
-        public static bool EnsureSystem() => _system || Load( System );
+        public static bool EnsureSystem() => _system || (_system = Load( System ));
 
         /// <summary>
         /// Ensures that <see cref="System"/> and <see cref="Audio"/> are loaded.

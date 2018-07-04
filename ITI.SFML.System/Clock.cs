@@ -43,7 +43,6 @@ namespace SFML.System
             return sfClock_restart( CPointer );
         }
 
-        static readonly bool _ensureSystem = CSFML.EnsureSystem();
         #region Imports
         [DllImport( CSFML.System, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern IntPtr sfClock_create();

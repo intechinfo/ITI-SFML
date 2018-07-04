@@ -80,7 +80,7 @@ namespace CodeCake
 
             Task( "Create-NuGet-Packages" )
                 .WithCriteria( () => gitInfo.IsValid )
-                .IsDependentOn( "Unit-Testing" )
+                .IsDependentOn( "Build" )
                 .Does( () =>
                 {
                     StandardCreateNuGetPackages( releasesDir, projectsToPublish, gitInfo, globalInfo.BuildConfiguration );
