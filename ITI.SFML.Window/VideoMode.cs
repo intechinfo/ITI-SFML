@@ -9,7 +9,7 @@ namespace SFML.Window
     /// and provides static functions for getting modes supported
     /// by the display device
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct VideoMode
     {
         /// <summary>
@@ -17,8 +17,8 @@ namespace SFML.Window
         /// </summary>
         /// <param name="width">Video mode width</param>
         /// <param name="height">Video mode height</param>
-        public VideoMode(uint width, uint height) :
-            this(width, height, 32)
+        public VideoMode( uint width, uint height ) :
+            this( width, height, 32 )
         {
         }
 
@@ -28,7 +28,7 @@ namespace SFML.Window
         /// <param name="width">Video mode width</param>
         /// <param name="height">Video mode height</param>
         /// <param name="bpp">Video mode depth (bits per pixel)</param>
-        public VideoMode(uint width, uint height, uint bpp)
+        public VideoMode( uint width, uint height, uint bpp )
         {
             Width = width;
             Height = height;
@@ -41,7 +41,7 @@ namespace SFML.Window
         /// <returns>True if the video mode is valid, false otherwise.</returns>
         public bool IsValid()
         {
-            return sfVideoMode_isValid(this);
+            return sfVideoMode_isValid( this );
         }
 
         /// <summary>
@@ -54,9 +54,9 @@ namespace SFML.Window
                 unsafe
                 {
                     uint Count;
-                    VideoMode* ModesPtr = sfVideoMode_getFullscreenModes(out Count);
+                    VideoMode* ModesPtr = sfVideoMode_getFullscreenModes( out Count );
                     VideoMode[] Modes = new VideoMode[Count];
-                    for (uint i = 0; i < Count; ++i)
+                    for( uint i = 0; i < Count; ++i )
                         Modes[i] = ModesPtr[i];
 
                     return Modes;
@@ -98,16 +98,16 @@ namespace SFML.Window
         /// Video mode depth, in bits per pixel.
         /// </summary>
         public readonly uint BitsPerPixel;
-        
+
         #region Imports
-        [DllImport(CSFML.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern VideoMode sfVideoMode_getDesktopMode();
 
-        [DllImport(CSFML.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        unsafe static extern VideoMode* sfVideoMode_getFullscreenModes(out uint Count);
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        unsafe static extern VideoMode* sfVideoMode_getFullscreenModes( out uint Count );
 
-        [DllImport(CSFML.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfVideoMode_isValid(VideoMode Mode);
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern bool sfVideoMode_isValid( VideoMode Mode );
         #endregion
     }
 }

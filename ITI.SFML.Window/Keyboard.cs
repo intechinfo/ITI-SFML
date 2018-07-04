@@ -4,18 +4,14 @@ using System.Security;
 
 namespace SFML.Window
 {
-    ////////////////////////////////////////////////////////////
     /// <summary>
-    /// Give access to the real-time state of the keyboard
+    /// Gives access to the real-time state of the keyboard
     /// </summary>
-    ////////////////////////////////////////////////////////////
     public static class Keyboard
     {
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Key codes
+        /// Key codes.
         /// </summary>
-        ////////////////////////////////////////////////////////////
         public enum Key
         {
             /// <summary>Unhandled key</summary>
@@ -220,43 +216,43 @@ namespace SFML.Window
             F14,
             /// <summary>The F15 key</summary>
             F15,
-            /// <summary>The Pause key</summary>
+            /// <summary>
+            /// The Pause key.
+            /// </summary>
             Pause,
 
-            /// <summary>The total number of keyboard keys</summary>
+            /// <summary>
+            /// The total number of keyboard keys.
+            /// </summary>
             KeyCount // Keep last
         };
-        
-        ////////////////////////////////////////////////////////////
+
         /// <summary>
-        /// Check if a key is pressed
+        /// Checks if a key is pressed
         /// </summary>
         /// <param name="key">Key to check</param>
         /// <returns>True if the key is pressed, false otherwise</returns>
-        ////////////////////////////////////////////////////////////
-        public static bool IsKeyPressed(Key key)
+        public static bool IsKeyPressed( Key key )
         {
-            return sfKeyboard_isKeyPressed(key);
+            return sfKeyboard_isKeyPressed( key );
         }
 
-        ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Enable/Disable visibility of the virtual keyboard
+        /// Enables/Disables visibility of the virtual keyboard.
         /// </summary>
-        /// <remarks>Applicable only on Android and iOS</remarks>
+        /// <remarks>Applicable only on Android and iOS.</remarks>
         /// <param name="visible">Whether to make the virtual keyboard visible (true) or not (false)</param>
-        ////////////////////////////////////////////////////////////
-        public static void SetVirtualKeyboardVisible(bool visible)
+        public static void SetVirtualKeyboardVisible( bool visible )
         {
-            sfKeyboard_setVirtualKeyboardVisible(visible);
+            sfKeyboard_setVirtualKeyboardVisible( visible );
         }
 
         #region Imports
-        [DllImport(CSFML.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfKeyboard_isKeyPressed(Key Key);
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern bool sfKeyboard_isKeyPressed( Key Key );
 
-        [DllImport(CSFML.Window, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfKeyboard_setVirtualKeyboardVisible(bool visible);
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfKeyboard_setVirtualKeyboardVisible( bool visible );
         #endregion
     }
 }

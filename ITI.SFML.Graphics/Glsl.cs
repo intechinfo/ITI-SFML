@@ -1,24 +1,22 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using SFML.System;
 
 namespace SFML.Graphics.Glsl
 {
     #region 2D Vectors
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// <see cref="Vec2"/> is a struct represent a glsl vec2 value
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct Vec2
     {
         ////////////////////////////////////////////////////////////
         /// <summary>
         /// Implicit cast from <see cref="Vector2f"/> to <see cref="Vec2"/>
         /// </summary>
-        public static implicit operator Vec2(Vector2f vec)
+        public static implicit operator Vec2( Vector2f vec )
         {
-            return new Vec2(vec);
+            return new Vec2( vec );
         }
 
         ////////////////////////////////////////////////////////////
@@ -28,7 +26,7 @@ namespace SFML.Graphics.Glsl
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         ////////////////////////////////////////////////////////////
-        public Vec2(float x, float y)
+        public Vec2( float x, float y )
         {
             X = x;
             Y = y;
@@ -40,7 +38,7 @@ namespace SFML.Graphics.Glsl
         /// </summary>
         /// <param name="vec">A standard SFML 2D vector</param>
         ////////////////////////////////////////////////////////////
-        public Vec2(Vector2f vec)
+        public Vec2( Vector2f vec )
         {
             X = vec.X;
             Y = vec.Y;
@@ -58,16 +56,16 @@ namespace SFML.Graphics.Glsl
     /// <see cref="Ivec2"/> is a struct represent a glsl ivec2 value
     /// </summary>
     ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct Ivec2
     {
         ////////////////////////////////////////////////////////////
         /// <summary>
         /// Implicit cast from <see cref="Vector2i"/> to <see cref="Ivec2"/>
         /// </summary>
-        public static implicit operator Ivec2(Vector2i vec)
+        public static implicit operator Ivec2( Vector2i vec )
         {
-            return new Ivec2(vec);
+            return new Ivec2( vec );
         }
 
         ////////////////////////////////////////////////////////////
@@ -77,7 +75,7 @@ namespace SFML.Graphics.Glsl
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         ////////////////////////////////////////////////////////////
-        public Ivec2(int x, int y)
+        public Ivec2( int x, int y )
         {
             X = x;
             Y = y;
@@ -89,7 +87,7 @@ namespace SFML.Graphics.Glsl
         /// </summary>
         /// <param name="vec">A standard SFML 2D integer vector</param>
         ////////////////////////////////////////////////////////////
-        public Ivec2(Vector2i vec)
+        public Ivec2( Vector2i vec )
         {
             X = vec.X;
             Y = vec.Y;
@@ -107,7 +105,7 @@ namespace SFML.Graphics.Glsl
     /// <see cref="Bvec2"/> is a struct represent a glsl bvec2 value
     /// </summary>
     ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct Bvec2
     {
         ////////////////////////////////////////////////////////////
@@ -117,7 +115,7 @@ namespace SFML.Graphics.Glsl
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         ////////////////////////////////////////////////////////////
-        public Bvec2(bool x, bool y)
+        public Bvec2( bool x, bool y )
         {
             X = x;
             Y = y;
@@ -137,16 +135,16 @@ namespace SFML.Graphics.Glsl
     /// <see cref="Vec3"/> is a struct represent a glsl vec3 value
     /// </summary>
     ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct Vec3
     {
         ////////////////////////////////////////////////////////////
         /// <summary>
         /// Implicit cast from <see cref="Vector3f"/> to <see cref="Vec3"/>
         /// </summary>
-        public static implicit operator Vec3(Vector3f vec)
+        public static implicit operator Vec3( Vector3f vec )
         {
-            return new Vec3(vec);
+            return new Vec3( vec );
         }
 
         ////////////////////////////////////////////////////////////
@@ -157,7 +155,7 @@ namespace SFML.Graphics.Glsl
         /// <param name="y">Y coordinate</param>
         /// <param name="z">Z coordinate</param>
         ////////////////////////////////////////////////////////////
-        public Vec3(float x, float y, float z)
+        public Vec3( float x, float y, float z )
         {
             X = x;
             Y = y;
@@ -170,7 +168,7 @@ namespace SFML.Graphics.Glsl
         /// </summary>
         /// <param name="vec">A standard SFML 3D vector</param>
         ////////////////////////////////////////////////////////////
-        public Vec3(Vector3f vec)
+        public Vec3( Vector3f vec )
         {
             X = vec.X;
             Y = vec.Y;
@@ -192,7 +190,7 @@ namespace SFML.Graphics.Glsl
     /// <see cref="Ivec3"/> is a struct represent a glsl ivec3 value
     /// </summary>
     ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct Ivec3
     {
         ////////////////////////////////////////////////////////////
@@ -203,7 +201,7 @@ namespace SFML.Graphics.Glsl
         /// <param name="y">Y coordinate</param>
         /// <param name="z">Z coordinate</param>
         ////////////////////////////////////////////////////////////
-        public Ivec3(int x, int y, int z)
+        public Ivec3( int x, int y, int z )
         {
             X = x;
             Y = y;
@@ -225,7 +223,7 @@ namespace SFML.Graphics.Glsl
     /// <see cref="Bvec3"/> is a struct represent a glsl bvec3 value
     /// </summary>
     ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct Bvec3
     {
         ////////////////////////////////////////////////////////////
@@ -236,7 +234,7 @@ namespace SFML.Graphics.Glsl
         /// <param name="y">Y coordinate</param>
         /// <param name="z">Z coordinate</param>
         ////////////////////////////////////////////////////////////
-        public Bvec3(bool x, bool y, bool z)
+        public Bvec3( bool x, bool y, bool z )
         {
             X = x;
             Y = y;
@@ -260,7 +258,7 @@ namespace SFML.Graphics.Glsl
     /// <see cref="Vec4"/> is a struct represent a glsl vec4 value
     /// </summary>
     ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct Vec4
     {
         ////////////////////////////////////////////////////////////
@@ -272,7 +270,7 @@ namespace SFML.Graphics.Glsl
         /// <param name="z">Z coordinate</param>
         /// <param name="w">W coordinate</param>
         ////////////////////////////////////////////////////////////
-        public Vec4(float x, float y, float z, float w)
+        public Vec4( float x, float y, float z, float w )
         {
             X = x;
             Y = y;
@@ -287,7 +285,7 @@ namespace SFML.Graphics.Glsl
         /// The <see cref="Color"/>'s values will be normalized from 0..255 to 0..1
         /// </remarks>
         /// <param name="color">A SFML <see cref="Color"/> to be translated to a 4D floating-point vector</param>
-        public Vec4(Color color)
+        public Vec4( Color color )
         {
             X = color.R / 255.0f;
             Y = color.G / 255.0f;
@@ -313,7 +311,7 @@ namespace SFML.Graphics.Glsl
     /// <see cref="Ivec4"/> is a struct represent a glsl ivec4 value
     /// </summary>
     ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct Ivec4
     {
         ////////////////////////////////////////////////////////////
@@ -325,7 +323,7 @@ namespace SFML.Graphics.Glsl
         /// <param name="z">Z coordinate</param>
         /// <param name="w">W coordinate</param>
         ////////////////////////////////////////////////////////////
-        public Ivec4(int x, int y, int z, int w)
+        public Ivec4( int x, int y, int z, int w )
         {
             X = x;
             Y = y;
@@ -337,7 +335,7 @@ namespace SFML.Graphics.Glsl
         /// Construct the <see cref="Ivec4"/> from a <see cref="Color"/>
         /// </summary>
         /// <param name="color">A SFML <see cref="Color"/> to be translated to a 4D integer vector</param>
-        public Ivec4(Color color)
+        public Ivec4( Color color )
         {
             X = color.R;
             Y = color.G;
@@ -363,7 +361,7 @@ namespace SFML.Graphics.Glsl
     /// <see cref="Bvec4"/> is a struct represent a glsl bvec4 value
     /// </summary>
     ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct Bvec4
     {
         ////////////////////////////////////////////////////////////
@@ -375,7 +373,7 @@ namespace SFML.Graphics.Glsl
         /// <param name="z">Z coordinate</param>
         /// <param name="w">W coordinate</param>
         ////////////////////////////////////////////////////////////
-        public Bvec4(bool x, bool y, bool z, bool w)
+        public Bvec4( bool x, bool y, bool z, bool w )
         {
             X = x;
             Y = y;
@@ -401,7 +399,7 @@ namespace SFML.Graphics.Glsl
     /// <summary>
     /// <see cref="Mat3"/> is a struct representing a glsl mat3 value
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public unsafe struct Mat3
     {
         /// <summary>
@@ -411,11 +409,11 @@ namespace SFML.Graphics.Glsl
         /// <remarks>
         /// Arguments are in row-major order
         /// </remarks>
-        public Mat3(float a00, float a01, float a02,
+        public Mat3( float a00, float a01, float a02,
                     float a10, float a11, float a12,
-                    float a20, float a21, float a22)
+                    float a20, float a21, float a22 )
         {
-            fixed (float* m = array)
+            fixed ( float* m = array )
             {
                 m[0] = a00; m[3] = a01; m[6] = a02;
                 m[1] = a10; m[4] = a11; m[7] = a12;
@@ -427,9 +425,9 @@ namespace SFML.Graphics.Glsl
         /// Construct the <see cref="Mat3"/> from a SFML <see cref="Transform"/>
         /// </summary>
         /// <param name="transform">A SFML <see cref="Transform"/></param>
-        public Mat3(in Transform transform)
+        public Mat3( in Transform transform )
         {
-            fixed (float* m = array)
+            fixed ( float* m = array )
             {
                 m[0] = transform.m00; m[3] = transform.m01; m[6] = transform.m02;
                 m[1] = transform.m10; m[4] = transform.m11; m[7] = transform.m12;
@@ -444,7 +442,7 @@ namespace SFML.Graphics.Glsl
     /// <summary>
     /// <see cref="Mat4"/> is a struct representing a glsl mat4 value
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public unsafe struct Mat4
     {
         /// <summary>
@@ -458,10 +456,10 @@ namespace SFML.Graphics.Glsl
         {
             get
             {
-                return new Mat4(1, 0, 0, 0,
+                return new Mat4( 1, 0, 0, 0,
                                 0, 1, 0, 0,
                                 0, 0, 1, 0,
-                                0, 0, 0, 1);
+                                0, 0, 0, 1 );
             }
         }
 
@@ -472,16 +470,16 @@ namespace SFML.Graphics.Glsl
         /// <remarks>
         /// Arguments are in row-major order
         /// </remarks>
-        public Mat4(float a00, float a01, float a02, float a03,
+        public Mat4( float a00, float a01, float a02, float a03,
                     float a10, float a11, float a12, float a13,
                     float a20, float a21, float a22, float a23,
-                    float a30, float a31, float a32, float a33)
+                    float a30, float a31, float a32, float a33 )
         {
-            fixed (float* m = array)
+            fixed ( float* m = array )
             {
                 // transpose to column major
-                m[0] = a00; m[4] = a01; m[8]  = a02; m[12] = a03;
-                m[1] = a10; m[5] = a11; m[9]  = a12; m[13] = a13;
+                m[0] = a00; m[4] = a01; m[8] = a02; m[12] = a03;
+                m[1] = a10; m[5] = a11; m[9] = a12; m[13] = a13;
                 m[2] = a20; m[6] = a21; m[10] = a22; m[14] = a23;
                 m[3] = a30; m[7] = a31; m[11] = a32; m[15] = a33;
             }
@@ -491,16 +489,16 @@ namespace SFML.Graphics.Glsl
         /// Construct the <see cref="Mat3"/> from a SFML <see cref="Transform"/> and expand it to a 4x4 matrix
         /// </summary>
         /// <param name="transform">A SFML <see cref="Transform"/></param>
-        public Mat4(in Transform transform)
+        public Mat4( in Transform transform )
         {
-            fixed (float* m = array)
+            fixed ( float* m = array )
             {
                 // swapping to column-major (OpenGL) from row-major (SFML) order
                 // in addition, filling in the blanks (from expanding to a mat4) with values from
                 // an identity matrix
-                m[0] = transform.m00; m[4] = transform.m01; m[8]  = 0; m[12] = transform.m02;
-                m[1] = transform.m10; m[5] = transform.m11; m[9]  = 0; m[13] = transform.m12;
-                m[2] = 0;             m[6] = 0;             m[10] = 1; m[14] = 0;
+                m[0] = transform.m00; m[4] = transform.m01; m[8] = 0; m[12] = transform.m02;
+                m[1] = transform.m10; m[5] = transform.m11; m[9] = 0; m[13] = transform.m12;
+                m[2] = 0; m[6] = 0; m[10] = 1; m[14] = 0;
                 m[3] = transform.m20; m[7] = transform.m21; m[11] = 0; m[15] = transform.m22;
             }
         }

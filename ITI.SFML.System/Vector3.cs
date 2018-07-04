@@ -7,7 +7,7 @@ namespace SFML.System
     /// Vector3f is an utility class for manipulating 3 dimensional
     /// vectors with float components
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public readonly struct Vector3f : IEquatable<Vector3f>
     {
 
@@ -32,7 +32,7 @@ namespace SFML.System
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
         /// <param name="z">Z coordinate</param>
-        public Vector3f(float x, float y, float z)
+        public Vector3f( float x, float y, float z )
         {
             X = x;
             Y = y;
@@ -44,9 +44,9 @@ namespace SFML.System
         /// </summary>
         /// <param name="v">Vector to negate</param>
         /// <returns>-v</returns>
-        public static Vector3f operator -(Vector3f v)
+        public static Vector3f operator -( Vector3f v )
         {
-            return new Vector3f(-v.X, -v.Y, -v.Z);
+            return new Vector3f( -v.X, -v.Y, -v.Z );
         }
 
         /// <summary>
@@ -55,9 +55,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 - v2</returns>
-        public static Vector3f operator -(Vector3f v1, Vector3f v2)
+        public static Vector3f operator -( Vector3f v1, Vector3f v2 )
         {
-            return new Vector3f(v1.X - v2.X, v1.Y - v2.X, v1.Z - v2.Z);
+            return new Vector3f( v1.X - v2.X, v1.Y - v2.X, v1.Z - v2.Z );
         }
 
         /// <summary>
@@ -66,9 +66,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 + v2</returns>
-        public static Vector3f operator +(Vector3f v1, Vector3f v2)
+        public static Vector3f operator +( Vector3f v1, Vector3f v2 )
         {
-            return new Vector3f(v1.X + v2.X, v1.Y + v2.X, v1.Z + v2.Z);
+            return new Vector3f( v1.X + v2.X, v1.Y + v2.X, v1.Z + v2.Z );
         }
 
         /// <summary>
@@ -77,9 +77,9 @@ namespace SFML.System
         /// <param name="v">Vector</param>
         /// <param name="x">Scalar value</param>
         /// <returns>v * x</returns>
-        public static Vector3f operator *(Vector3f v, float x)
+        public static Vector3f operator *( Vector3f v, float x )
         {
-            return new Vector3f(v.X * x, v.Y * x, v.Z * x);
+            return new Vector3f( v.X * x, v.Y * x, v.Z * x );
         }
 
         /// <summary>
@@ -88,9 +88,9 @@ namespace SFML.System
         /// <param name="x">Scalar value</param>
         /// <param name="v">Vector</param>
         /// <returns>x * v</returns>
-        public static Vector3f operator *(float x, Vector3f v)
+        public static Vector3f operator *( float x, Vector3f v )
         {
-            return new Vector3f(v.X * x, v.Y * x, v.Z * x);
+            return new Vector3f( v.X * x, v.Y * x, v.Z * x );
         }
 
         /// <summary>
@@ -99,9 +99,9 @@ namespace SFML.System
         /// <param name="v">Vector</param>
         /// <param name="x">Scalar value</param>
         /// <returns>v / x</returns>
-        public static Vector3f operator /(Vector3f v, float x)
+        public static Vector3f operator /( Vector3f v, float x )
         {
-            return new Vector3f(v.X / x, v.Y / x, v.Z / x);
+            return new Vector3f( v.X / x, v.Y / x, v.Z / x );
         }
 
         /// <summary>
@@ -110,9 +110,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 == v2</returns>
-        public static bool operator ==(Vector3f v1, Vector3f v2)
+        public static bool operator ==( Vector3f v1, Vector3f v2 )
         {
-            return v1.Equals(v2);
+            return v1.Equals( v2 );
         }
 
         /// <summary>
@@ -121,9 +121,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 != v2</returns>
-        public static bool operator !=(Vector3f v1, Vector3f v2)
+        public static bool operator !=( Vector3f v1, Vector3f v2 )
         {
-            return !v1.Equals(v2);
+            return !v1.Equals( v2 );
         }
 
         /// <summary>
@@ -143,9 +143,9 @@ namespace SFML.System
         /// </summary>
         /// <param name="obj">Object to check</param>
         /// <returns>Object and vector are equal</returns>
-        public override bool Equals(object obj)
+        public override bool Equals( object obj )
         {
-            return (obj is Vector3f) && Equals((Vector3f)obj);
+            return (obj is Vector3f) && Equals( (Vector3f)obj );
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace SFML.System
         /// </summary>
         /// <param name="other">Vector to check</param>
         /// <returns>Vectors are equal</returns>
-        public bool Equals(Vector3f other)
+        public bool Equals( Vector3f other )
         {
             return (X == other.X) &&
                    (Y == other.Y) &&

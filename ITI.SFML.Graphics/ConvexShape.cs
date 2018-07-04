@@ -13,8 +13,8 @@ namespace SFML.Graphics
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public ConvexShape() :
-            this(0)
+        public ConvexShape()
+            : this( 0 )
         {
         }
 
@@ -22,21 +22,21 @@ namespace SFML.Graphics
         /// Constructs the shape with an initial point count.
         /// </summary>
         /// <param name="pointCount">Number of points of the shape.</param>
-        public ConvexShape(uint pointCount)
+        public ConvexShape( uint pointCount )
         {
-            SetPointCount(pointCount);
+            SetPointCount( pointCount );
         }
 
         /// <summary>
         /// Constructs the shape from another shape.
         /// </summary>
         /// <param name="copy">Shape to copy.</param>
-        public ConvexShape(ConvexShape copy) 
-            : base(copy)
+        public ConvexShape( ConvexShape copy )
+            : base( copy )
         {
-            SetPointCount(copy.GetPointCount());
-            for (uint i = 0; i < copy.GetPointCount(); ++i)
-                SetPoint(i, copy.GetPoint(i));
+            SetPointCount( copy.GetPointCount() );
+            for( uint i = 0; i < copy.GetPointCount(); ++i )
+                SetPoint( i, copy.GetPoint( i ) );
         }
 
         /// <summary>
@@ -53,9 +53,9 @@ namespace SFML.Graphics
         /// The count must be greater than 2 to define a valid shape.
         /// </summary>
         /// <param name="count">New number of points of the polygon.</param>
-        public void SetPointCount(uint count)
+        public void SetPointCount( uint count )
         {
-            Array.Resize(ref _points, (int)count);
+            Array.Resize( ref _points, (int)count );
             Update();
         }
 
@@ -70,7 +70,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="index">Index of the point to get, in range [0 .. PointCount - 1].</param>
         /// <returns>index-th point of the shape.</returns>
-        public override Vector2f GetPoint(uint index)
+        public override Vector2f GetPoint( uint index )
         {
             return _points[index];
         }
@@ -87,7 +87,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="index">Index of the point to change, in range [0 .. PointCount - 1].</param>
         /// <param name="point">New position of the point.</param>
-        public void SetPoint(uint index, Vector2f point)
+        public void SetPoint( uint index, Vector2f point )
         {
             _points[index] = point;
             Update();

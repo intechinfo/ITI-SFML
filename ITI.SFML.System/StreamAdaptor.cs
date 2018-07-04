@@ -13,40 +13,40 @@ namespace SFML.System
         /// Private structure that contains InputStream callbacks
         /// (directly maps to a CSFML sfInputStream).
         /// </summary>
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout( LayoutKind.Sequential )]
         readonly struct InputStream
         {
-            public InputStream(StreamAdaptor a)
+            public InputStream( StreamAdaptor a )
             {
-                Read = new ReadCallbackType(a.Read);
-                Seek = new SeekCallbackType(a.Seek);
-                Tell = new TellCallbackType(a.Tell);
-                GetSize = new GetSizeCallbackType(a.GetSize);
+                Read = new ReadCallbackType( a.Read );
+                Seek = new SeekCallbackType( a.Seek );
+                Tell = new TellCallbackType( a.Tell );
+                GetSize = new GetSizeCallbackType( a.GetSize );
             }
 
             /// <summary>
             /// Type of callback to read data from the current stream
             /// </summary>
-            [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-            public delegate long ReadCallbackType(IntPtr data, long size, IntPtr userData);
+            [UnmanagedFunctionPointer( CallingConvention.Cdecl )]
+            public delegate long ReadCallbackType( IntPtr data, long size, IntPtr userData );
 
             /// <summary>
             /// Type of callback to seek the current stream's position
             /// </summary>
-            [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-            public delegate long SeekCallbackType(long position, IntPtr userData);
+            [UnmanagedFunctionPointer( CallingConvention.Cdecl )]
+            public delegate long SeekCallbackType( long position, IntPtr userData );
 
             /// <summary>
             /// Type of callback to return the current stream's position
             /// </summary>
-            [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-            public delegate long TellCallbackType(IntPtr userData);
+            [UnmanagedFunctionPointer( CallingConvention.Cdecl )]
+            public delegate long TellCallbackType( IntPtr userData );
 
             /// <summary>
             /// Type of callback to return the current stream's size
             /// </summary>
-            [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-            public delegate long GetSizeCallbackType(IntPtr userData);
+            [UnmanagedFunctionPointer( CallingConvention.Cdecl )]
+            public delegate long GetSizeCallbackType( IntPtr userData );
 
             /// <summary>
             /// Function that is called to read data from the stream
@@ -77,12 +77,12 @@ namespace SFML.System
         /// Constructs from a System.IO.Stream.
         /// </summary>
         /// <param name="stream">Stream to adapt.</param>
-        public StreamAdaptor(Stream stream)
+        public StreamAdaptor( Stream stream )
         {
             _stream = stream;
             _inputStream = new InputStream( this );
-            _inputStreamPtr = Marshal.AllocHGlobal(Marshal.SizeOf(_inputStream));
-            Marshal.StructureToPtr(_inputStream, _inputStreamPtr, false);
+            _inputStreamPtr = Marshal.AllocHGlobal( Marshal.SizeOf( _inputStream ) );
+            Marshal.StructureToPtr( _inputStream, _inputStreamPtr, false );
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace SFML.System
         /// </summary>
         ~StreamAdaptor()
         {
-            Dispose(false);
+            Dispose( false );
         }
 
         /// <summary>
@@ -106,17 +106,17 @@ namespace SFML.System
         /// </summary>
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            Dispose( true );
+            GC.SuppressFinalize( this );
         }
 
         /// <summary>
         /// Destroys the object.
         /// </summary>
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        private void Dispose(bool disposing)
+        private void Dispose( bool disposing )
         {
-            Marshal.FreeHGlobal(_inputStreamPtr);
+            Marshal.FreeHGlobal( _inputStreamPtr );
         }
 
         /// <summary>
@@ -126,11 +126,11 @@ namespace SFML.System
         /// <param name="size">Size to read, in bytes.</param>
         /// <param name="userData">User data -- unused.</param>
         /// <returns>Number of bytes read.</returns>
-        private long Read(IntPtr data, long size, IntPtr userData)
+        private long Read( IntPtr data, long size, IntPtr userData )
         {
             byte[] buffer = new byte[size];
-            int count = _stream.Read(buffer, 0, (int)size);
-            Marshal.Copy(buffer, 0, data, count);
+            int count = _stream.Read( buffer, 0, (int)size );
+            Marshal.Copy( buffer, 0, data, count );
             return count;
         }
 
@@ -140,9 +140,9 @@ namespace SFML.System
         /// <param name="position">New read position.</param>
         /// <param name="userData">User data -- unused.</param>
         /// <returns>Actual position</returns>
-        private long Seek(long position, IntPtr userData)
+        private long Seek( long position, IntPtr userData )
         {
-            return _stream.Seek(position, SeekOrigin.Begin);
+            return _stream.Seek( position, SeekOrigin.Begin );
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace SFML.System
         /// </summary>
         /// <param name="userData">User data -- unused</param>
         /// <returns>Current position in the stream</returns>
-        private long Tell(IntPtr userData)
+        private long Tell( IntPtr userData )
         {
             return _stream.Position;
         }
@@ -160,7 +160,7 @@ namespace SFML.System
         /// </summary>
         /// <param name="userData">User data -- unused.</param>
         /// <returns>Number of bytes in the stream.</returns>
-        private long GetSize(IntPtr userData)
+        private long GetSize( IntPtr userData )
         {
             return _stream.Length;
         }

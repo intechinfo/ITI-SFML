@@ -6,7 +6,7 @@ namespace SFML.Graphics
     /// <summary>
     /// Define a point with color and texture coordinates.
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public readonly struct Vertex
     {
         /// <summary>
@@ -29,8 +29,8 @@ namespace SFML.Graphics
         /// The vertex color is white and texture coordinates are (0, 0).
         /// </summary>
         /// <param name="position">Vertex position.</param>
-        public Vertex(Vector2f position) 
-            : this(position, Color.White, new Vector2f(0, 0))
+        public Vertex( Vector2f position )
+            : this( position, Color.White, new Vector2f( 0, 0 ) )
         {
         }
 
@@ -40,8 +40,8 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="position">Vertex position.</param>
         /// <param name="color">Vertex color.</param>
-        public Vertex(Vector2f position, Color color) 
-            : this(position, color, new Vector2f(0, 0))
+        public Vertex( Vector2f position, Color color )
+            : this( position, color, new Vector2f( 0, 0 ) )
         {
         }
 
@@ -51,8 +51,8 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="position">Vertex position</param>
         /// <param name="texCoords">Vertex texture coordinates</param>
-        public Vertex(Vector2f position, Vector2f texCoords) 
-            : this(position, Color.White, texCoords)
+        public Vertex( Vector2f position, Vector2f texCoords )
+            : this( position, Color.White, texCoords )
         {
         }
 
@@ -64,7 +64,7 @@ namespace SFML.Graphics
         /// <param name="color">Vertex color</param>
         /// <param name="texCoords">Vertex texture coordinates</param>
         ////////////////////////////////////////////////////////////
-        public Vertex(Vector2f position, Color color, Vector2f texCoords)
+        public Vertex( Vector2f position, Color color, Vector2f texCoords )
         {
             Position = position;
             Color = color;

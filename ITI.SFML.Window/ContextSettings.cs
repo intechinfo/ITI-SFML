@@ -4,13 +4,13 @@ using System.Runtime.InteropServices;
 namespace SFML.Window
 {
     /// <summary>
-    /// Structure defining the creation settings of OpenGL contexts
+    /// Structure defining the creation settings of OpenGL contexts.
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct ContextSettings
     {
         /// <summary>
-        /// Enumeration of the context attribute flags
+        /// Enumeration of the context attribute flags.
         /// </summary>
         [Flags]
         public enum Attribute
@@ -36,8 +36,8 @@ namespace SFML.Window
         /// </summary>
         /// <param name="depthBits">Depth buffer bits</param>
         /// <param name="stencilBits">Stencil buffer bits</param>
-        public ContextSettings(uint depthBits, uint stencilBits) :
-            this(depthBits, stencilBits, 0)
+        public ContextSettings( uint depthBits, uint stencilBits )
+            : this( depthBits, stencilBits, 0 )
         {
         }
 
@@ -47,13 +47,13 @@ namespace SFML.Window
         /// <param name="depthBits">Depth buffer bits</param>
         /// <param name="stencilBits">Stencil buffer bits</param>
         /// <param name="antialiasingLevel">Antialiasing level</param>
-        public ContextSettings(uint depthBits, uint stencilBits, uint antialiasingLevel) :
-            this(depthBits, stencilBits, antialiasingLevel, 2, 0, Attribute.Default, false)
+        public ContextSettings( uint depthBits, uint stencilBits, uint antialiasingLevel )
+            : this( depthBits, stencilBits, antialiasingLevel, 2, 0, Attribute.Default, false )
         {
         }
 
         /// <summary>
-        /// Construct the settings from depth / stencil bits and antialiasing level.
+        /// Constructs the settings from depth / stencil bits and antialiasing level.
         /// </summary>
         /// <param name="depthBits">Depth buffer bits</param>
         /// <param name="stencilBits">Stencil buffer bits</param>
@@ -63,13 +63,13 @@ namespace SFML.Window
         /// <param name="attributes">Attribute flags of the context</param>
         /// <param name="sRgbCapable">sRGB capability of the context</param>
         public ContextSettings(
-            uint depthBits, 
-            uint stencilBits, 
-            uint antialiasingLevel, 
-            uint majorVersion, 
-            uint minorVersion, 
-            Attribute attributes, 
-            bool sRgbCapable)
+            uint depthBits,
+            uint stencilBits,
+            uint antialiasingLevel,
+            uint majorVersion,
+            uint minorVersion,
+            Attribute attributes,
+            bool sRgbCapable )
         {
             DepthBits = depthBits;
             StencilBits = stencilBits;
@@ -98,36 +98,36 @@ namespace SFML.Window
         /// <summary>
         /// Depth buffer bits (0 is disabled).
         /// </summary>
-        public uint DepthBits;
+        public readonly uint DepthBits;
 
         /// <summary>
         /// Stencil buffer bits (0 is disabled).
         /// </summary>
-        public uint StencilBits;
+        public readonly uint StencilBits;
 
         /// <summary>
         /// Antialiasing level (0 is disabled).
         /// </summary>
-        public uint AntialiasingLevel;
+        public readonly uint AntialiasingLevel;
 
         /// <summary>
         /// Major number of the context version.
         /// </summary>
-        public uint MajorVersion;
+        public readonly uint MajorVersion;
 
         /// <summary>
         /// Minor number of the context version.
         /// </summary>
-        public uint MinorVersion;
+        public readonly uint MinorVersion;
 
         /// <summary>
         /// The attribute flags to create the context with.
         /// </summary>
-        public Attribute AttributeFlags;
+        public readonly Attribute AttributeFlags;
 
         /// <summary>
         /// Whether the context framebuffer is sRGB capable.
         /// </summary>
-        public bool SRgbCapable;
+        public readonly bool SRgbCapable;
     }
 }

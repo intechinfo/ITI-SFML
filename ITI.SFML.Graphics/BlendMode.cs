@@ -6,7 +6,7 @@ namespace SFML.Graphics
     /// <summary>
     /// Blending modes for drawing.
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public readonly struct BlendMode : IEquatable<BlendMode>
     {
         /// <summary>
@@ -92,18 +92,18 @@ namespace SFML.Graphics
         }
 
         /// <summary>Blend source and dest according to dest alpha</summary>
-        public static readonly BlendMode Alpha = new BlendMode(Factor.SrcAlpha, Factor.OneMinusSrcAlpha, Equation.Add,
-                                                               Factor.One, Factor.OneMinusSrcAlpha, Equation.Add);
+        public static readonly BlendMode Alpha = new BlendMode( Factor.SrcAlpha, Factor.OneMinusSrcAlpha, Equation.Add,
+                                                               Factor.One, Factor.OneMinusSrcAlpha, Equation.Add );
 
         /// <summary>Add source to dest</summary>
-        public static readonly BlendMode Add = new BlendMode(Factor.SrcAlpha, Factor.One, Equation.Add,
-                                                             Factor.One, Factor.One, Equation.Add);
+        public static readonly BlendMode Add = new BlendMode( Factor.SrcAlpha, Factor.One, Equation.Add,
+                                                             Factor.One, Factor.One, Equation.Add );
 
         /// <summary>Multiply source and dest</summary>
-        public static readonly BlendMode Multiply = new BlendMode(Factor.DstColor, Factor.Zero);
+        public static readonly BlendMode Multiply = new BlendMode( Factor.DstColor, Factor.Zero );
 
         /// <summary>Overwrite dest with source</summary>
-        public static readonly BlendMode None = new BlendMode(Factor.One, Factor.Zero);
+        public static readonly BlendMode None = new BlendMode( Factor.One, Factor.Zero );
 
 
         /// <summary>
@@ -111,8 +111,8 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="SourceFactor">Specifies how to compute the source factor for the color and alpha channels.</param>
         /// <param name="DestinationFactor">Specifies how to compute the destination factor for the color and alpha channels.</param>
-        public BlendMode(Factor SourceFactor, Factor DestinationFactor)
-            : this(SourceFactor, DestinationFactor, Equation.Add)
+        public BlendMode( Factor SourceFactor, Factor DestinationFactor )
+            : this( SourceFactor, DestinationFactor, Equation.Add )
         {
         }
 
@@ -122,8 +122,8 @@ namespace SFML.Graphics
         /// <param name="SourceFactor">Specifies how to compute the source factor for the color and alpha channels.</param>
         /// <param name="DestinationFactor">Specifies how to compute the destination factor for the color and alpha channels.</param>
         /// <param name="BlendEquation">Specifies how to combine the source and destination colors and alpha.</param>
-        public BlendMode(Factor SourceFactor, Factor DestinationFactor, Equation BlendEquation)
-            : this(SourceFactor, DestinationFactor, BlendEquation, SourceFactor, DestinationFactor, BlendEquation)
+        public BlendMode( Factor SourceFactor, Factor DestinationFactor, Equation BlendEquation )
+            : this( SourceFactor, DestinationFactor, BlendEquation, SourceFactor, DestinationFactor, BlendEquation )
         {
         }
 
@@ -137,12 +137,12 @@ namespace SFML.Graphics
         /// <param name="AlphaDestinationFactor">Specifies how to compute the destination factor.</param>
         /// <param name="AlphaBlendEquation">Specifies how to combine the source and destination alphas.</param>
         public BlendMode(
-                Factor ColorSourceFactor, 
-                Factor ColorDestinationFactor, 
-                Equation ColorBlendEquation, 
-                Factor AlphaSourceFactor, 
-                Factor AlphaDestinationFactor, 
-                Equation AlphaBlendEquation)
+                Factor ColorSourceFactor,
+                Factor ColorDestinationFactor,
+                Equation ColorBlendEquation,
+                Factor AlphaSourceFactor,
+                Factor AlphaDestinationFactor,
+                Equation AlphaBlendEquation )
         {
             ColorSrcFactor = ColorSourceFactor;
             ColorDstFactor = ColorDestinationFactor;
@@ -156,27 +156,27 @@ namespace SFML.Graphics
         /// Compares two blend modes and checks if they are equal.
         /// </summary>
         /// <returns>Blend Modes are equal.</returns>
-        public static bool operator ==(BlendMode left, BlendMode right) => left.Equals(right);
+        public static bool operator ==( BlendMode left, BlendMode right ) => left.Equals( right );
 
         /// <summary>
         /// Compares two blend modes and checks if they are not equal.
         /// </summary>
         /// <returns>Blend Modes are not equal.</returns>
-        public static bool operator !=(BlendMode left, BlendMode right) => !left.Equals(right);
+        public static bool operator !=( BlendMode left, BlendMode right ) => !left.Equals( right );
 
         /// <summary>
         /// Compares blend mode and object and checks if they are equal.
         /// </summary>
         /// <param name="obj">Object to check.</param>
         /// <returns>Object and blend mode are equal;</returns>
-        public override bool Equals(object obj) =>  obj is BlendMode b && Equals( b );
+        public override bool Equals( object obj ) => obj is BlendMode b && Equals( b );
 
         /// <summary>
         /// Compares two blend modes and checks if they are equal.
         /// </summary>
         /// <param name="other">Blend Mode to check.</param>
         /// <returns>blend modes are equal.</returns>
-        public bool Equals(BlendMode other)
+        public bool Equals( BlendMode other )
         {
             return (ColorSrcFactor == other.ColorSrcFactor) &&
                    (ColorDstFactor == other.ColorDstFactor) &&

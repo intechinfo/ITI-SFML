@@ -7,7 +7,7 @@ namespace SFML.Graphics
     /// <summary>
     /// Defines a 3x3 transform matrix.
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct MutableTransform
     {
         float m00, m01, m02;
@@ -28,7 +28,7 @@ namespace SFML.Graphics
         /// <param name="a22">Element (2, 2) of the matrix.</param>
         public MutableTransform( float a00, float a01, float a02,
                                  float a10, float a11, float a12,
-                                 float a20, float a21, float a22)
+                                 float a20, float a21, float a22 )
         {
             m00 = a00; m01 = a01; m02 = a02;
             m10 = a10; m11 = a11; m12 = a12;
@@ -41,7 +41,7 @@ namespace SFML.Graphics
         /// <returns>The transform.</returns>
         public unsafe Transform ToTransform()
         {
-            fixed (MutableTransform* f = &this)
+            fixed ( MutableTransform* f = &this )
             {
                 return *((Transform*)(void*)f);
             }
@@ -56,9 +56,9 @@ namespace SFML.Graphics
         /// </para>
         /// </summary>
         /// <param name="transform">Transform to combine to this transform.</param>
-        public void Combine(in Transform transform)
+        public void Combine( in Transform transform )
         {
-            sfTransform_combine(ref this, in transform);
+            sfTransform_combine( ref this, in transform );
         }
 
         /// <summary>
@@ -70,9 +70,9 @@ namespace SFML.Graphics
         /// </para>
         /// </summary>
         /// <param name="transform">Transform to combine to this transform.</param>
-        public void Combine(ref MutableTransform transform)
+        public void Combine( ref MutableTransform transform )
         {
-            sfTransform_combine(ref this, ref transform);
+            sfTransform_combine( ref this, ref transform );
         }
 
         /// <summary>
@@ -80,19 +80,19 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="x">Offset to apply on X axis.</param>
         /// <param name="y">Offset to apply on Y axis.</param>
-        public void Translate(float x, float y) => sfTransform_translate(ref this, x, y);
+        public void Translate( float x, float y ) => sfTransform_translate( ref this, x, y );
 
         /// <summary>
         /// Combine the current transform with a translation.
         /// </summary>
         /// <param name="offset">Translation offset to apply.</param>
-        public void Translate(Vector2f offset) => Translate(offset.X, offset.Y);
+        public void Translate( Vector2f offset ) => Translate( offset.X, offset.Y );
 
         /// <summary>
         /// Combines the current transform with a rotation.
         /// </summary>
         /// <param name="angle">Rotation angle, in degrees.</param>
-        public void Rotate(float angle) => sfTransform_rotate(ref this, angle);
+        public void Rotate( float angle ) => sfTransform_rotate( ref this, angle );
 
         /// <summary>
         /// Combines the current transform with a rotation.
@@ -106,9 +106,9 @@ namespace SFML.Graphics
         /// <param name="angle">Rotation angle, in degrees.</param>
         /// <param name="centerX">X coordinate of the center of rotation.</param>
         /// <param name="centerY">Y coordinate of the center of rotation.</param>
-        public void Rotate(float angle, float centerX, float centerY)
+        public void Rotate( float angle, float centerX, float centerY )
         {
-            sfTransform_rotateWithCenter(ref this, angle, centerX, centerY);
+            sfTransform_rotateWithCenter( ref this, angle, centerX, centerY );
         }
 
         /// <summary>
@@ -122,14 +122,14 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="angle">Rotation angle, in degrees.</param>
         /// <param name="center">Center of rotation.</param>
-        public void Rotate(float angle, Vector2f center) => Rotate(angle, center.X, center.Y);
+        public void Rotate( float angle, Vector2f center ) => Rotate( angle, center.X, center.Y );
 
         /// <summary>
         /// Combines the current transform with a scaling.
         /// </summary>
         /// <param name="scaleX">Scaling factor on the X axis.</param>
         /// <param name="scaleY">Scaling factor on the Y axis.</param>
-        public void Scale(float scaleX, float scaleY) => sfTransform_scale(ref this, scaleX, scaleY);
+        public void Scale( float scaleX, float scaleY ) => sfTransform_scale( ref this, scaleX, scaleY );
 
         /// <summary>
         /// Combines the current transform with a scaling.
@@ -144,16 +144,16 @@ namespace SFML.Graphics
         /// <param name="scaleY">Scaling factor on Y axis</param>
         /// <param name="centerX">X coordinate of the center of scaling</param>
         /// <param name="centerY">Y coordinate of the center of scaling</param>
-        public void Scale(float scaleX, float scaleY, float centerX, float centerY)
+        public void Scale( float scaleX, float scaleY, float centerX, float centerY )
         {
-            sfTransform_scaleWithCenter(ref this, scaleX, scaleY, centerX, centerY);
+            sfTransform_scaleWithCenter( ref this, scaleX, scaleY, centerX, centerY );
         }
 
         /// <summary>
         /// Combines the current transform with a scaling.
         /// </summary>
         /// <param name="factors">Scaling factors.</param>
-        public void Scale(Vector2f factors) => Scale(factors.X, factors.Y);
+        public void Scale( Vector2f factors ) => Scale( factors.X, factors.Y );
 
         /// <summary>
         /// Combines the current transform with a scaling.
@@ -166,7 +166,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="factors">Scaling factors.</param>
         /// <param name="center">Center of scaling.</param>
-        public void Scale(Vector2f factors, Vector2f center) => Scale(factors.X, factors.Y, center.X, center.Y);
+        public void Scale( Vector2f factors, Vector2f center ) => Scale( factors.X, factors.Y, center.X, center.Y );
 
         /// <summary>
         /// The identity transform (does nothing).
@@ -177,7 +177,7 @@ namespace SFML.Graphics
             {
                 return new MutableTransform( 1, 0, 0,
                                              0, 1, 0,
-                                             0, 0, 1);
+                                             0, 0, 1 );
             }
         }
 
@@ -187,38 +187,38 @@ namespace SFML.Graphics
         /// <returns>String description of the object.</returns>
         public override string ToString()
         {
-            return string.Format("[MutableTransform]" +
+            return string.Format( "[MutableTransform]" +
                    " Matrix(" +
                    "{0}, {1}, {2}," +
                    "{3}, {4}, {5}," +
                    "{6}, {7}, {8}, )",
                    m00, m01, m02,
                    m10, m11, m12,
-                   m20, m21, m22);
+                   m20, m21, m22 );
         }
 
         #region Imports
 
-        [DllImport(CSFML.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfTransform_combine(ref MutableTransform transform, in Transform other);
+        [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfTransform_combine( ref MutableTransform transform, in Transform other );
 
-        [DllImport(CSFML.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfTransform_combine(ref MutableTransform transform, ref MutableTransform other);
+        [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfTransform_combine( ref MutableTransform transform, ref MutableTransform other );
 
-        [DllImport(CSFML.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfTransform_translate(ref MutableTransform transform, float x, float y);
+        [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfTransform_translate( ref MutableTransform transform, float x, float y );
 
-        [DllImport(CSFML.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfTransform_rotate(ref MutableTransform transform, float angle);
+        [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfTransform_rotate( ref MutableTransform transform, float angle );
 
-        [DllImport(CSFML.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfTransform_rotateWithCenter(ref MutableTransform transform, float angle, float centerX, float centerY);
+        [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfTransform_rotateWithCenter( ref MutableTransform transform, float angle, float centerX, float centerY );
 
-        [DllImport(CSFML.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfTransform_scale(ref MutableTransform transform, float scaleX, float scaleY);
+        [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfTransform_scale( ref MutableTransform transform, float scaleX, float scaleY );
 
-        [DllImport(CSFML.Graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfTransform_scaleWithCenter(ref MutableTransform transform, float scaleX, float scaleY, float centerX, float centerY);
+        [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfTransform_scaleWithCenter( ref MutableTransform transform, float scaleX, float scaleY, float centerX, float centerY );
         #endregion
     }
 }

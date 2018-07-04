@@ -2,8 +2,6 @@ using System;
 
 namespace SFML
 {
-    //TODO: replace this with a SafeHandle !!
-
     /// <summary>
     /// The ObjectBase class is an abstract base for every
     /// SFML object. It's meant for internal use only
@@ -14,7 +12,7 @@ namespace SFML
         /// Construct the object from a pointer to the C library object
         /// </summary>
         /// <param name="cPointer">Internal pointer to the object in the C libraries</param>
-        public ObjectBase(IntPtr cPointer)
+        public ObjectBase( IntPtr cPointer )
         {
             myCPointer = cPointer;
         }
@@ -24,7 +22,7 @@ namespace SFML
         /// </summary>
         ~ObjectBase()
         {
-            Dispose(false);
+            Dispose( false );
         }
 
         /// <summary>
@@ -42,19 +40,19 @@ namespace SFML
         /// </summary>
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            Dispose( true );
+            GC.SuppressFinalize( this );
         }
 
         /// <summary>
         /// Destroy the object
         /// </summary>
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call?</param>
-        private void Dispose(bool disposing)
+        private void Dispose( bool disposing )
         {
-            if (myCPointer != IntPtr.Zero)
+            if( myCPointer != IntPtr.Zero )
             {
-                Destroy(disposing);
+                Destroy( disposing );
                 myCPointer = IntPtr.Zero;
             }
         }
@@ -63,7 +61,7 @@ namespace SFML
         /// Destroy the object (implementation is left to each derived class)
         /// </summary>
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call?</param>
-        protected abstract void Destroy(bool disposing);
+        protected abstract void Destroy( bool disposing );
 
         private IntPtr myCPointer = IntPtr.Zero;
     }

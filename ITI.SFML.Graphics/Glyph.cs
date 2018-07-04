@@ -5,7 +5,7 @@ namespace SFML.Graphics
     /// <summary>
     /// Structure describing a glyph (a visual character).
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public readonly struct Glyph
     {
         /// <summary>

@@ -17,14 +17,14 @@ namespace SFML.Audio
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public SoundRecorder() 
-            : base(IntPtr.Zero)
+        public SoundRecorder()
+            : base( IntPtr.Zero )
         {
-            _startCallback = new StartCallback(OnStart);
-            _processCallback = new ProcessCallback(ProcessSamples);
-            _stopCallback = new StopCallback(OnStop);
+            _startCallback = new StartCallback( OnStart );
+            _processCallback = new ProcessCallback( ProcessSamples );
+            _stopCallback = new StopCallback( OnStop );
 
-            CPointer = sfSoundRecorder_create(_startCallback, _processCallback, _stopCallback, IntPtr.Zero);
+            CPointer = sfSoundRecorder_create( _startCallback, _processCallback, _stopCallback, IntPtr.Zero );
         }
 
         /// <summary>
@@ -39,9 +39,9 @@ namespace SFML.Audio
         /// Please note that only one capture can happen at the same time.
         /// </summary>
         /// <param name="sampleRate">Sound frequency; the more samples, the higher the quality (44100 by default = CD quality).</param>
-        public bool Start(uint sampleRate = 44100)
+        public bool Start( uint sampleRate = 44100 )
         {
-            return sfSoundRecorder_start(CPointer, sampleRate);
+            return sfSoundRecorder_start( CPointer, sampleRate );
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace SFML.Audio
         /// </summary>
         public void Stop()
         {
-            sfSoundRecorder_stop(CPointer);
+            sfSoundRecorder_stop( CPointer );
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace SFML.Audio
         /// </remarks>
         public uint SampleRate
         {
-            get { return sfSoundRecorder_getSampleRate(CPointer); }
+            get { return sfSoundRecorder_getSampleRate( CPointer ); }
         }
 
         /// <summary>
@@ -75,8 +75,8 @@ namespace SFML.Audio
         /// </remarks>
         public uint ChannelCount
         {
-            get { return sfSoundRecorder_getChannelCount(CPointer); }
-            set { sfSoundRecorder_setChannelCount(CPointer, value); }
+            get { return sfSoundRecorder_getChannelCount( CPointer ); }
+            set { sfSoundRecorder_setChannelCount( CPointer, value ); }
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace SFML.Audio
         /// </summary>
         /// <param name="samples">Array of samples to process</param>
         /// <returns>False to stop recording audio data, true to continue</returns>
-        protected abstract bool OnProcessSamples(short[] samples);
+        protected abstract bool OnProcessSamples( short[] samples );
 
         /// <summary>
         /// Stops capturing audio data.
@@ -151,10 +151,9 @@ namespace SFML.Audio
         /// </para>
         /// The default processing interval is 100 ms.
         /// </summary>
-        ////////////////////////////////////////////////////////////
-        protected void SetProcessingInterval(Time interval)
+        protected void SetProcessingInterval( Time interval )
         {
-            sfSoundRecorder_setProcessingInterval(CPointer, interval);
+            sfSoundRecorder_setProcessingInterval( CPointer, interval );
         }
 
         /// <summary>
@@ -167,10 +166,10 @@ namespace SFML.Audio
                 unsafe
                 {
                     uint Count;
-                    IntPtr* DevicesPtr = sfSoundRecorder_getAvailableDevices(out Count);
+                    IntPtr* DevicesPtr = sfSoundRecorder_getAvailableDevices( out Count );
                     string[] Devices = new string[Count];
-                    for (uint i = 0; i < Count; ++i)
-                        Devices[i] = Marshal.PtrToStringAnsi(DevicesPtr[i]);
+                    for( uint i = 0; i < Count; ++i )
+                        Devices[i] = Marshal.PtrToStringAnsi( DevicesPtr[i] );
 
                     return Devices;
                 }
@@ -182,7 +181,7 @@ namespace SFML.Audio
         /// </summary>
         public static string DefaultDevice
         {
-            get { return Marshal.PtrToStringAnsi(sfSoundRecorder_getDefaultDevice()); }
+            get { return Marshal.PtrToStringAnsi( sfSoundRecorder_getDefaultDevice() ); }
         }
 
         /// <summary>
@@ -190,9 +189,9 @@ namespace SFML.Audio
         /// </summary>
         /// <param name="Name">The name of the audio capture device.</param>
         /// <returns>True, if it was able to set the requested device.</returns>
-        public bool SetDevice(string Name)
+        public bool SetDevice( string Name )
         {
-            return sfSoundRecorder_setDevice(CPointer, Name);
+            return sfSoundRecorder_setDevice( CPointer, Name );
         }
 
         /// <summary>
@@ -201,16 +200,16 @@ namespace SFML.Audio
         /// <returns>The name of the current audio capture device.</returns>
         public string GetDevice()
         {
-            return Marshal.PtrToStringAnsi(sfSoundRecorder_getDevice(CPointer));
+            return Marshal.PtrToStringAnsi( sfSoundRecorder_getDevice( CPointer ) );
         }
 
         /// <summary>
         /// Handles the destruction of the object.
         /// </summary>
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        protected override void Destroy(bool disposing)
+        protected override void Destroy( bool disposing )
         {
-            sfSoundRecorder_destroy(CPointer);
+            sfSoundRecorder_destroy( CPointer );
         }
 
         /// <summary>
@@ -221,61 +220,61 @@ namespace SFML.Audio
         /// <param name="nbSamples">Number of samples in the array</param>
         /// <param name="userData">User data -- unused</param>
         /// <returns>False to stop recording audio data, true to continue</returns>
-        private bool ProcessSamples(IntPtr samples, uint nbSamples, IntPtr userData)
+        private bool ProcessSamples( IntPtr samples, uint nbSamples, IntPtr userData )
         {
             short[] samplesArray = new short[nbSamples];
-            Marshal.Copy(samples, samplesArray, 0, samplesArray.Length);
-            return OnProcessSamples(samplesArray);
+            Marshal.Copy( samples, samplesArray, 0, samplesArray.Length );
+            return OnProcessSamples( samplesArray );
         }
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        [UnmanagedFunctionPointer( CallingConvention.Cdecl )]
         private delegate bool StartCallback();
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate bool ProcessCallback(IntPtr samples, uint nbSamples, IntPtr userData);
+        [UnmanagedFunctionPointer( CallingConvention.Cdecl )]
+        private delegate bool ProcessCallback( IntPtr samples, uint nbSamples, IntPtr userData );
 
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        [UnmanagedFunctionPointer( CallingConvention.Cdecl )]
         private delegate void StopCallback();
 
         #region Imports
-        [DllImport(CSFML.Audio, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfSoundRecorder_create(StartCallback OnStart, ProcessCallback OnProcess, StopCallback OnStop, IntPtr UserData);
+        [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern IntPtr sfSoundRecorder_create( StartCallback OnStart, ProcessCallback OnProcess, StopCallback OnStop, IntPtr UserData );
 
-        [DllImport(CSFML.Audio, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfSoundRecorder_destroy(IntPtr SoundRecorder);
+        [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfSoundRecorder_destroy( IntPtr SoundRecorder );
 
-        [DllImport(CSFML.Audio, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfSoundRecorder_start(IntPtr SoundRecorder, uint SampleRate);
+        [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern bool sfSoundRecorder_start( IntPtr SoundRecorder, uint SampleRate );
 
-        [DllImport(CSFML.Audio, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfSoundRecorder_stop(IntPtr SoundRecorder);
+        [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfSoundRecorder_stop( IntPtr SoundRecorder );
 
-        [DllImport(CSFML.Audio, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern uint sfSoundRecorder_getSampleRate(IntPtr SoundRecorder);
+        [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern uint sfSoundRecorder_getSampleRate( IntPtr SoundRecorder );
 
-        [DllImport(CSFML.Audio, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern bool sfSoundRecorder_isAvailable();
 
-        [DllImport(CSFML.Audio, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfSoundRecorder_setProcessingInterval(IntPtr SoundRecorder, Time Interval);
+        [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfSoundRecorder_setProcessingInterval( IntPtr SoundRecorder, Time Interval );
 
-        [DllImport(CSFML.Audio, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        unsafe static extern IntPtr* sfSoundRecorder_getAvailableDevices(out uint Count);
+        [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        unsafe static extern IntPtr* sfSoundRecorder_getAvailableDevices( out uint Count );
 
-        [DllImport(CSFML.Audio, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
+        [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern IntPtr sfSoundRecorder_getDefaultDevice();
 
-        [DllImport(CSFML.Audio, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern bool sfSoundRecorder_setDevice(IntPtr SoundRecorder, string Name);
+        [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern bool sfSoundRecorder_setDevice( IntPtr SoundRecorder, string Name );
 
-        [DllImport(CSFML.Audio, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfSoundRecorder_getDevice(IntPtr SoundRecorder);
+        [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern IntPtr sfSoundRecorder_getDevice( IntPtr SoundRecorder );
 
-        [DllImport(CSFML.Audio, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern void sfSoundRecorder_setChannelCount(IntPtr SoundRecorder, uint channelCount);
+        [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfSoundRecorder_setChannelCount( IntPtr SoundRecorder, uint channelCount );
 
-        [DllImport(CSFML.Audio, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-        static extern uint sfSoundRecorder_getChannelCount(IntPtr SoundRecorder);
+        [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern uint sfSoundRecorder_getChannelCount( IntPtr SoundRecorder );
         #endregion
     }
 }

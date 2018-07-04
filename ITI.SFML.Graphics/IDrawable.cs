@@ -14,6 +14,6 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="target">Render target to draw to.</param>
         /// <param name="states">Render states to use.</param>
-        void Draw(IRenderTarget target, in RenderStates states);
+        void Draw( IRenderTarget target, in RenderStates states );
     }
 }

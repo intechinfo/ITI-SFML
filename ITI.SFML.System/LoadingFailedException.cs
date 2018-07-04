@@ -13,7 +13,7 @@ namespace SFML.System
         /// Default constructor (unknown error)
         /// </summary>
         public LoadingFailedException() :
-            base("Failed to load a resource")
+            base( "Failed to load a resource" )
         {
         }
 
@@ -21,8 +21,8 @@ namespace SFML.System
         /// Failure to load a resource from memory
         /// </summary>
         /// <param name="resourceName">Name of the resource</param>
-        public LoadingFailedException(string resourceName) :
-            base("Failed to load " + resourceName + " from memory")
+        public LoadingFailedException( string resourceName ) :
+            base( "Failed to load " + resourceName + " from memory" )
         {
         }
 
@@ -31,8 +31,8 @@ namespace SFML.System
         /// </summary>
         /// <param name="resourceName">Name of the resource</param>
         /// <param name="innerException">Exception which is the cause ofthe current exception</param>
-        public LoadingFailedException(string resourceName, Exception innerException) :
-            base("Failed to load " + resourceName + " from memory", innerException)
+        public LoadingFailedException( string resourceName, Exception innerException ) :
+            base( "Failed to load " + resourceName + " from memory", innerException )
         {
         }
 
@@ -41,8 +41,8 @@ namespace SFML.System
         /// </summary>
         /// <param name="resourceName">Name of the resource</param>
         /// <param name="filename">Path of the file</param>
-        public LoadingFailedException(string resourceName, string filename) :
-            base("Failed to load " + resourceName + " from file " + filename)
+        public LoadingFailedException( string resourceName, string filename ) :
+            base( "Failed to load " + resourceName + " from file " + filename )
         {
         }
 
@@ -52,8 +52,8 @@ namespace SFML.System
         /// <param name="resourceName">Name of the resource</param>
         /// <param name="filename">Path of the file</param>
         /// <param name="innerException">Exception which is the cause ofthe current exception</param>
-        public LoadingFailedException(string resourceName, string filename, Exception innerException) :
-            base("Failed to load " + resourceName + " from file " + filename, innerException)
+        public LoadingFailedException( string resourceName, string filename, Exception innerException ) :
+            base( "Failed to load " + resourceName + " from file " + filename, innerException )
         {
         }
 
@@ -62,9 +62,9 @@ namespace SFML.System
         /// </summary>		
         /// <param name="info">Serialized data</param>		
         /// <param name="context">Contextual informations</param>		
-        public LoadingFailedException(SerializationInfo info, StreamingContext context) :
-            base(info, context)		
-        {		
+        public LoadingFailedException( SerializationInfo info, StreamingContext context ) :
+            base( info, context )
+        {
         }
     }
 }

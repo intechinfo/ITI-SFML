@@ -21,10 +21,10 @@ namespace SFML.Graphics
     /// </remarks>
     public class Transformable : ObjectBase
     {
-        Vector2f _origin = new Vector2f(0, 0);
-        Vector2f _position = new Vector2f(0, 0);
+        Vector2f _origin = new Vector2f( 0, 0 );
+        Vector2f _position = new Vector2f( 0, 0 );
         float _rotation = 0;
-        Vector2f _scale = new Vector2f(1, 1);
+        Vector2f _scale = new Vector2f( 1, 1 );
         Transform _transform;
         Transform _inverseTransform;
         bool _transformNeedUpdate = true;
@@ -33,8 +33,8 @@ namespace SFML.Graphics
         /// <summary>
         /// Default constructor
         /// </summary>
-        public Transformable() 
-            : base(IntPtr.Zero)
+        public Transformable()
+            : base( IntPtr.Zero )
         {
         }
 
@@ -42,8 +42,8 @@ namespace SFML.Graphics
         /// Constructs the transformable from another transformable.
         /// </summary>
         /// <param name="transformable">Transformable to copy.</param>
-        public Transformable(Transformable transformable) 
-            : base(IntPtr.Zero)
+        public Transformable( Transformable transformable )
+            : base( IntPtr.Zero )
         {
             Origin = transformable.Origin;
             Position = transformable.Position;
@@ -131,13 +131,13 @@ namespace SFML.Graphics
         {
             get
             {
-                if (_transformNeedUpdate)
+                if( _transformNeedUpdate )
                 {
                     _transformNeedUpdate = false;
 
                     float angle = -_rotation * 3.141592654F / 180.0F;
-                    float cosine = (float)Math.Cos(angle);
-                    float sine = (float)Math.Sin(angle);
+                    float cosine = (float)Math.Cos( angle );
+                    float sine = (float)Math.Sin( angle );
                     float sxc = _scale.X * cosine;
                     float syc = _scale.Y * cosine;
                     float sxs = _scale.X * sine;
@@ -145,9 +145,9 @@ namespace SFML.Graphics
                     float tx = -_origin.X * sxc - _origin.Y * sys + _position.X;
                     float ty = _origin.X * sxs - _origin.Y * syc + _position.Y;
 
-                    _transform = new Transform(sxc, sys, tx,
+                    _transform = new Transform( sxc, sys, tx,
                                                 -sxs, syc, ty,
-                                                0.0F, 0.0F, 1.0F);
+                                                0.0F, 0.0F, 1.0F );
                 }
                 return _transform;
             }
@@ -160,7 +160,7 @@ namespace SFML.Graphics
         {
             get
             {
-                if (_inverseNeedUpdate)
+                if( _inverseNeedUpdate )
                 {
                     _inverseTransform = Transform.GetInverse();
                     _inverseNeedUpdate = false;
@@ -173,8 +173,8 @@ namespace SFML.Graphics
         /// Constructs the object from its internal C pointer.
         /// </summary>
         /// <param name="cPointer">Pointer to the object in the C library.</param>
-        protected Transformable(IntPtr cPointer) 
-            : base(cPointer)
+        protected Transformable( IntPtr cPointer )
+            : base( cPointer )
         {
         }
 
@@ -182,7 +182,7 @@ namespace SFML.Graphics
         /// Handle the destruction of the object
         /// </summary>
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        protected override void Destroy(bool disposing)
+        protected override void Destroy( bool disposing )
         {
             // Does nothing, this instance is either pure C# (if created by the user)
             // or not the final object (if used as a base for a drawable class)

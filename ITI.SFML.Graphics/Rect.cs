@@ -4,14 +4,12 @@ using SFML.System;
 
 namespace SFML.Graphics
 {
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// IntRect is an utility class for manipulating 2D rectangles
-    /// with integer coordinates
+    /// with integer coordinates.
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
-    public struct IntRect : IEquatable<IntRect>
+    [StructLayout( LayoutKind.Sequential )]
+    public readonly struct IntRect : IEquatable<IntRect>
     {
         /// <summary>
         /// Left coordinate of the rectangle.
@@ -34,14 +32,13 @@ namespace SFML.Graphics
         public readonly int Height;
 
         /// <summary>
-        /// Construct the rectangle from its coordinates
+        /// Constructs the rectangle from its coordinates.
         /// </summary>
-        /// <param name="left">Left coordinate of the rectangle</param>
-        /// <param name="top">Top coordinate of the rectangle</param>
-        /// <param name="width">Width of the rectangle</param>
-        /// <param name="height">Height of the rectangle</param>
-        ////////////////////////////////////////////////////////////
-        public IntRect(int left, int top, int width, int height)
+        /// <param name="left">Left coordinate of the rectangle.</param>
+        /// <param name="top">Top coordinate of the rectangle.</param>
+        /// <param name="width">Width of the rectangle.</param>
+        /// <param name="height">Height of the rectangle.</param>
+        public IntRect( int left, int top, int width, int height )
         {
             Left = left;
             Top = top;
@@ -50,12 +47,12 @@ namespace SFML.Graphics
         }
 
         /// <summary>
-        /// Construct the rectangle from position and size.
+        /// Constructs the rectangle from position and size.
         /// </summary>
-        /// <param name="position">Position of the top-left corner of the rectangle</param>
-        /// <param name="size">Size of the rectangle</param>
-        public IntRect(Vector2i position, Vector2i size)
-            : this(position.X, position.Y, size.X, size.Y)
+        /// <param name="position">Position of the top-left corner of the rectangle.</param>
+        /// <param name="size">Size of the rectangle.</param>
+        public IntRect( Vector2i position, Vector2i size )
+            : this( position.X, position.Y, size.X, size.Y )
         {
         }
 
@@ -65,16 +62,19 @@ namespace SFML.Graphics
         /// <param name="x">X coordinate of the point to test</param>
         /// <param name="y">Y coordinate of the point to test</param>
         /// <returns>True if the point is inside</returns>
-        public bool Contains(int x, int y)
+        public bool Contains( int x, int y )
         {
-            int minX = Math.Min(Left, Left + Width);
-            int maxX = Math.Max(Left, Left + Width);
-            int minY = Math.Min(Top, Top + Height);
-            int maxY = Math.Max(Top, Top + Height);
+            int minX = Math.Min( Left, Left + Width );
+            int maxX = Math.Max( Left, Left + Width );
+            int minY = Math.Min( Top, Top + Height );
+            int maxY = Math.Max( Top, Top + Height );
 
             return (x >= minX) && (x < maxX) && (y >= minY) && (y < maxY);
         }
 
+        /// <summary>
+        /// Gets whether this rectangle is the zero one.
+        /// </summary>
         public bool IsZero => Top == 0 && Left == 0 && Width == 0 && Height == 0;
 
         /// <summary>
@@ -82,40 +82,40 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="rect">Other rectangle.</param>
         /// <returns>True if rectangles overlap.</returns>
-        public bool IsIntersecting(IntRect rect) => !Intersects(rect).IsZero;
+        public bool IsIntersecting( IntRect rect ) => !Intersects( rect ).IsZero;
 
         /// <summary>
         /// Gets the intersection between this rectangle and another one.
         /// </summary>
         /// <param name="rect">Other rectangle.</param>
         /// <returns>The intersectio rectangles or a <see cref="IsZero"/> rectangle.</returns>
-        public IntRect Intersects(IntRect rect)
+        public IntRect Intersects( IntRect rect )
         {
             // Rectangles with negative dimensions are allowed, so we must handle them correctly
 
             // Compute the min and max of the first rectangle on both axes
-            int r1MinX = Math.Min(Left, Left + Width);
-            int r1MaxX = Math.Max(Left, Left + Width);
-            int r1MinY = Math.Min(Top, Top + Height);
-            int r1MaxY = Math.Max(Top, Top + Height);
+            int r1MinX = Math.Min( Left, Left + Width );
+            int r1MaxX = Math.Max( Left, Left + Width );
+            int r1MinY = Math.Min( Top, Top + Height );
+            int r1MaxY = Math.Max( Top, Top + Height );
 
             // Compute the min and max of the second rectangle on both axes
-            int r2MinX = Math.Min(rect.Left, rect.Left + rect.Width);
-            int r2MaxX = Math.Max(rect.Left, rect.Left + rect.Width);
-            int r2MinY = Math.Min(rect.Top, rect.Top + rect.Height);
-            int r2MaxY = Math.Max(rect.Top, rect.Top + rect.Height);
+            int r2MinX = Math.Min( rect.Left, rect.Left + rect.Width );
+            int r2MaxX = Math.Max( rect.Left, rect.Left + rect.Width );
+            int r2MinY = Math.Min( rect.Top, rect.Top + rect.Height );
+            int r2MaxY = Math.Max( rect.Top, rect.Top + rect.Height );
 
             // Compute the intersection boundaries
-            int interLeft = Math.Max(r1MinX, r2MinX);
-            int interTop = Math.Max(r1MinY, r2MinY);
-            int interRight = Math.Min(r1MaxX, r2MaxX);
-            int interBottom = Math.Min(r1MaxY, r2MaxY);
+            int interLeft = Math.Max( r1MinX, r2MinX );
+            int interTop = Math.Max( r1MinY, r2MinY );
+            int interRight = Math.Min( r1MaxX, r2MaxX );
+            int interBottom = Math.Min( r1MaxY, r2MaxY );
 
             // If the intersection is valid (positive non zero area), then there is an intersection.
             int w = interRight - interLeft;
             int h = interBottom - interTop;
             return w > 0 && h > 0
-                    ? new IntRect(interLeft, interTop, w, h)
+                    ? new IntRect( interLeft, interTop, w, h )
                     : new IntRect();
         }
 
@@ -137,14 +137,14 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="obj">Object to check.</param>
         /// <returns>True if the object is rectangle that is equal to this, false otherwise.</returns>
-        public override bool Equals(object obj) => obj is IntRect r && Equals(r);
+        public override bool Equals( object obj ) => obj is IntRect r && Equals( r );
 
         /// <summary>
         /// Compares two rectangles and checks if they are equal
         /// </summary>
         /// <param name="other">Rectangle to check</param>
         /// <returns>Rectangles are equal</returns>
-        public bool Equals(IntRect other)
+        public bool Equals( IntRect other )
         {
             return (Left == other.Left) &&
                    (Top == other.Top) &&
@@ -170,7 +170,7 @@ namespace SFML.Graphics
         /// <param name="r1">First rect</param>
         /// <param name="r2">Second rect</param>
         /// <returns>r1 == r2</returns>
-        public static bool operator ==(IntRect r1, IntRect r2) => r1.Equals(r2);
+        public static bool operator ==( IntRect r1, IntRect r2 ) => r1.Equals( r2 );
 
         /// <summary>
         /// Operator != overload ; check rect inequality.
@@ -178,14 +178,14 @@ namespace SFML.Graphics
         /// <param name="r1">First rect</param>
         /// <param name="r2">Second rect</param>
         /// <returns>r1 != r2</returns>
-        public static bool operator !=(IntRect r1, IntRect r2) => !r1.Equals(r2);
+        public static bool operator !=( IntRect r1, IntRect r2 ) => !r1.Equals( r2 );
 
         /// <summary>
         /// Explicit casting to another rectangle type
         /// </summary>
         /// <param name="r">Rectangle being casted</param>
         /// <returns>Casting result</returns>
-        public static explicit operator FloatRect(IntRect r) =>  new FloatRect(r.Left,r.Top,r.Width,r.Height);
+        public static explicit operator FloatRect( IntRect r ) => new FloatRect( r.Left, r.Top, r.Width, r.Height );
 
     }
 
@@ -193,8 +193,8 @@ namespace SFML.Graphics
     /// FloatRect is an utility class for manipulating 2D rectangles
     /// with float coordinates.
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
-    public struct FloatRect : IEquatable<FloatRect>
+    [StructLayout( LayoutKind.Sequential )]
+    public readonly struct FloatRect : IEquatable<FloatRect>
     {
         /// <summary>
         /// Left coordinate of the rectangle.
@@ -223,7 +223,7 @@ namespace SFML.Graphics
         /// <param name="top">Top coordinate of the rectangle.</param>
         /// <param name="width">Width of the rectangle.</param>
         /// <param name="height">Height of the rectangle.</param>
-        public FloatRect(float left, float top, float width, float height)
+        public FloatRect( float left, float top, float width, float height )
         {
             Left = left;
             Top = top;
@@ -236,8 +236,8 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="position">Position of the top-left corner of the rectangle.</param>
         /// <param name="size">Size of the rectangle.</param>
-        public FloatRect(Vector2f position, Vector2f size)
-            : this(position.X, position.Y, size.X, size.Y)
+        public FloatRect( Vector2f position, Vector2f size )
+            : this( position.X, position.Y, size.X, size.Y )
         {
         }
 
@@ -247,12 +247,12 @@ namespace SFML.Graphics
         /// <param name="x">X coordinate of the point to test.</param>
         /// <param name="y">Y coordinate of the point to test.</param>
         /// <returns>True if the point is inside.</returns>
-        public bool Contains(float x, float y)
+        public bool Contains( float x, float y )
         {
-            float minX = Math.Min(Left, Left + Width);
-            float maxX = Math.Max(Left, Left + Width);
-            float minY = Math.Min(Top, Top + Height);
-            float maxY = Math.Max(Top, Top + Height);
+            float minX = Math.Min( Left, Left + Width );
+            float maxX = Math.Max( Left, Left + Width );
+            float minY = Math.Min( Top, Top + Height );
+            float maxY = Math.Max( Top, Top + Height );
 
             return (x >= minX) && (x < maxX) && (y >= minY) && (y < maxY);
         }
@@ -267,40 +267,40 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="rect">Rectangle to test.</param>
         /// <returns>True if rectangles overlap.</returns>
-        public bool IsIntersecting(FloatRect rect) => !Intersects(rect).IsZero;
+        public bool IsIntersecting( FloatRect rect ) => !Intersects( rect ).IsZero;
 
         /// <summary>
         /// Returns the intersection between two rectangles.
         /// </summary>
         /// <param name="rect">Other rectangle.</param>
         /// <returns>Intersectd rectangle. </returns>
-        public FloatRect Intersects(FloatRect rect)
+        public FloatRect Intersects( FloatRect rect )
         {
             // Rectangles with negative dimensions are allowed, so we must handle them correctly.
 
             // Compute the min and max of the first rectangle on both axes
-            float r1MinX = Math.Min(Left, Left + Width);
-            float r1MaxX = Math.Max(Left, Left + Width);
-            float r1MinY = Math.Min(Top, Top + Height);
-            float r1MaxY = Math.Max(Top, Top + Height);
+            float r1MinX = Math.Min( Left, Left + Width );
+            float r1MaxX = Math.Max( Left, Left + Width );
+            float r1MinY = Math.Min( Top, Top + Height );
+            float r1MaxY = Math.Max( Top, Top + Height );
 
             // Compute the min and max of the second rectangle on both axes
-            float r2MinX = Math.Min(rect.Left, rect.Left + rect.Width);
-            float r2MaxX = Math.Max(rect.Left, rect.Left + rect.Width);
-            float r2MinY = Math.Min(rect.Top, rect.Top + rect.Height);
-            float r2MaxY = Math.Max(rect.Top, rect.Top + rect.Height);
+            float r2MinX = Math.Min( rect.Left, rect.Left + rect.Width );
+            float r2MaxX = Math.Max( rect.Left, rect.Left + rect.Width );
+            float r2MinY = Math.Min( rect.Top, rect.Top + rect.Height );
+            float r2MaxY = Math.Max( rect.Top, rect.Top + rect.Height );
 
             // Compute the intersection boundaries
-            float interLeft = Math.Max(r1MinX, r2MinX);
-            float interTop = Math.Max(r1MinY, r2MinY);
-            float interRight = Math.Min(r1MaxX, r2MaxX);
-            float interBottom = Math.Min(r1MaxY, r2MaxY);
+            float interLeft = Math.Max( r1MinX, r2MinX );
+            float interTop = Math.Max( r1MinY, r2MinY );
+            float interRight = Math.Min( r1MaxX, r2MaxX );
+            float interBottom = Math.Min( r1MaxY, r2MaxY );
 
             // If the intersection is valid (positive non zero area), then there is an intersection.
             float w = interRight - interLeft;
             float h = interBottom - interTop;
             return w > 0 && h > 0
-                    ? new FloatRect(interLeft, interTop, w, h)
+                    ? new FloatRect( interLeft, interTop, w, h )
                     : new FloatRect();
         }
 
@@ -322,14 +322,14 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="obj">Object to check.</param>
         /// <returns>True if this rectangle and the object are equal.</returns>
-        public override bool Equals(object obj) => obj is FloatRect r && Equals(r);
+        public override bool Equals( object obj ) => obj is FloatRect r && Equals( r );
 
         /// <summary>
         /// Compares two rectangles and checks if they are equal.
         /// </summary>
         /// <param name="other">Rectangle to check.</param>
         /// <returns>Rectangles are equal.</returns>
-        public bool Equals(FloatRect other)
+        public bool Equals( FloatRect other )
         {
             return (Left == other.Left) &&
                    (Top == other.Top) &&
@@ -355,7 +355,7 @@ namespace SFML.Graphics
         /// <param name="r1">First rect</param>
         /// <param name="r2">Second rect</param>
         /// <returns>r1 == r2</returns>
-        public static bool operator ==(FloatRect r1, FloatRect r2) => r1.Equals(r2);
+        public static bool operator ==( FloatRect r1, FloatRect r2 ) => r1.Equals( r2 );
 
         /// <summary>
         /// Operator != overload ; check rect inequality
@@ -363,20 +363,19 @@ namespace SFML.Graphics
         /// <param name="r1">First rect</param>
         /// <param name="r2">Second rect</param>
         /// <returns>r1 != r2</returns>
-        public static bool operator !=(FloatRect r1, FloatRect r2) => !r1.Equals(r2);
+        public static bool operator !=( FloatRect r1, FloatRect r2 ) => !r1.Equals( r2 );
 
         /// <summary>
         /// Explicit casting to another rectangle type.
         /// </summary>
         /// <param name="r">Rectangle being casted.</param>
         /// <returns>Casting result.</returns>
-        ////////////////////////////////////////////////////////////
-        public static explicit operator IntRect(FloatRect r)
+        public static explicit operator IntRect( FloatRect r )
         {
-            return new IntRect((int)r.Left,
-                               (int)r.Top,
-                               (int)r.Width,
-                               (int)r.Height);
+            return new IntRect( (int)r.Left,
+                                (int)r.Top,
+                                (int)r.Width,
+                                (int)r.Height );
         }
 
     }

@@ -7,7 +7,7 @@ namespace SFML.System
     /// Vector2f is an utility class for manipulating 2 dimensional
     /// vectors with float components
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public readonly struct Vector2f : IEquatable<Vector2f>
     {
         /// <summary>
@@ -25,7 +25,7 @@ namespace SFML.System
         /// </summary>
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
-        public Vector2f(float x, float y)
+        public Vector2f( float x, float y )
         {
             X = x;
             Y = y;
@@ -36,9 +36,9 @@ namespace SFML.System
         /// </summary>
         /// <param name="v">Vector to negate</param>
         /// <returns>-v</returns>
-        public static Vector2f operator -(Vector2f v)
+        public static Vector2f operator -( Vector2f v )
         {
-            return new Vector2f(-v.X, -v.Y);
+            return new Vector2f( -v.X, -v.Y );
         }
 
         /// <summary>
@@ -47,9 +47,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 - v2</returns>
-        public static Vector2f operator -(Vector2f v1, Vector2f v2)
+        public static Vector2f operator -( Vector2f v1, Vector2f v2 )
         {
-            return new Vector2f(v1.X - v2.X, v1.Y - v2.Y);
+            return new Vector2f( v1.X - v2.X, v1.Y - v2.Y );
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 + v2</returns>
-        public static Vector2f operator +(Vector2f v1, Vector2f v2)
+        public static Vector2f operator +( Vector2f v1, Vector2f v2 )
         {
-            return new Vector2f(v1.X + v2.X, v1.Y + v2.Y);
+            return new Vector2f( v1.X + v2.X, v1.Y + v2.Y );
         }
 
         /// <summary>
@@ -69,9 +69,9 @@ namespace SFML.System
         /// <param name="v">Vector</param>
         /// <param name="x">Scalar value</param>
         /// <returns>v * x</returns>
-        public static Vector2f operator *(Vector2f v, float x)
+        public static Vector2f operator *( Vector2f v, float x )
         {
-            return new Vector2f(v.X * x, v.Y * x);
+            return new Vector2f( v.X * x, v.Y * x );
         }
 
         /// <summary>
@@ -80,9 +80,9 @@ namespace SFML.System
         /// <param name="x">Scalar value</param>
         /// <param name="v">Vector</param>
         /// <returns>x * v</returns>
-        public static Vector2f operator *(float x, Vector2f v)
+        public static Vector2f operator *( float x, Vector2f v )
         {
-            return new Vector2f(v.X * x, v.Y * x);
+            return new Vector2f( v.X * x, v.Y * x );
         }
 
         /// <summary>
@@ -91,9 +91,9 @@ namespace SFML.System
         /// <param name="v">Vector</param>
         /// <param name="x">Scalar value</param>
         /// <returns>v / x</returns>
-        public static Vector2f operator /(Vector2f v, float x)
+        public static Vector2f operator /( Vector2f v, float x )
         {
-            return new Vector2f(v.X / x, v.Y / x);
+            return new Vector2f( v.X / x, v.Y / x );
         }
 
         /// <summary>
@@ -102,9 +102,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 == v2</returns>
-        public static bool operator ==(Vector2f v1, Vector2f v2)
+        public static bool operator ==( Vector2f v1, Vector2f v2 )
         {
-            return v1.Equals(v2);
+            return v1.Equals( v2 );
         }
 
         /// <summary>
@@ -113,9 +113,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 != v2</returns>
-        public static bool operator !=(Vector2f v1, Vector2f v2)
+        public static bool operator !=( Vector2f v1, Vector2f v2 )
         {
-            return !v1.Equals(v2);
+            return !v1.Equals( v2 );
         }
 
         /// <summary>
@@ -134,9 +134,9 @@ namespace SFML.System
         /// </summary>
         /// <param name="obj">Object to check</param>
         /// <returns>Object and vector are equal</returns>
-        public override bool Equals(object obj)
+        public override bool Equals( object obj )
         {
-            return (obj is Vector2f) && Equals((Vector2f)obj);
+            return (obj is Vector2f) && Equals( (Vector2f)obj );
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace SFML.System
         /// </summary>
         /// <param name="other">Vector to check</param>
         /// <returns>Vectors are equal</returns>
-        public bool Equals(Vector2f other)
+        public bool Equals( Vector2f other )
         {
             return (X == other.X) &&
                    (Y == other.Y);
@@ -165,9 +165,9 @@ namespace SFML.System
         /// </summary>
         /// <param name="v">Vector being casted</param>
         /// <returns>Casting result</returns>
-        public static explicit operator Vector2i(Vector2f v)
+        public static explicit operator Vector2i( Vector2f v )
         {
-            return new Vector2i((int)v.X, (int)v.Y);
+            return new Vector2i( (int)v.X, (int)v.Y );
         }
 
         /// <summary>
@@ -175,9 +175,9 @@ namespace SFML.System
         /// </summary>
         /// <param name="v">Vector being casted</param>
         /// <returns>Casting result</returns>
-        public static explicit operator Vector2u(Vector2f v)
+        public static explicit operator Vector2u( Vector2f v )
         {
-            return new Vector2u((uint)v.X, (uint)v.Y);
+            return new Vector2u( (uint)v.X, (uint)v.Y );
         }
 
     }
@@ -186,7 +186,7 @@ namespace SFML.System
     /// Vector2i is an utility class for manipulating 2 dimensional
     /// vectors with integer components
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct Vector2i : IEquatable<Vector2i>
     {
         /// <summary>
@@ -204,7 +204,7 @@ namespace SFML.System
         /// </summary>
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
-        public Vector2i(int x, int y)
+        public Vector2i( int x, int y )
         {
             X = x;
             Y = y;
@@ -215,9 +215,9 @@ namespace SFML.System
         /// </summary>
         /// <param name="v">Vector to negate</param>
         /// <returns>-v</returns>
-        public static Vector2i operator -(Vector2i v)
+        public static Vector2i operator -( Vector2i v )
         {
-            return new Vector2i(-v.X, -v.Y);
+            return new Vector2i( -v.X, -v.Y );
         }
 
         /// <summary>
@@ -226,9 +226,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 - v2</returns>
-        public static Vector2i operator -(Vector2i v1, Vector2i v2)
+        public static Vector2i operator -( Vector2i v1, Vector2i v2 )
         {
-            return new Vector2i(v1.X - v2.X, v1.Y - v2.Y);
+            return new Vector2i( v1.X - v2.X, v1.Y - v2.Y );
         }
 
         /// <summary>
@@ -237,9 +237,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 + v2</returns>
-        public static Vector2i operator +(Vector2i v1, Vector2i v2)
+        public static Vector2i operator +( Vector2i v1, Vector2i v2 )
         {
-            return new Vector2i(v1.X + v2.X, v1.Y + v2.Y);
+            return new Vector2i( v1.X + v2.X, v1.Y + v2.Y );
         }
 
         /// <summary>
@@ -248,9 +248,9 @@ namespace SFML.System
         /// <param name="v">Vector</param>
         /// <param name="x">Scalar value</param>
         /// <returns>v * x</returns>
-        public static Vector2i operator *(Vector2i v, int x)
+        public static Vector2i operator *( Vector2i v, int x )
         {
-            return new Vector2i(v.X * x, v.Y * x);
+            return new Vector2i( v.X * x, v.Y * x );
         }
 
         /// <summary>
@@ -259,9 +259,9 @@ namespace SFML.System
         /// <param name="x">Scalar value</param>
         /// <param name="v">Vector</param>
         /// <returns>x * v</returns>
-        public static Vector2i operator *(int x, Vector2i v)
+        public static Vector2i operator *( int x, Vector2i v )
         {
-            return new Vector2i(v.X * x, v.Y * x);
+            return new Vector2i( v.X * x, v.Y * x );
         }
 
         /// <summary>
@@ -270,9 +270,9 @@ namespace SFML.System
         /// <param name="v">Vector</param>
         /// <param name="x">Scalar value</param>
         /// <returns>v / x</returns>
-        public static Vector2i operator /(Vector2i v, int x)
+        public static Vector2i operator /( Vector2i v, int x )
         {
-            return new Vector2i(v.X / x, v.Y / x);
+            return new Vector2i( v.X / x, v.Y / x );
         }
 
         /// <summary>
@@ -281,9 +281,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 == v2</returns>
-        public static bool operator ==(Vector2i v1, Vector2i v2)
+        public static bool operator ==( Vector2i v1, Vector2i v2 )
         {
-            return v1.Equals(v2);
+            return v1.Equals( v2 );
         }
 
         /// <summary>
@@ -292,9 +292,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 != v2</returns>
-        public static bool operator !=(Vector2i v1, Vector2i v2)
+        public static bool operator !=( Vector2i v1, Vector2i v2 )
         {
-            return !v1.Equals(v2);
+            return !v1.Equals( v2 );
         }
 
         /// <summary>
@@ -313,9 +313,9 @@ namespace SFML.System
         /// </summary>
         /// <param name="obj">Object to check</param>
         /// <returns>Object and vector are equal</returns>
-        public override bool Equals(object obj)
+        public override bool Equals( object obj )
         {
-            return (obj is Vector2i) && Equals((Vector2i)obj);
+            return (obj is Vector2i) && Equals( (Vector2i)obj );
         }
 
         /// <summary>
@@ -323,7 +323,7 @@ namespace SFML.System
         /// </summary>
         /// <param name="other">Vector to check</param>
         /// <returns>Vectors are equal</returns>
-        public bool Equals(Vector2i other)
+        public bool Equals( Vector2i other )
         {
             return (X == other.X) &&
                    (Y == other.Y);
@@ -344,9 +344,9 @@ namespace SFML.System
         /// </summary>
         /// <param name="v">Vector being casted</param>
         /// <returns>Casting result</returns>
-        public static explicit operator Vector2f(Vector2i v)
+        public static explicit operator Vector2f( Vector2i v )
         {
-            return new Vector2f((float)v.X, (float)v.Y);
+            return new Vector2f( (float)v.X, (float)v.Y );
         }
 
         /// <summary>
@@ -354,9 +354,9 @@ namespace SFML.System
         /// </summary>
         /// <param name="v">Vector being casted</param>
         /// <returns>Casting result</returns>
-        public static explicit operator Vector2u(Vector2i v)
+        public static explicit operator Vector2u( Vector2i v )
         {
-            return new Vector2u((uint)v.X, (uint)v.Y);
+            return new Vector2u( (uint)v.X, (uint)v.Y );
         }
 
     }
@@ -365,7 +365,7 @@ namespace SFML.System
     /// Vector2u is an utility class for manipulating 2 dimensional
     /// vectors with unsigned integer components
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct Vector2u : IEquatable<Vector2u>
     {
 
@@ -384,7 +384,7 @@ namespace SFML.System
         /// </summary>
         /// <param name="x">X coordinate</param>
         /// <param name="y">Y coordinate</param>
-        public Vector2u(uint x, uint y)
+        public Vector2u( uint x, uint y )
         {
             X = x;
             Y = y;
@@ -396,9 +396,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 - v2</returns>
-        public static Vector2u operator -(Vector2u v1, Vector2u v2)
+        public static Vector2u operator -( Vector2u v1, Vector2u v2 )
         {
-            return new Vector2u(v1.X - v2.X, v1.Y - v2.Y);
+            return new Vector2u( v1.X - v2.X, v1.Y - v2.Y );
         }
 
         /// <summary>
@@ -407,9 +407,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 + v2</returns>
-        public static Vector2u operator +(Vector2u v1, Vector2u v2)
+        public static Vector2u operator +( Vector2u v1, Vector2u v2 )
         {
-            return new Vector2u(v1.X + v2.X, v1.Y + v2.Y);
+            return new Vector2u( v1.X + v2.X, v1.Y + v2.Y );
         }
 
         /// <summary>
@@ -418,9 +418,9 @@ namespace SFML.System
         /// <param name="v">Vector</param>
         /// <param name="x">Scalar value</param>
         /// <returns>v * x</returns>
-        public static Vector2u operator *(Vector2u v, uint x)
+        public static Vector2u operator *( Vector2u v, uint x )
         {
-            return new Vector2u(v.X * x, v.Y * x);
+            return new Vector2u( v.X * x, v.Y * x );
         }
 
         /// <summary>
@@ -429,9 +429,9 @@ namespace SFML.System
         /// <param name="x">Scalar value</param>
         /// <param name="v">Vector</param>
         /// <returns>x * v</returns>
-        public static Vector2u operator *(uint x, Vector2u v)
+        public static Vector2u operator *( uint x, Vector2u v )
         {
-            return new Vector2u(v.X * x, v.Y * x);
+            return new Vector2u( v.X * x, v.Y * x );
         }
 
         /// <summary>
@@ -440,9 +440,9 @@ namespace SFML.System
         /// <param name="v">Vector</param>
         /// <param name="x">Scalar value</param>
         /// <returns>v / x</returns>
-        public static Vector2u operator /(Vector2u v, uint x)
+        public static Vector2u operator /( Vector2u v, uint x )
         {
-            return new Vector2u(v.X / x, v.Y / x);
+            return new Vector2u( v.X / x, v.Y / x );
         }
 
         /// <summary>
@@ -451,9 +451,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 == v2</returns>
-        public static bool operator ==(Vector2u v1, Vector2u v2)
+        public static bool operator ==( Vector2u v1, Vector2u v2 )
         {
-            return v1.Equals(v2);
+            return v1.Equals( v2 );
         }
 
         /// <summary>
@@ -462,9 +462,9 @@ namespace SFML.System
         /// <param name="v1">First vector</param>
         /// <param name="v2">Second vector</param>
         /// <returns>v1 != v2</returns>
-        public static bool operator !=(Vector2u v1, Vector2u v2)
+        public static bool operator !=( Vector2u v1, Vector2u v2 )
         {
-            return !v1.Equals(v2);
+            return !v1.Equals( v2 );
         }
 
         /// <summary>
@@ -483,9 +483,9 @@ namespace SFML.System
         /// </summary>
         /// <param name="obj">Object to check</param>
         /// <returns>Object and vector are equal</returns>
-        public override bool Equals(object obj)
+        public override bool Equals( object obj )
         {
-            return (obj is Vector2u) && Equals((Vector2u)obj);
+            return (obj is Vector2u) && Equals( (Vector2u)obj );
         }
 
         /// <summary>
@@ -493,7 +493,7 @@ namespace SFML.System
         /// </summary>
         /// <param name="other">Vector to check</param>
         /// <returns>Vectors are equal</returns>
-        public bool Equals(Vector2u other)
+        public bool Equals( Vector2u other )
         {
             return (X == other.X) &&
                    (Y == other.Y);
@@ -514,9 +514,9 @@ namespace SFML.System
         /// </summary>
         /// <param name="v">Vector being casted</param>
         /// <returns>Casting result</returns>
-        public static explicit operator Vector2i(Vector2u v)
+        public static explicit operator Vector2i( Vector2u v )
         {
-            return new Vector2i((int)v.X, (int)v.Y);
+            return new Vector2i( (int)v.X, (int)v.Y );
         }
 
         /// <summary>
@@ -524,9 +524,9 @@ namespace SFML.System
         /// </summary>
         /// <param name="v">Vector being casted</param>
         /// <returns>Casting result</returns>
-        public static explicit operator Vector2f(Vector2u v)
+        public static explicit operator Vector2f( Vector2u v )
         {
-            return new Vector2f((float)v.X, (float)v.Y);
+            return new Vector2f( (float)v.X, (float)v.Y );
         }
 
     }

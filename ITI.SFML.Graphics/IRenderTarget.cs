@@ -27,14 +27,14 @@ namespace SFML.Graphics
         /// Changes the current active view.
         /// </summary>
         /// <param name="view">New view</param>
-        void SetView(View view);
+        void SetView( View view );
 
         /// <summary>
         /// Gets the viewport of a view applied to this target.
         /// </summary>
         /// <param name="view">Target view.</param>
         /// <returns>Viewport rectangle, expressed in pixels in the current target.</returns>
-        IntRect GetViewport(View view);
+        IntRect GetViewport( View view );
 
         /// <summary>
         /// Convert a point from target coordinates to world
@@ -48,7 +48,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="point">Pixel to convert.</param>
         /// <returns>The converted point, in "world" coordinates.</returns>
-        Vector2f MapPixelToCoords(Vector2i point);
+        Vector2f MapPixelToCoords( Vector2i point );
 
         /// <summary>
         /// Converts a point from target coordinates to world coordinates
@@ -78,7 +78,7 @@ namespace SFML.Graphics
         /// <param name="point">Pixel to convert.</param>
         /// <param name="view">The view to use for converting the point.</param>
         /// <returns>The converted point, in "world" coordinates.</returns>
-        Vector2f MapPixelToCoords(Vector2i point, View view);
+        Vector2f MapPixelToCoords( Vector2i point, View view );
 
         /// <summary>
         /// Converts a point from world coordinates to target
@@ -92,7 +92,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="point">Point to convert.</param>
         /// <returns>The converted point, in target coordinates (pixels).</returns>
-        Vector2i MapCoordsToPixel(Vector2f point);
+        Vector2i MapCoordsToPixel( Vector2f point );
 
         /// <summary>
         /// Converts a point from world coordinates to target coordinates.
@@ -117,7 +117,7 @@ namespace SFML.Graphics
         /// <param name="point">Point to convert.</param>
         /// <param name="view">The view to use for converting the point.</param>
         /// <returns>The converted point, in target coordinates (pixels).</returns>
-        Vector2i MapCoordsToPixel(Vector2f point, View view);
+        Vector2i MapCoordsToPixel( Vector2f point, View view );
 
         /// <summary>
         /// Clears the entire target with black color.
@@ -128,27 +128,27 @@ namespace SFML.Graphics
         /// Clears the entire target with a single color
         /// </summary>
         /// <param name="color">Color to use to clear the window</param>
-        void Clear(Color color);
+        void Clear( Color color );
 
         /// <summary>
         /// Draws a drawable object to the render-target, with default render states
         /// </summary>
         /// <param name="drawable">Object to draw</param>
-        void Draw(IDrawable drawable);
+        void Draw( IDrawable drawable );
 
         /// <summary>
         /// Draws a drawable object to the render-target.
         /// </summary>
         /// <param name="drawable">Object to draw.</param>
         /// <param name="states">Render states to use for drawing.</param>
-        void Draw(IDrawable drawable, RenderStates states);
+        void Draw( IDrawable drawable, RenderStates states );
 
         /// <summary>
         /// Draws primitives defined by an array of vertices, with default render states
         /// </summary>
         /// <param name="vertices">Array of vertices to draw.</param>
         /// <param name="type">Type of primitives to draw.</param>
-        void Draw(Vertex[] vertices, PrimitiveType type);
+        void Draw( Vertex[] vertices, PrimitiveType type );
 
         /// <summary>
         /// Draws primitives defined by an array of vertices.
@@ -156,7 +156,7 @@ namespace SFML.Graphics
         /// <param name="vertices">Array of vertices to draw.</param>
         /// <param name="type">Type of primitives to draw.</param>
         /// <param name="states">Render states to use for drawing.</param>
-        void Draw(Vertex[] vertices, PrimitiveType type, RenderStates states);
+        void Draw( Vertex[] vertices, PrimitiveType type, RenderStates states );
 
         /// <summary>
         /// Draws primitives defined by a sub-array of vertices, with default render states.
@@ -165,7 +165,7 @@ namespace SFML.Graphics
         /// <param name="start">Index of the first vertex to draw in the array.</param>
         /// <param name="count">Number of vertices to draw.</param>
         /// <param name="type">Type of primitives to draw.</param>
-        void Draw(Vertex[] vertices, uint start, uint count, PrimitiveType type);
+        void Draw( Vertex[] vertices, uint start, uint count, PrimitiveType type );
 
         /// <summary>
         /// Draws primitives defined by a sub-array of vertices.
@@ -175,7 +175,7 @@ namespace SFML.Graphics
         /// <param name="count">Number of vertices to draw.</param>
         /// <param name="type">Type of primitives to draw.</param>
         /// <param name="states">Render states to use for drawing.</param>
-        void Draw(Vertex[] vertices, uint start, uint count, PrimitiveType type, RenderStates states);
+        void Draw( Vertex[] vertices, uint start, uint count, PrimitiveType type, RenderStates states );
 
         /// <summary>
         /// Save the current OpenGL render states and matrices.

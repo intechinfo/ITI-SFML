@@ -3,11 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace SFML.Window
 {
-    ////////////////////////////////////////////////////////////
     /// <summary>
-    /// Enumeration of the different types of events
+    /// Enumeration of the different types of events.
     /// </summary>
-    ////////////////////////////////////////////////////////////
     public enum EventType
     {
         /// <summary>Event triggered when a window is manually closed</summary>
@@ -32,7 +30,7 @@ namespace SFML.Window
         KeyReleased,
 
         /// <summary>Event triggered when the mouse wheel is scrolled (deprecated)</summary>
-        [Obsolete("MouseWheelMoved is deprecated, please use MouseWheelScrolled instead")]
+        [Obsolete( "MouseWheelMoved is deprecated, please use MouseWheelScrolled instead" )]
         MouseWheelMoved,
 
         /// <summary>Event triggered when a mouse wheel is scrolled</summary>
@@ -86,7 +84,7 @@ namespace SFML.Window
     /// Keyboard event parameters
     /// </summary>
     ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct KeyEvent
     {
         /// <summary>Code of the key (see KeyCode enum)</summary>
@@ -105,24 +103,20 @@ namespace SFML.Window
         public int System;
     }
 
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Text event parameters
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct TextEvent
     {
         /// <summary>UTF-32 value of the character</summary>
         public uint Unicode;
     }
 
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Mouse move event parameters
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct MouseMoveEvent
     {
         /// <summary>X coordinate of the mouse cursor</summary>
@@ -132,12 +126,10 @@ namespace SFML.Window
         public int Y;
     }
 
-    ////////////////////////////////////////////////////////////
     /// <summary>
-    /// Mouse buttons event parameters
+    /// Mouse buttons event parameters.
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct MouseButtonEvent
     {
         /// <summary>Code of the button (see MouseButton enum)</summary>
@@ -150,13 +142,11 @@ namespace SFML.Window
         public int Y;
     }
 
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Mouse wheel move event parameters
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
-    [Obsolete("MouseWheelEvent is deprecated, please use MouseWheelScrollEvent instead")]
+    [StructLayout( LayoutKind.Sequential )]
+    [Obsolete( "MouseWheelEvent is deprecated, please use MouseWheelScrollEvent instead" )]
     public struct MouseWheelEvent
     {
         /// <summary>Scroll amount</summary>
@@ -169,12 +159,10 @@ namespace SFML.Window
         public int Y;
     }
 
-    ////////////////////////////////////////////////////////////
     /// <summary>
-    /// Mouse wheel scroll event parameters
+    /// Mouse wheel scroll event parameters.
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct MouseWheelScrollEvent
     {
         /// <summary>Mouse Wheel which triggered the event</summary>
@@ -190,12 +178,10 @@ namespace SFML.Window
         public int Y;
     }
 
-    ////////////////////////////////////////////////////////////
     /// <summary>
-    /// Joystick axis move event parameters
+    /// Joystick axis move event parameters.
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct JoystickMoveEvent
     {
         /// <summary>Index of the joystick which triggered the event</summary>
@@ -208,12 +194,10 @@ namespace SFML.Window
         public float Position;
     }
 
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Joystick buttons event parameters
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct JoystickButtonEvent
     {
         /// <summary>Index of the joystick which triggered the event</summary>
@@ -223,24 +207,20 @@ namespace SFML.Window
         public uint Button;
     }
 
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Joystick connect event parameters
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct JoystickConnectEvent
     {
         /// <summary>Index of the joystick which triggered the event</summary>
         public uint JoystickId;
     }
 
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Size event parameters
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct SizeEvent
     {
         /// <summary>New width of the window</summary>
@@ -250,12 +230,10 @@ namespace SFML.Window
         public uint Height;
     }
 
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Touch event parameters
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct TouchEvent
     {
         /// <summary>Index of the finger in case of multi-touch events</summary>
@@ -268,12 +246,10 @@ namespace SFML.Window
         public int Y;
     }
 
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Sensor event parameters
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout( LayoutKind.Sequential )]
     public struct SensorEvent
     {
         /// <summary>Type of the sensor</summary>
@@ -289,65 +265,63 @@ namespace SFML.Window
         public float Z;
     }
 
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Event defines a system event and its parameters
     /// </summary>
-    ////////////////////////////////////////////////////////////
-    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    [StructLayout( LayoutKind.Explicit, Size = 20 )]
     public struct Event
     {
         /// <summary>Type of event (see EventType enum)</summary>
-        [FieldOffset(0)]
+        [FieldOffset( 0 )]
         public EventType Type;
 
         /// <summary>Arguments for size events (Resized)</summary>
-        [FieldOffset(4)]
+        [FieldOffset( 4 )]
         public SizeEvent Size;
 
         /// <summary>Arguments for key events (KeyPressed, KeyReleased)</summary>
-        [FieldOffset(4)]
+        [FieldOffset( 4 )]
         public KeyEvent Key;
 
         /// <summary>Arguments for text events (TextEntered)</summary>
-        [FieldOffset(4)]
+        [FieldOffset( 4 )]
         public TextEvent Text;
 
         /// <summary>Arguments for mouse move events (MouseMoved)</summary>
-        [FieldOffset(4)]
+        [FieldOffset( 4 )]
         public MouseMoveEvent MouseMove;
 
         /// <summary>Arguments for mouse button events (MouseButtonPressed, MouseButtonReleased)</summary>
-        [FieldOffset(4)]
+        [FieldOffset( 4 )]
         public MouseButtonEvent MouseButton;
 
         /// <summary>Arguments for mouse wheel events (MouseWheelMoved)</summary>
-        [FieldOffset(4)]
-        [Obsolete("MouseWheel is deprecated, please use MouseWheelScroll instead")]
+        [FieldOffset( 4 )]
+        [Obsolete( "MouseWheel is deprecated, please use MouseWheelScroll instead" )]
         public MouseWheelEvent MouseWheel;
 
         /// <summary>Arguments for mouse wheel scroll events (MouseWheelScrolled)</summary>
-        [FieldOffset(4)]
+        [FieldOffset( 4 )]
         public MouseWheelScrollEvent MouseWheelScroll;
 
         /// <summary>Arguments for joystick axis events (JoystickMoved)</summary>
-        [FieldOffset(4)]
+        [FieldOffset( 4 )]
         public JoystickMoveEvent JoystickMove;
 
         /// <summary>Arguments for joystick button events (JoystickButtonPressed, JoystickButtonReleased)</summary>
-        [FieldOffset(4)]
+        [FieldOffset( 4 )]
         public JoystickButtonEvent JoystickButton;
 
         /// <summary>Arguments for joystick connect events (JoystickConnected, JoystickDisconnected)</summary>
-        [FieldOffset(4)]
+        [FieldOffset( 4 )]
         public JoystickConnectEvent JoystickConnect;
 
         /// <summary>Arguments for touch events (TouchBegan, TouchMoved, TouchEnded)</summary>
-        [FieldOffset(4)]
+        [FieldOffset( 4 )]
         public TouchEvent Touch;
 
         /// <summary>Arguments for sensor events (SensorChanged)</summary>
-        [FieldOffset(4)]
+        [FieldOffset( 4 )]
         public SensorEvent Sensor;
     }
 }
