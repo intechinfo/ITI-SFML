@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.IO;
 using SFML.System;
+using System.Numerics;
 
 namespace SFML.Audio
 {
@@ -181,7 +182,7 @@ namespace SFML.Audio
         /// spatialized.
         /// The default position of a sound is (0, 0, 0).
         /// </summary>
-        public Vector3f Position
+        public Vector3 Position
         {
             get { return sfMusic_getPosition( CPointer ); }
             set { sfMusic_setPosition( CPointer, value ); }
@@ -330,7 +331,7 @@ namespace SFML.Audio
         static extern void sfMusic_setVolume( IntPtr Music, float Volume );
 
         [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern void sfMusic_setPosition( IntPtr Music, Vector3f position );
+        static extern void sfMusic_setPosition( IntPtr Music, Vector3 position );
 
         [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfMusic_setRelativeToListener( IntPtr Music, bool Relative );
@@ -354,7 +355,7 @@ namespace SFML.Audio
         static extern float sfMusic_getVolume( IntPtr Music );
 
         [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern Vector3f sfMusic_getPosition( IntPtr Music );
+        static extern Vector3 sfMusic_getPosition( IntPtr Music );
 
         [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern bool sfMusic_isRelativeToListener( IntPtr Music );

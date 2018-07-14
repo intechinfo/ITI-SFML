@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Security;
 using SFML.System;
@@ -142,7 +143,7 @@ namespace SFML.Audio
         /// The default position of a sound is (0, 0, 0).
         /// </para>
         /// </summary>
-        public Vector3f Position
+        public Vector3 Position
         {
             get { return sfSoundStream_getPosition( CPointer ); }
             set { sfSoundStream_setPosition( CPointer, value ); }
@@ -354,7 +355,7 @@ namespace SFML.Audio
         static extern void sfSoundStream_setVolume( IntPtr SoundStream, float Volume );
 
         [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern void sfSoundStream_setPosition( IntPtr SoundStream, Vector3f position );
+        static extern void sfSoundStream_setPosition( IntPtr SoundStream, Vector3 position );
 
         [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfSoundStream_setRelativeToListener( IntPtr SoundStream, bool Relative );
@@ -378,7 +379,7 @@ namespace SFML.Audio
         static extern float sfSoundStream_getVolume( IntPtr SoundStream );
 
         [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern Vector3f sfSoundStream_getPosition( IntPtr SoundStream );
+        static extern Vector3 sfSoundStream_getPosition( IntPtr SoundStream );
 
         [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern bool sfSoundStream_isRelativeToListener( IntPtr SoundStream );

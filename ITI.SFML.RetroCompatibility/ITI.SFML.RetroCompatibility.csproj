@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="ITI.SFML.Graphics" Version="0.0.0-b" />
+    <PackageReference Include="ITI.SFML.System" Version="0.0.0-b" />
+    <PackageReference Include="ITI.SFML.Window" Version="0.0.0-b" />
+  </ItemGroup>
+</Project>

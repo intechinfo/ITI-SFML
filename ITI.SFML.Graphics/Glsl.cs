@@ -141,9 +141,9 @@ namespace SFML.Graphics.Glsl
     {
         ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Implicit cast from <see cref="Vector3f"/> to <see cref="Vec3"/>
+        /// Implicit cast from <see cref="Vector3"/> to <see cref="Vec3"/>
         /// </summary>
-        public static implicit operator Vec3( Vector3f vec )
+        public static implicit operator Vec3( Vector3 vec )
         {
             return new Vec3( vec );
         }
@@ -165,11 +165,11 @@ namespace SFML.Graphics.Glsl
 
         ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct the <see cref="Vec3"/> from a standard SFML <see cref="Vector3f"/>
+        /// Construct the <see cref="Vec3"/> from a standard SFML <see cref="Vector3"/>
         /// </summary>
         /// <param name="vec">A standard SFML 3D vector</param>
         ////////////////////////////////////////////////////////////
-        public Vec3( Vector3f vec )
+        public Vec3( Vector3 vec )
         {
             X = vec.X;
             Y = vec.Y;
