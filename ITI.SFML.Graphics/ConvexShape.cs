@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using SFML.System;
 
 namespace SFML.Graphics
@@ -8,7 +9,7 @@ namespace SFML.Graphics
     /// </summary>
     public class ConvexShape : Shape
     {
-        Vector2f[] _points;
+        Vector2[] _points;
 
         /// <summary>
         /// Default constructor.
@@ -70,7 +71,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="index">Index of the point to get, in range [0 .. PointCount - 1].</param>
         /// <returns>index-th point of the shape.</returns>
-        public override Vector2f GetPoint( uint index )
+        public override Vector2 GetPoint( uint index )
         {
             return _points[index];
         }
@@ -87,7 +88,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="index">Index of the point to change, in range [0 .. PointCount - 1].</param>
         /// <param name="point">New position of the point.</param>
-        public void SetPoint( uint index, Vector2f point )
+        public void SetPoint( uint index, Vector2 point )
         {
             _points[index] = point;
             Update();

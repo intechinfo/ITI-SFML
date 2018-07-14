@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Security;
 using SFML.System;
@@ -86,7 +87,7 @@ namespace SFML.Graphics
         /// Combine the current transform with a translation.
         /// </summary>
         /// <param name="offset">Translation offset to apply.</param>
-        public void Translate( Vector2f offset ) => Translate( offset.X, offset.Y );
+        public void Translate( Vector2 offset ) => Translate( offset.X, offset.Y );
 
         /// <summary>
         /// Combines the current transform with a rotation.
@@ -122,7 +123,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="angle">Rotation angle, in degrees.</param>
         /// <param name="center">Center of rotation.</param>
-        public void Rotate( float angle, Vector2f center ) => Rotate( angle, center.X, center.Y );
+        public void Rotate( float angle, Vector2 center ) => Rotate( angle, center.X, center.Y );
 
         /// <summary>
         /// Combines the current transform with a scaling.
@@ -153,7 +154,7 @@ namespace SFML.Graphics
         /// Combines the current transform with a scaling.
         /// </summary>
         /// <param name="factors">Scaling factors.</param>
-        public void Scale( Vector2f factors ) => Scale( factors.X, factors.Y );
+        public void Scale( Vector2 factors ) => Scale( factors.X, factors.Y );
 
         /// <summary>
         /// Combines the current transform with a scaling.
@@ -166,7 +167,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="factors">Scaling factors.</param>
         /// <param name="center">Center of scaling.</param>
-        public void Scale( Vector2f factors, Vector2f center ) => Scale( factors.X, factors.Y, center.X, center.Y );
+        public void Scale( Vector2 factors, Vector2 center ) => Scale( factors.X, factors.Y, center.X, center.Y );
 
         /// <summary>
         /// The identity transform (does nothing).

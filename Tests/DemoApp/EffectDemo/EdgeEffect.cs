@@ -2,6 +2,7 @@ using SFML.Graphics;
 using SFML.System;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace DemoApp.EffectDemo
@@ -31,7 +32,7 @@ namespace DemoApp.EffectDemo
 
             // Initialize the background sprite
             _backgroundSprite = new Sprite( _backgroundTexture );
-            _backgroundSprite.Position = new Vector2f( 135, 100 );
+            _backgroundSprite.Position = new Vector2( 135, 100 );
 
             // Load the moving entities
             _entities = new Sprite[6];
@@ -54,7 +55,7 @@ namespace DemoApp.EffectDemo
             {
                 var posX = (float)Math.Cos( 0.25F * (time * i + (_entities.Length - i)) ) * 300 + 350;
                 var posY = (float)Math.Sin( 0.25F * (time * (_entities.Length - i) + i) ) * 200 + 250;
-                _entities[i].Position = new Vector2f( posX, posY );
+                _entities[i].Position = new Vector2( posX, posY );
             }
 
             // Render the updated scene to the off-screen surface

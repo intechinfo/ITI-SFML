@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Security;
 using SFML.System;
@@ -37,7 +38,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="center">Center of the view.</param>
         /// <param name="size">Size of the view.</param>
-        public View( Vector2f center, Vector2f size )
+        public View( Vector2 center, Vector2 size )
             : base( sfView_create() )
         {
             Center = center;
@@ -56,7 +57,7 @@ namespace SFML.Graphics
         /// <summary>
         /// Gets or sets the center of the view.
         /// </summary>
-        public Vector2f Center
+        public Vector2 Center
         {
             get { return sfView_getCenter( CPointer ); }
             set { sfView_setCenter( CPointer, value ); }
@@ -65,7 +66,7 @@ namespace SFML.Graphics
         /// <summary>
         /// Gets or sets the half-size of the view.
         /// </summary>
-        public Vector2f Size
+        public Vector2 Size
         {
             get { return sfView_getSize( CPointer ); }
             set { sfView_setSize( CPointer, value ); }
@@ -103,7 +104,7 @@ namespace SFML.Graphics
         /// Moves this view.
         /// </summary>
         /// <param name="offset">Offset to move the view.</param>
-        public void Move( Vector2f offset )
+        public void Move( Vector2 offset )
         {
             sfView_move( CPointer, offset );
         }
@@ -172,10 +173,10 @@ namespace SFML.Graphics
         static extern void sfView_destroy( IntPtr View );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern void sfView_setCenter( IntPtr View, Vector2f center );
+        static extern void sfView_setCenter( IntPtr View, Vector2 center );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern void sfView_setSize( IntPtr View, Vector2f size );
+        static extern void sfView_setSize( IntPtr View, Vector2 size );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfView_setRotation( IntPtr View, float Angle );
@@ -187,10 +188,10 @@ namespace SFML.Graphics
         static extern void sfView_reset( IntPtr View, FloatRect Rectangle );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern Vector2f sfView_getCenter( IntPtr View );
+        static extern Vector2 sfView_getCenter( IntPtr View );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern Vector2f sfView_getSize( IntPtr View );
+        static extern Vector2 sfView_getSize( IntPtr View );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern float sfView_getRotation( IntPtr View );
@@ -199,7 +200,7 @@ namespace SFML.Graphics
         static extern FloatRect sfView_getViewport( IntPtr View );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern void sfView_move( IntPtr View, Vector2f offset );
+        static extern void sfView_move( IntPtr View, Vector2 offset );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfView_rotate( IntPtr View, float Angle );

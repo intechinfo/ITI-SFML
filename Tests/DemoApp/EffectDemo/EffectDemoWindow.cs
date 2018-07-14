@@ -3,6 +3,7 @@ using SFML.System;
 using SFML.Window;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace DemoApp.EffectDemo
@@ -34,17 +35,17 @@ namespace DemoApp.EffectDemo
             // Create the messages background
             _textBackgroundTexture = new Texture( "resources/text-background.png" );
             _textBackground = new Sprite( _textBackgroundTexture );
-            _textBackground.Position = new Vector2f( 0, 520 );
+            _textBackground.Position = new Vector2( 0, 520 );
             _textBackground.Color = new Color( 255, 255, 255, 200 );
 
             // Create the description text (_currentEffect is 0).
             _description = new Text( "Current effect: " + _effects[0].Name, _font, 20 );
-            _description.Position = new Vector2f( 10, 530 );
+            _description.Position = new Vector2( 10, 530 );
             _description.FillColor = new Color( 80, 80, 80 );
 
             // Create the instructions text
             _instructions = new Text( "Press left and right arrows to change the current shader", _font, 20 );
-            _instructions.Position = new Vector2f( 280, 555 );
+            _instructions.Position = new Vector2( 280, 555 );
             _instructions.FillColor = new Color( 80, 80, 80 );
         }
 

@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Runtime.InteropServices;
 using SFML.System;
 
@@ -12,9 +13,9 @@ namespace SFML.Graphics.Glsl
     {
         ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Implicit cast from <see cref="Vector2f"/> to <see cref="Vec2"/>
+        /// Implicit cast from <see cref="Vector2"/> to <see cref="Vec2"/>
         /// </summary>
-        public static implicit operator Vec2( Vector2f vec )
+        public static implicit operator Vec2( Vector2 vec )
         {
             return new Vec2( vec );
         }
@@ -34,11 +35,11 @@ namespace SFML.Graphics.Glsl
 
         ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct the <see cref="Vec2"/> from a standard SFML <see cref="Vector2f"/>
+        /// Construct the <see cref="Vec2"/> from a standard SFML <see cref="Vector2"/>
         /// </summary>
         /// <param name="vec">A standard SFML 2D vector</param>
         ////////////////////////////////////////////////////////////
-        public Vec2( Vector2f vec )
+        public Vec2( Vector2 vec )
         {
             X = vec.X;
             Y = vec.Y;

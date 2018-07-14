@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using SFML.System;
 
 namespace SFML.Graphics
@@ -90,12 +91,12 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="index">Index of the point to get, in range [0 .. PointCount - 1].</param>
         /// <returns>index-th point of the shape.</returns>
-        public override Vector2f GetPoint(uint index)
+        public override Vector2 GetPoint(uint index)
         {
             float angle = (float)(index * 2 * Math.PI / _pointCount - Math.PI / 2);
             float x = (float)Math.Cos(angle) * _radius;
             float y = (float)Math.Sin(angle) * _radius;
-            return new Vector2f(_radius + x, _radius + y);
+            return new Vector2(_radius + x, _radius + y);
         }
 
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using System.Security;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -208,7 +209,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="index">Index of the character.</param>
         /// <returns>Position of the Index-th character (end of text if Index is out of range).</returns>
-        public Vector2f FindCharacterPos( uint index )
+        public Vector2 FindCharacterPos( uint index )
         {
             return sfText_findCharacterPos( CPointer, index );
         }
@@ -358,7 +359,7 @@ namespace SFML.Graphics
         static extern FloatRect sfText_getRect( IntPtr CPointer );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern Vector2f sfText_findCharacterPos( IntPtr CPointer, uint Index );
+        static extern Vector2 sfText_findCharacterPos( IntPtr CPointer, uint Index );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern FloatRect sfText_getLocalBounds( IntPtr CPointer );

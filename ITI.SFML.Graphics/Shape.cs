@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Security;
 using SFML.System;
@@ -14,7 +15,7 @@ namespace SFML.Graphics
         delegate uint GetPointCountCallbackType( IntPtr UserData );
 
         [UnmanagedFunctionPointer( CallingConvention.Cdecl )]
-        delegate Vector2f GetPointCallbackType( uint index, IntPtr UserData );
+        delegate Vector2 GetPointCallbackType( uint index, IntPtr UserData );
 
         GetPointCountCallbackType _getPointCountCallback;
         GetPointCallbackType _getPointCallback;
@@ -82,7 +83,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="index">Index of the point to get, in range [0 .. PointCount - 1].</param>
         /// <returns>index-th point of the shape.</returns>
-        public abstract Vector2f GetPoint( uint index );
+        public abstract Vector2 GetPoint( uint index );
 
         /// <summary>
         /// Gets the local bounding rectangle of the entity.
@@ -197,7 +198,7 @@ namespace SFML.Graphics
         /// <summary>
         /// Callback passed to the C API.
         /// </summary>
-        Vector2f InternalGetPoint( uint index, IntPtr userData ) => GetPoint( index );
+        Vector2 InternalGetPoint( uint index, IntPtr userData ) => GetPoint( index );
 
 
         #region Imports

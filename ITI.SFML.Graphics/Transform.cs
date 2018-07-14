@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Security;
 using SFML.System;
@@ -49,14 +50,14 @@ namespace SFML.Graphics
         /// <param name="x">X coordinate of the point to transform.</param>
         /// <param name="y">Y coordinate of the point to transform.</param>
         /// <returns>Transformed point.</returns>
-        public Vector2f TransformPoint( float x, float y ) => TransformPoint( new Vector2f( x, y ) );
+        public Vector2 TransformPoint( float x, float y ) => TransformPoint( new Vector2( x, y ) );
 
         /// <summary>
         /// Transforms a 2D point.
         /// </summary>
         /// <param name="point">Point to transform.</param>
         /// <returns>Transformed point.</returns>
-        public Vector2f TransformPoint( Vector2f point ) => sfTransform_transformPoint( in this, point );
+        public Vector2 TransformPoint( Vector2 point ) => sfTransform_transformPoint( in this, point );
 
         /// <summary>
         /// Transforms a rectangle.
@@ -116,7 +117,7 @@ namespace SFML.Graphics
         /// Combine the current transform with a translation.
         /// </summary>
         /// <param name="offset">Translation offset to apply.</param>
-        public Transform Translate( Vector2f offset ) => Translate( offset.X, offset.Y );
+        public Transform Translate( Vector2 offset ) => Translate( offset.X, offset.Y );
 
         /// <summary>
         /// Combines the current transform with a rotation.
@@ -159,7 +160,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="angle">Rotation angle, in degrees.</param>
         /// <param name="center">Center of rotation.</param>
-        public Transform Rotate( float angle, Vector2f center ) => Rotate( angle, center.X, center.Y );
+        public Transform Rotate( float angle, Vector2 center ) => Rotate( angle, center.X, center.Y );
 
         /// <summary>
         /// Combines the current transform with a scaling.
@@ -197,7 +198,7 @@ namespace SFML.Graphics
         /// Combines the current transform with a scaling.
         /// </summary>
         /// <param name="factors">Scaling factors.</param>
-        public Transform Scale( Vector2f factors ) => Scale( factors.X, factors.Y );
+        public Transform Scale( Vector2 factors ) => Scale( factors.X, factors.Y );
 
         /// <summary>
         /// Combines the current transform with a scaling.
@@ -210,7 +211,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="factors">Scaling factors.</param>
         /// <param name="center">Center of scaling.</param>
-        public Transform Scale( Vector2f factors, Vector2f center ) => Scale( factors.X, factors.Y, center.X, center.Y );
+        public Transform Scale( Vector2 factors, Vector2 center ) => Scale( factors.X, factors.Y, center.X, center.Y );
 
         /// <summary>
         /// Overload of binary operator * to combine two transforms.
@@ -228,7 +229,7 @@ namespace SFML.Graphics
         /// <param name="left">Left operand (the transform)</param>
         /// <param name="right">Right operand (the point to transform)</param>
         /// <returns>New transformed point</returns>
-        public static Vector2f operator *( Transform left, Vector2f right )
+        public static Vector2 operator *( Transform left, Vector2 right )
         {
             return left.TransformPoint( right );
         }
@@ -261,7 +262,7 @@ namespace SFML.Graphics
         static extern Transform sfTransform_getInverse( in Transform transform );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern Vector2f sfTransform_transformPoint( in Transform transform, Vector2f point );
+        static extern Vector2 sfTransform_transformPoint( in Transform transform, Vector2 point );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern FloatRect sfTransform_transformRect( in Transform transform, FloatRect rectangle );

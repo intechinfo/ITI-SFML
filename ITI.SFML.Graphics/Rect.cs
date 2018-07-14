@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using SFML.System;
 
@@ -236,7 +237,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="position">Position of the top-left corner of the rectangle.</param>
         /// <param name="size">Size of the rectangle.</param>
-        public FloatRect( Vector2f position, Vector2f size )
+        public FloatRect( Vector2 position, Vector2 size )
             : this( position.X, position.Y, size.X, size.Y )
         {
         }

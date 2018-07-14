@@ -2,6 +2,7 @@ using SFML.Graphics;
 using SFML.System;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace DemoApp.EffectDemo
@@ -28,7 +29,7 @@ namespace DemoApp.EffectDemo
                 var r = (byte)random.Next( 0, 255 );
                 var g = (byte)random.Next( 0, 255 );
                 var b = (byte)random.Next( 0, 255 );
-                _points.Append( new Vertex( new Vector2f( x, y ), new Color( r, g, b ) ) );
+                _points.Append( new Vertex( new Vector2( x, y ), new Color( r, g, b ) ) );
             }
 
             // Load the shader
@@ -38,7 +39,7 @@ namespace DemoApp.EffectDemo
         protected override void OnUpdate( float time, float x, float y )
         {
             var radius = 200 + (float)Math.Cos( time ) * 150;
-            _shader.SetUniform( "storm_position", new Vector2f( x * 800, y * 600 ) );
+            _shader.SetUniform( "storm_position", new Vector2( x * 800, y * 600 ) );
             _shader.SetUniform( "storm_inner_radius", radius / 3 );
             _shader.SetUniform( "storm_total_radius", radius );
             _shader.SetUniform( "blink_alpha", 0.5F + (float)Math.Cos( time * 3 ) * 0.25F );

@@ -2,6 +2,7 @@ using SFML.Graphics;
 using SFML.System;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace DemoApp.EffectDemo
@@ -36,7 +37,7 @@ namespace DemoApp.EffectDemo
             else
             {
                 var error = new Text( "Shader not\nsupported", Font );
-                error.Position = new Vector2f( 320, 200 );
+                error.Position = new Vector2( 320, 200 );
                 error.CharacterSize = 36;
                 target.Draw( error, states );
             }

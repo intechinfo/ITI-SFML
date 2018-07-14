@@ -1,3 +1,4 @@
+using System.Numerics;
 using SFML.System;
 
 namespace SFML.Graphics
@@ -7,13 +8,13 @@ namespace SFML.Graphics
     /// </summary>
     public class RectangleShape : Shape
     {
-        Vector2f _size;
+        Vector2 _size;
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public RectangleShape()
-            : this( new Vector2f( 0, 0 ) )
+            : this( new Vector2( 0, 0 ) )
         {
         }
 
@@ -21,7 +22,7 @@ namespace SFML.Graphics
         /// Constructs the shape with an initial size.
         /// </summary>
         /// <param name="size">Size of the shape</param>
-        public RectangleShape( Vector2f size )
+        public RectangleShape( Vector2 size )
         {
             Size = size;
         }
@@ -39,7 +40,7 @@ namespace SFML.Graphics
         /// <summary>
         /// The size of the rectangle
         /// </summary>
-        public Vector2f Size
+        public Vector2 Size
         {
             get { return _size; }
             set { _size = value; Update(); }
@@ -62,15 +63,15 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="index">Index of the point to get, in range [0 .. 3]</param>
         /// <returns>index-th point of the shape</returns>
-        public override Vector2f GetPoint( uint index )
+        public override Vector2 GetPoint( uint index )
         {
             switch( index )
             {
                 default:
-                case 0: return new Vector2f( 0, 0 );
-                case 1: return new Vector2f( _size.X, 0 );
-                case 2: return new Vector2f( _size.X, _size.Y );
-                case 3: return new Vector2f( 0, _size.Y );
+                case 0: return new Vector2( 0, 0 );
+                case 1: return new Vector2( _size.X, 0 );
+                case 2: return new Vector2( _size.X, _size.Y );
+                case 3: return new Vector2( 0, _size.Y );
             }
         }
 

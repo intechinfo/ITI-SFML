@@ -2,6 +2,7 @@ using SFML.Graphics;
 using SFML.System;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace DemoApp.EffectDemo
@@ -39,7 +40,7 @@ namespace DemoApp.EffectDemo
                                      "In hac habitasse platea dictumst. Etiam fringilla est id odio dapibus sit amet semper dui laoreet.\n";
             _text.Font = Font;
             _text.CharacterSize = 22;
-            _text.Position = new Vector2f( 30, 20 );
+            _text.Position = new Vector2( 30, 20 );
             // Load the shader
             _shader = new Shader( "resources/wave.vert", null, "resources/blur.frag" );
         }
@@ -47,7 +48,7 @@ namespace DemoApp.EffectDemo
         protected override void OnUpdate( float time, float x, float y )
         {
             _shader.SetUniform( "wave_phase", time );
-            _shader.SetUniform( "wave_amplitude", new Vector2f( x * 40, y * 40 ) );
+            _shader.SetUniform( "wave_amplitude", new Vector2( x * 40, y * 40 ) );
             _shader.SetUniform( "blur_radius", (x + y) * 0.008F );
         }
 
