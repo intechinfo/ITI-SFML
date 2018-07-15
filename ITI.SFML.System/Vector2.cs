@@ -176,6 +176,17 @@ namespace SFML.System
         /// </summary>
         /// <param name="v">Vector being casted</param>
         /// <returns>Casting result</returns>
+        public static explicit operator Vector2i( Vector2 v )
+        {
+            return new Vector2i( (int) v.X, (int) v.Y );
+        }
+
+
+        /// <summary>
+        /// Explicit casting to another vector type
+        /// </summary>
+        /// <param name="v">Vector being casted</param>
+        /// <returns>Casting result</returns>
         public static explicit operator Vector2u( Vector2i v )
         {
             return new Vector2u( (uint)v.X, (uint)v.Y );
@@ -351,5 +362,14 @@ namespace SFML.System
             return new Vector2( (float)v.X, (float)v.Y );
         }
 
+        /// <summary>
+        /// Explicit casting to another vector type
+        /// </summary>
+        /// <param name="v">Vector being casted</param>
+        /// <returns>Casting result</returns>
+        public static explicit operator Vector2u( Vector2 v )
+        {
+            return new Vector2u( (uint)v.X, (uint)v.Y );
+        }
     }
 }
