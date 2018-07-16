@@ -13,21 +13,16 @@ namespace SFML.Graphics
         Vector2u Size { get; }
 
         /// <summary>
-        /// Default view of the target
+        /// Gets the default view of the render target.
+        /// The default view has the initial size of the render target, and never changes after the target has been created.
         /// </summary>
         View DefaultView { get; }
 
-        /// <summary>
-        /// Return the current active view
-        /// </summary>
-        /// <returns>The current view</returns>
-        View GetView();
 
         /// <summary>
-        /// Changes the current active view.
+        /// Gets or Sets the current active view
         /// </summary>
-        /// <param name="view">New view</param>
-        void SetView( View view );
+        View View { get; set; }
 
         /// <summary>
         /// Gets the viewport of a view applied to this target.
