@@ -8,19 +8,20 @@ namespace SFML.Graphics
     public interface IRenderTarget
     {
         /// <summary>
-        /// Size of the rendering region of the target
+        /// Gets the size of the rendering region of the target.
         /// </summary>
         Vector2u Size { get; }
 
         /// <summary>
         /// Gets the default view of the render target.
-        /// The default view has the initial size of the render target, and never changes after the target has been created.
+        /// The default view has the initial size of the render target, and
+        /// never changes after the target has been created.
         /// </summary>
         View DefaultView { get; }
 
 
         /// <summary>
-        /// Gets or Sets the current active view
+        /// Gets or sets the current active view.
         /// </summary>
         View View { get; set; }
 
@@ -32,7 +33,7 @@ namespace SFML.Graphics
         IntRect GetViewport( View view );
 
         /// <summary>
-        /// Convert a point from target coordinates to world
+        /// Converts a point from target coordinates to world
         /// coordinates, using the current view.
         /// <para>
         /// This function is an overload of the MapPixelToCoords
