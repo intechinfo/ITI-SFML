@@ -293,8 +293,9 @@ namespace SFML.Graphics
         {
             sfRenderWindow_clear( CPointer, color );
         }
+
         /// <summary>
-        /// Get or Set the current active view
+        /// Gets or Sets the current active view
         /// </summary>
         public View View
         {

@@ -77,8 +77,9 @@ namespace SFML.Graphics
             get { return new View( myDefaultView ); }
         }
 
+
         /// <summary>
-        /// Get or Set the current active view
+        /// Gets or Sets the current active view
         /// </summary>
         public View View
         {

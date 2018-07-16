@@ -18,7 +18,9 @@ namespace SFML.Graphics
         View DefaultView { get; }
 
 
-
+        /// <summary>
+        /// Gets or Sets the current active view
+        /// </summary>
         View View { get; set; }
 
         /// <summary>
