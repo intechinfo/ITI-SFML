@@ -13,7 +13,8 @@ namespace SFML.Graphics
         Vector2u Size { get; }
 
         /// <summary>
-        /// Default view of the target
+        /// Gets the default view of the render target.
+        /// The default view has the initial size of the render target, and never changes after the target has been created.
         /// </summary>
         View DefaultView { get; }
 
