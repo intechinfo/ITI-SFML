@@ -1,5 +1,3 @@
-using System;
-
 namespace SFML.Graphics
 {
     /// <summary>
