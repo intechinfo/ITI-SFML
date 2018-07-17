@@ -333,7 +333,7 @@ namespace SFML.Graphics
         /// <param name="texture">Shader to bind (can be null to use no texture).</param>
         public static void Bind( Texture texture )
         {
-            sfTexture_bind( texture != null ? texture.CPointer : IntPtr.Zero );
+            sfTexture_bind( texture?.CPointer ?? IntPtr.Zero );
         }
 
         /// <summary>

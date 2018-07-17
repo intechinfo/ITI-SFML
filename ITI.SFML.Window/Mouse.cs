@@ -92,10 +92,7 @@ namespace SFML.Window
         /// <returns>Current position of the mouse.</returns>
         public static Vector2i GetPosition( Window relativeTo )
         {
-            if( relativeTo != null )
-                return relativeTo.InternalGetMousePosition();
-            else
-                return sfMouse_getPosition( IntPtr.Zero );
+            return relativeTo?.InternalGetMousePosition() ?? sfMouse_getPosition( IntPtr.Zero );
         }
 
         /// <summary>

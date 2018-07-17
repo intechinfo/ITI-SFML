@@ -279,8 +279,7 @@ namespace SFML.Audio
         {
             if( disposing )
             {
-                if( _stream != null )
-                    _stream.Dispose();
+                _stream?.Dispose();
             }
 
             sfMusic_destroy( CPointer );

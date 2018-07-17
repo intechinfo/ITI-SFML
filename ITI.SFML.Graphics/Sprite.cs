@@ -75,7 +75,7 @@ namespace SFML.Graphics
         public Texture Texture
         {
             get { return _texture; }
-            set { _texture = value; sfSprite_setTexture( CPointer, value != null ? value.CPointer : IntPtr.Zero, false ); }
+            set { _texture = value; sfSprite_setTexture( CPointer, value?.CPointer ?? IntPtr.Zero, false ); }
         }
 
         /// <summary>

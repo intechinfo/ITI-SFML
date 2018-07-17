@@ -39,10 +39,7 @@ namespace SFML.Window
         /// <returns>Current position of the finger</returns>
         public static Vector2i GetPosition( uint Finger, Window RelativeTo )
         {
-            if( RelativeTo != null )
-                return RelativeTo.InternalGetTouchPosition( Finger );
-            else
-                return sfTouch_getPosition( Finger, IntPtr.Zero );
+            return RelativeTo?.InternalGetTouchPosition( Finger ) ?? sfTouch_getPosition( Finger, IntPtr.Zero );
         }
 
         #region Imports

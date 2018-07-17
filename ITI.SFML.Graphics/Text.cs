@@ -180,7 +180,7 @@ namespace SFML.Graphics
         public Font Font
         {
             get { return _font; }
-            set { _font = value; sfText_setFont( CPointer, value != null ? value.CPointer : IntPtr.Zero ); }
+            set { _font = value; sfText_setFont( CPointer, value?.CPointer ?? IntPtr.Zero ); }
         }
 
         /// <summary>

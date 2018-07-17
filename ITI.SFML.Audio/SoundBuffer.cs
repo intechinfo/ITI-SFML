@@ -160,9 +160,9 @@ namespace SFML.Audio
         {
             get
             {
-                short[] SamplesArray = new short[sfSoundBuffer_getSampleCount( CPointer )];
-                Marshal.Copy( sfSoundBuffer_getSamples( CPointer ), SamplesArray, 0, SamplesArray.Length );
-                return SamplesArray;
+                short[] samplesArray = new short[sfSoundBuffer_getSampleCount( CPointer )];
+                Marshal.Copy( sfSoundBuffer_getSamples( CPointer ), samplesArray, 0, samplesArray.Length );
+                return samplesArray;
             }
         }
 

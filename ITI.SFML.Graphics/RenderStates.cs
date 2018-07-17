@@ -124,11 +124,13 @@ namespace SFML.Graphics
         /// <returns>The data.</returns>
         internal MarshalData Marshal()
         {
-            MarshalData data = new MarshalData();
-            data.blendMode = BlendMode;
-            data.transform = Transform;
-            data.texture = Texture != null ? Texture.CPointer : IntPtr.Zero;
-            data.shader = Shader != null ? Shader.CPointer : IntPtr.Zero;
+            MarshalData data = new MarshalData
+            {
+                blendMode = BlendMode,
+                transform = Transform,
+                texture = Texture?.CPointer ?? IntPtr.Zero,
+                shader = Shader?.CPointer ?? IntPtr.Zero
+            };
             return data;
         }
 
