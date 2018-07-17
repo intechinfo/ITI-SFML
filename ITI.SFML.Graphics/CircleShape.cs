@@ -20,20 +20,11 @@ namespace SFML.Graphics
         }
 
         /// <summary>
-        /// Constructs the shape with an initial radius.
-        /// </summary>
-        /// <param name="radius">Radius of the shape</param>
-        public CircleShape(float radius)
-            : this(radius, 30)
-        {
-        }
-
-        /// <summary>
         /// Constructs the shape with an initial radius and point count.
         /// </summary>
         /// <param name="radius">Radius of the shape</param>
         /// <param name="pointCount">Number of points of the shape</param>
-        public CircleShape(float radius, uint pointCount)
+        public CircleShape(float radius, uint pointCount = 30 )
         {
             Radius = radius;
             SetPointCount(pointCount);
