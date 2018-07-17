@@ -120,26 +120,26 @@ namespace SFML.Graphics
         /// <summary>
         /// Constructs the blend mode given the factors and equation.
         /// </summary>
-        /// <param name="ColorSourceFactor">Specifies how to compute the source factor for the color channels.</param>
-        /// <param name="ColorDestinationFactor">Specifies how to compute the destination factor for the color channels.</param>
-        /// <param name="ColorBlendEquation">Specifies how to combine the source and destination colors.</param>
-        /// <param name="AlphaSourceFactor">Specifies how to compute the source factor.</param>
-        /// <param name="AlphaDestinationFactor">Specifies how to compute the destination factor.</param>
-        /// <param name="AlphaBlendEquation">Specifies how to combine the source and destination alphas.</param>
+        /// <param name="colorSourceFactor">Specifies how to compute the source factor for the color channels.</param>
+        /// <param name="colorDestinationFactor">Specifies how to compute the destination factor for the color channels.</param>
+        /// <param name="colorBlendEquation">Specifies how to combine the source and destination colors.</param>
+        /// <param name="alphaSourceFactor">Specifies how to compute the source factor.</param>
+        /// <param name="alphaDestinationFactor">Specifies how to compute the destination factor.</param>
+        /// <param name="alphaBlendEquation">Specifies how to combine the source and destination alphas.</param>
         public BlendMode(
-                Factor ColorSourceFactor,
-                Factor ColorDestinationFactor,
-                Equation ColorBlendEquation,
-                Factor AlphaSourceFactor,
-                Factor AlphaDestinationFactor,
-                Equation AlphaBlendEquation )
+                Factor colorSourceFactor,
+                Factor colorDestinationFactor,
+                Equation colorBlendEquation,
+                Factor alphaSourceFactor,
+                Factor alphaDestinationFactor,
+                Equation alphaBlendEquation )
         {
-            ColorSrcFactor = ColorSourceFactor;
-            ColorDstFactor = ColorDestinationFactor;
-            ColorEquation = ColorBlendEquation;
-            AlphaSrcFactor = AlphaSourceFactor;
-            AlphaDstFactor = AlphaDestinationFactor;
-            AlphaEquation = AlphaBlendEquation;
+            ColorSrcFactor = colorSourceFactor;
+            ColorDstFactor = colorDestinationFactor;
+            ColorEquation = colorBlendEquation;
+            AlphaSrcFactor = alphaSourceFactor;
+            AlphaDstFactor = alphaDestinationFactor;
+            AlphaEquation = alphaBlendEquation;
         }
 
         /// <summary>

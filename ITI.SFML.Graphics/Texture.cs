@@ -187,29 +187,11 @@ namespace SFML.Graphics
         /// Updates a texture from an image.
         /// </summary>
         /// <param name="image">Image to copy to the texture.</param>
-        public void Update( Image image )
-        {
-            Update( image, 0, 0 );
-        }
-
-        /// <summary>
-        /// Updates a texture from an image.
-        /// </summary>
-        /// <param name="image">Image to copy to the texture.</param>
         /// <param name="x">X offset in the texture where to copy the source pixels.</param>
         /// <param name="y">Y offset in the texture where to copy the source pixels.</param>
-        public void Update( Image image, uint x, uint y )
+        public void Update( Image image, uint x = 0, uint y = 0 )
         {
             sfTexture_updateFromImage( CPointer, image.CPointer, x, y );
-        }
-
-        /// <summary>
-        /// Updates a texture from the content of a window.
-        /// </summary>
-        /// <param name="window">Window to copy to the texture.</param>
-        public void Update( SFML.Window.Window window )
-        {
-            Update( window, 0, 0 );
         }
 
         /// <summary>
@@ -218,7 +200,7 @@ namespace SFML.Graphics
         /// <param name="window">Window to copy to the texture.</param>
         /// <param name="x">X offset in the texture where to copy the source pixels.</param>
         /// <param name="y">Y offset in the texture where to copy the source pixels.</param>
-        public void Update( SFML.Window.Window window, uint x, uint y )
+        public void Update( Window.Window window, uint x = 0, uint y = 0 )
         {
             sfTexture_updateFromWindow( CPointer, window.CPointer, x, y );
         }
@@ -227,18 +209,9 @@ namespace SFML.Graphics
         /// Updates a texture from the contents of a render-window.
         /// </summary>
         /// <param name="window">Render-window to copy to the texture.</param>
-        public void Update( RenderWindow window )
-        {
-            Update( window, 0, 0 );
-        }
-
-        /// <summary>
-        /// Updates a texture from the contents of a render-window.
-        /// </summary>
-        /// <param name="window">Render-window to copy to the texture.</param>
         /// <param name="x">X offset in the texture where to copy the source pixels.</param>
         /// <param name="y">Y offset in the texture where to copy the source pixels.</param>
-        public void Update( RenderWindow window, uint x, uint y )
+        public void Update( RenderWindow window, uint x = 0, uint y = 0 )
         {
             sfTexture_updateFromRenderWindow( CPointer, window.CPointer, x, y );
         }
@@ -372,16 +345,14 @@ namespace SFML.Graphics
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
         protected override void Destroy( bool disposing )
         {
-            if( !_external )
-            {
-                if( !disposing )
-                    Context.Global.SetActive( true );
+            if( _external ) return;
+            if( !disposing )
+                Context.Global.SetActive( true );
 
-                sfTexture_destroy( CPointer );
+            sfTexture_destroy( CPointer );
 
-                if( !disposing )
-                    Context.Global.SetActive( false );
-            }
+            if( !disposing )
+                Context.Global.SetActive( false );
         }
 
         #region Imports

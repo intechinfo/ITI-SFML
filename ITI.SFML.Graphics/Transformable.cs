@@ -23,7 +23,7 @@ namespace SFML.Graphics
     {
         Vector2f _origin = new Vector2f( 0, 0 );
         Vector2f _position = new Vector2f( 0, 0 );
-        float _rotation = 0;
+        float _rotation;
         Vector2f _scale = new Vector2f( 1, 1 );
         Transform _transform;
         Transform _inverseTransform;
@@ -131,24 +131,22 @@ namespace SFML.Graphics
         {
             get
             {
-                if( _transformNeedUpdate )
-                {
-                    _transformNeedUpdate = false;
+                if( !_transformNeedUpdate ) return _transform;
+                _transformNeedUpdate = false;
 
-                    float angle = -_rotation * 3.141592654F / 180.0F;
-                    float cosine = (float)Math.Cos( angle );
-                    float sine = (float)Math.Sin( angle );
-                    float sxc = _scale.X * cosine;
-                    float syc = _scale.Y * cosine;
-                    float sxs = _scale.X * sine;
-                    float sys = _scale.Y * sine;
-                    float tx = -_origin.X * sxc - _origin.Y * sys + _position.X;
-                    float ty = _origin.X * sxs - _origin.Y * syc + _position.Y;
+                float angle = -_rotation * 3.141592654F / 180.0F;
+                float cosine = (float)Math.Cos( angle );
+                float sine = (float)Math.Sin( angle );
+                float sxc = _scale.X * cosine;
+                float syc = _scale.Y * cosine;
+                float sxs = _scale.X * sine;
+                float sys = _scale.Y * sine;
+                float tx = -_origin.X * sxc - _origin.Y * sys + _position.X;
+                float ty = _origin.X * sxs - _origin.Y * syc + _position.Y;
 
-                    _transform = new Transform( sxc, sys, tx,
-                                                -sxs, syc, ty,
-                                                0.0F, 0.0F, 1.0F );
-                }
+                _transform = new Transform( sxc, sys, tx,
+                    -sxs, syc, ty,
+                    0.0F, 0.0F, 1.0F );
                 return _transform;
             }
         }

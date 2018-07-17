@@ -147,9 +147,11 @@ namespace SFML.Graphics
         public Info GetInfo()
         {
             InfoMarshalData data = sfFont_getInfo( CPointer );
-            Info info = new Info();
+            Info info = new Info
+            {
+                Family = Marshal.PtrToStringAnsi( data.Family )
+            };
 
-            info.Family = Marshal.PtrToStringAnsi( data.Family );
 
             return info;
         }

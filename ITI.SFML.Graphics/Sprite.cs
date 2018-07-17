@@ -141,13 +141,14 @@ namespace SFML.Graphics
         public void Draw( IRenderTarget target, in RenderStates states )
         {
             RenderStates.MarshalData marshaled = states.WithAppliedTransform( Transform ).Marshal();
-            if( target is RenderWindow )
+            switch (target)
             {
-                sfRenderWindow_drawSprite( ((RenderWindow)target).CPointer, CPointer, ref marshaled );
-            }
-            else if( target is RenderTexture )
-            {
-                sfRenderTexture_drawSprite( ((RenderTexture)target).CPointer, CPointer, ref marshaled );
+                case RenderWindow window:
+                    sfRenderWindow_drawSprite( window.CPointer, CPointer, ref marshaled );
+                    break;
+                case RenderTexture texture:
+                    sfRenderTexture_drawSprite( texture.CPointer, CPointer, ref marshaled );
+                    break;
             }
         }
 
