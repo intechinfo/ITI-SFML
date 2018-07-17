@@ -9,7 +9,6 @@ namespace SFML.Audio
     public class SoundBufferRecorder : SoundRecorder
     {
         readonly List<short> _samplesArray = new List<short>();
-        SoundBuffer _soundBuffer;
 
         /// <summary>
         /// Gets the sound buffer containing the captured audio data.
@@ -20,10 +19,7 @@ namespace SFML.Audio
         /// to make any modifications to it.
         /// </para>
         /// </summary>
-        public SoundBuffer SoundBuffer
-        {
-            get { return _soundBuffer; }
-        }
+        public SoundBuffer SoundBuffer { get; private set; }
 
         /// <summary>
         /// Provides a string describing the object.
@@ -62,7 +58,7 @@ namespace SFML.Audio
         /// </summary>
         protected override void OnStop()
         {
-            _soundBuffer = new SoundBuffer( _samplesArray.ToArray(), 1, SampleRate );
+            SoundBuffer = new SoundBuffer( _samplesArray.ToArray(), 1, SampleRate );
         }
 
     }
