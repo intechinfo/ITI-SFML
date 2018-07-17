@@ -107,23 +107,13 @@ namespace SFML.Graphics
 
 
         /// <summary>
-        /// Construct the blend mode given the factors and equation.
-        /// </summary>
-        /// <param name="SourceFactor">Specifies how to compute the source factor for the color and alpha channels.</param>
-        /// <param name="DestinationFactor">Specifies how to compute the destination factor for the color and alpha channels.</param>
-        public BlendMode( Factor SourceFactor, Factor DestinationFactor )
-            : this( SourceFactor, DestinationFactor, Equation.Add )
-        {
-        }
-
-        /// <summary>
         /// Constructs the blend mode given the factors and equation.
         /// </summary>
-        /// <param name="SourceFactor">Specifies how to compute the source factor for the color and alpha channels.</param>
-        /// <param name="DestinationFactor">Specifies how to compute the destination factor for the color and alpha channels.</param>
-        /// <param name="BlendEquation">Specifies how to combine the source and destination colors and alpha.</param>
-        public BlendMode( Factor SourceFactor, Factor DestinationFactor, Equation BlendEquation )
-            : this( SourceFactor, DestinationFactor, BlendEquation, SourceFactor, DestinationFactor, BlendEquation )
+        /// <param name="sourceFactor">Specifies how to compute the source factor for the color and alpha channels.</param>
+        /// <param name="destinationFactor">Specifies how to compute the destination factor for the color and alpha channels.</param>
+        /// <param name="blendEquation">Specifies how to combine the source and destination colors and alpha.</param>
+        public BlendMode( Factor sourceFactor, Factor destinationFactor, Equation blendEquation = Equation.Add )
+            : this( sourceFactor, destinationFactor, blendEquation, sourceFactor, destinationFactor, blendEquation )
         {
         }
 
