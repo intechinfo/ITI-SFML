@@ -76,34 +76,12 @@ namespace SFML.Window
         /// Gets the current position of the mouse.
         /// </summary>
         /// This function returns the current position of the mouse
-        /// cursor in desktop coordinates.
-        /// <returns>Current position of the mouse.</returns>
-        public static Vector2i GetPosition()
-        {
-            return GetPosition( null );
-        }
-
-        /// <summary>
-        /// Gets the current position of the mouse.
-        /// </summary>
-        /// This function returns the current position of the mouse
         /// cursor relative to a window.
         /// <param name="relativeTo">Reference window.</param>
         /// <returns>Current position of the mouse.</returns>
-        public static Vector2i GetPosition( Window relativeTo )
+        public static Vector2i GetPosition( Window relativeTo = null )
         {
             return relativeTo?.InternalGetMousePosition() ?? sfMouse_getPosition( IntPtr.Zero );
-        }
-
-        /// <summary>
-        /// Sets the current position of the mouse.
-        /// </summary>
-        /// This function sets the current position of the mouse
-        /// cursor in desktop coordinates.
-        /// <param name="position">New position of the mouse</param>
-        public static void SetPosition( Vector2i position )
-        {
-            SetPosition( position, null );
         }
 
         /// <summary>
@@ -113,7 +91,7 @@ namespace SFML.Window
         /// cursor relative to a window.
         /// <param name="position">New position of the mouse</param>
         /// <param name="relativeTo">Reference window</param>
-        public static void SetPosition( Vector2i position, Window relativeTo )
+        public static void SetPosition( Vector2i position, Window relativeTo = null )
         {
             if( relativeTo != null )
                 relativeTo.InternalSetMousePosition( position );

@@ -22,24 +22,14 @@ namespace SFML.Window
 
         /// <summary>
         /// This function returns the current touch position
-        /// </summary>
-        /// <param name="Finger">Finger index</param>
-        /// <returns>Current position of the finger</returns>
-        public static Vector2i GetPosition( uint Finger )
-        {
-            return GetPosition( Finger, null );
-        }
-
-        /// <summary>
-        /// This function returns the current touch position
         /// relative to the given window
         /// </summary>
-        /// <param name="Finger">Finger index</param>
-        /// <param name="RelativeTo">Reference window</param>
+        /// <param name="finger">Finger index</param>
+        /// <param name="relativeTo">Reference window</param>
         /// <returns>Current position of the finger</returns>
-        public static Vector2i GetPosition( uint Finger, Window RelativeTo )
+        public static Vector2i GetPosition( uint finger, Window relativeTo = null )
         {
-            return RelativeTo?.InternalGetTouchPosition( Finger ) ?? sfTouch_getPosition( Finger, IntPtr.Zero );
+            return relativeTo?.InternalGetTouchPosition( finger ) ?? sfTouch_getPosition( finger, IntPtr.Zero );
         }
 
         #region Imports
