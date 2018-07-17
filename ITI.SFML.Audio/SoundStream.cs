@@ -268,7 +268,7 @@ namespace SFML.Audio
         /// Structure mapping the C library arguments passed to the data callback
         /// </summary>
         [StructLayout( LayoutKind.Sequential )]
-        private struct Chunk
+        struct Chunk
         {
             unsafe public short* samples;
             public uint sampleCount;
@@ -280,7 +280,7 @@ namespace SFML.Audio
         /// <param name="dataChunk">Data chunk to fill with new audio samples.</param>
         /// <param name="userData">User data -- unused</param>
         /// <returns>True to continue playback, false to stop.</returns>
-        private bool GetData( ref Chunk dataChunk, IntPtr userData )
+        bool GetData( ref Chunk dataChunk, IntPtr userData )
         {
             if( OnGetData( out _tempBuffer ) )
             {
@@ -307,16 +307,16 @@ namespace SFML.Audio
         /// <param name="timeOffset">New position</param>
         /// <param name="userData">User data -- unused</param>
         /// <returns>If false is returned, the playback is aborted</returns>
-        private void Seek( Time timeOffset, IntPtr userData )
+        void Seek( Time timeOffset, IntPtr userData )
         {
             OnSeek( timeOffset );
         }
 
         [UnmanagedFunctionPointer( CallingConvention.Cdecl )]
-        private delegate bool GetDataCallbackType( ref Chunk dataChunk, IntPtr UserData );
+        delegate bool GetDataCallbackType( ref Chunk dataChunk, IntPtr UserData );
 
         [UnmanagedFunctionPointer( CallingConvention.Cdecl )]
-        private delegate void SeekCallbackType( Time timeOffset, IntPtr UserData );
+        delegate void SeekCallbackType( Time timeOffset, IntPtr UserData );
 
 
         #region Imports
