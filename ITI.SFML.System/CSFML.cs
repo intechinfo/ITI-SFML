@@ -108,9 +108,9 @@ namespace SFML.System
         public const int RTLD_NOW = 0x002;
 
         [DllImport( "libdl", EntryPoint = "dlopen" )]
-        private static extern IntPtr LoadUnixLibrary( string path, int flags );
+        static extern IntPtr LoadUnixLibrary( string path, int flags );
 
         [DllImport( "kernel32", EntryPoint = "LoadLibrary" )]
-        private static extern IntPtr LoadWindowsLibrary( string path );
+        static extern IntPtr LoadWindowsLibrary( string path );
     }
 }

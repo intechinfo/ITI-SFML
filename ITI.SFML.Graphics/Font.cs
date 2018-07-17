@@ -188,7 +188,7 @@ namespace SFML.Graphics
         /// Internal constructor.
         /// </summary>
         /// <param name="cPointer">Pointer to the object in C library.</param>
-        private Font( IntPtr cPointer )
+        Font( IntPtr cPointer )
             : base( cPointer )
         {
         }

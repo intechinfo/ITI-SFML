@@ -48,7 +48,7 @@ namespace SFML
         /// Destroy the object
         /// </summary>
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call?</param>
-        private void Dispose( bool disposing )
+        void Dispose( bool disposing )
         {
             if( myCPointer != IntPtr.Zero )
             {
@@ -63,6 +63,6 @@ namespace SFML
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call?</param>
         protected abstract void Destroy( bool disposing );
 
-        private IntPtr myCPointer = IntPtr.Zero;
+        IntPtr myCPointer = IntPtr.Zero;
     }
 }

@@ -11,7 +11,7 @@ namespace SFML.Window
     /// </summary>
     public class Context : CriticalFinalizerObject
     {
-        private IntPtr _this = IntPtr.Zero;
+        IntPtr _this = IntPtr.Zero;
 
         /// <summary>
         /// Default constructor
@@ -70,7 +70,7 @@ namespace SFML.Window
             return "[Context]";
         }
 
-        private static Context ourGlobalContext = null;
+        static Context ourGlobalContext = null;
 
         #region Imports
         [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]

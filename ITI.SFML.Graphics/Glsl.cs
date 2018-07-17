@@ -436,7 +436,7 @@ namespace SFML.Graphics.Glsl
         }
 
         // column-major!
-        private fixed float array[3 * 3];
+        fixed float array[3 * 3];
     }
 
     /// <summary>
@@ -504,7 +504,7 @@ namespace SFML.Graphics.Glsl
         }
 
         // column major!
-        private fixed float array[4 * 4];
+        fixed float array[4 * 4];
     }
     #endregion
 }
