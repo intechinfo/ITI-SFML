@@ -1,5 +1,6 @@
 using SFML.System;
 using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Security;
 
@@ -125,7 +126,7 @@ namespace SFML.Graphics
         /// contains all the vertices of the array.
         /// </para>
         /// </summary>
-        public FloatRect Bounds => sfVertexArray_getBounds( CPointer );
+        public RectangleF Bounds => sfVertexArray_getBounds( CPointer );
 
         /// <summary>
         /// Draws the vertex array to a render target.
@@ -186,7 +187,7 @@ namespace SFML.Graphics
         static extern PrimitiveType sfVertexArray_getPrimitiveType( IntPtr CPointer );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern FloatRect sfVertexArray_getBounds( IntPtr CPointer );
+        static extern RectangleF sfVertexArray_getBounds( IntPtr CPointer );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfRenderWindow_drawVertexArray( IntPtr CPointer, IntPtr VertexArray, ref RenderStates.MarshalData states );

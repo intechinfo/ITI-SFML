@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using SFML.System;
@@ -62,9 +63,9 @@ namespace SFML.Graphics.Glsl
     {
         ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Implicit cast from <see cref="Vector2i"/> to <see cref="Ivec2"/>
+        /// Implicit cast from <see cref="Point"/> to <see cref="Ivec2"/>
         /// </summary>
-        public static implicit operator Ivec2( Vector2i vec )
+        public static implicit operator Ivec2( Point vec )
         {
             return new Ivec2( vec );
         }
@@ -84,11 +85,11 @@ namespace SFML.Graphics.Glsl
 
         ////////////////////////////////////////////////////////////
         /// <summary>
-        /// Construct the <see cref="Ivec2"/> from a standard SFML <see cref="Vector2i"/>
+        /// Construct the <see cref="Ivec2"/> from a standard SFML <see cref="Point"/>
         /// </summary>
         /// <param name="vec">A standard SFML 2D integer vector</param>
         ////////////////////////////////////////////////////////////
-        public Ivec2( Vector2i vec )
+        public Ivec2( Point vec )
         {
             X = vec.X;
             Y = vec.Y;

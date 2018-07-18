@@ -1,10 +1,8 @@
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
-using System;
-using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
+using Point = System.Drawing.Point;
 
 namespace DemoApp.EffectDemo
 {
@@ -51,7 +49,7 @@ namespace DemoApp.EffectDemo
 
         public void Update( Clock clock )
         {
-            Vector2i mouse = Mouse.GetPosition( this );
+            Point mouse = Mouse.GetPosition( this );
             var x = (float)mouse.X / Size.X;
             var y = (float)mouse.Y / Size.Y;
             _effects[_currentEffect].Update( clock.ElapsedTime.AsSeconds(), x, y );

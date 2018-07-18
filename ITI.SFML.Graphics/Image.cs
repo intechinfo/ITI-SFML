@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.IO;
@@ -187,7 +188,7 @@ namespace SFML.Graphics
         /// <param name="destY">Y coordinate of the destination position</param>
         public void Copy( Image source, uint destX, uint destY )
         {
-            Copy( source, destX, destY, new IntRect( 0, 0, 0, 0 ) );
+            Copy( source, destX, destY, new Rectangle( 0, 0, 0, 0 ) );
         }
 
         /// <summary>
@@ -199,7 +200,7 @@ namespace SFML.Graphics
         /// <param name="destX">X coordinate of the destination position</param>
         /// <param name="destY">Y coordinate of the destination position</param>
         /// <param name="sourceRect">Sub-rectangle of the source image to copy</param>
-        public void Copy( Image source, uint destX, uint destY, IntRect sourceRect )
+        public void Copy( Image source, uint destX, uint destY, Rectangle sourceRect )
         {
             Copy( source, destX, destY, sourceRect, false );
         }
@@ -214,7 +215,7 @@ namespace SFML.Graphics
         /// <param name="destY">Y coordinate of the destination position</param>
         /// <param name="sourceRect">Sub-rectangle of the source image to copy</param>
         /// <param name="applyAlpha">Should the copy take in account the source transparency?</param>
-        public void Copy( Image source, uint destX, uint destY, IntRect sourceRect, bool applyAlpha )
+        public void Copy( Image source, uint destX, uint destY, Rectangle sourceRect, bool applyAlpha )
         {
             sfImage_copyImage( CPointer, source.CPointer, destX, destY, sourceRect, applyAlpha );
         }
@@ -338,7 +339,7 @@ namespace SFML.Graphics
         static extern void sfImage_createMaskFromColor( IntPtr CPointer, Color Col, byte Alpha );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern void sfImage_copyImage( IntPtr CPointer, IntPtr Source, uint DestX, uint DestY, IntRect SourceRect, bool applyAlpha );
+        static extern void sfImage_copyImage( IntPtr CPointer, IntPtr Source, uint DestX, uint DestY, Rectangle SourceRect, bool applyAlpha );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfImage_setPixel( IntPtr CPointer, uint X, uint Y, Color Col );

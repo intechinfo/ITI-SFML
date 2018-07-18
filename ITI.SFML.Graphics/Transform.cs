@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Security;
@@ -71,7 +72,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="rectangle">Rectangle to transform.</param>
         /// <returns>Transformed rectangle.</returns>
-        public FloatRect TransformRect( FloatRect rectangle ) => sfTransform_transformRect( in this, rectangle );
+        public RectangleF TransformRect( RectangleF rectangle ) => sfTransform_transformRect( in this, rectangle );
 
         /// <summary>
         /// Returns a <see cref="MutableTransform"/> from this <see cref="Transform"/>.
@@ -265,7 +266,7 @@ namespace SFML.Graphics
         static extern Vector2 sfTransform_transformPoint( in Transform transform, Vector2 point );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern FloatRect sfTransform_transformRect( in Transform transform, FloatRect rectangle );
+        static extern RectangleF sfTransform_transformRect( in Transform transform, RectangleF rectangle );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfTransform_combine( ref Transform transform, ref Transform other );

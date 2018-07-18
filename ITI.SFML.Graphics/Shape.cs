@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Security;
@@ -33,7 +34,7 @@ namespace SFML.Graphics
         /// <summary>
         /// Sub-rectangle of the texture that the shape will display.
         /// </summary>
-        public IntRect TextureRect
+        public Rectangle TextureRect
         {
             get { return sfShape_getTextureRect( CPointer ); }
             set { sfShape_setTextureRect( CPointer, value ); }
@@ -96,7 +97,7 @@ namespace SFML.Graphics
         ///</para>
         /// </summary>
         /// <returns>Local bounding rectangle of the entity.</returns>
-        public FloatRect GetLocalBounds()
+        public RectangleF GetLocalBounds()
         {
             return sfShape_getLocalBounds( CPointer );
         }
@@ -112,7 +113,7 @@ namespace SFML.Graphics
         /// </para>
         /// </summary>
         /// <returns>Global bounding rectangle of the entity</returns>
-        public FloatRect GetGlobalBounds()
+        public RectangleF GetGlobalBounds()
         {
             // we don't use the native getGlobalBounds function,
             // because we override the object's transform
@@ -215,10 +216,10 @@ namespace SFML.Graphics
         static extern void sfShape_setTexture( IntPtr CPointer, IntPtr Texture, bool AdjustToNewSize );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern void sfShape_setTextureRect( IntPtr CPointer, IntRect Rect );
+        static extern void sfShape_setTextureRect( IntPtr CPointer, Rectangle Rect );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern IntRect sfShape_getTextureRect( IntPtr CPointer );
+        static extern Rectangle sfShape_getTextureRect( IntPtr CPointer );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfShape_setFillColor( IntPtr CPointer, Color Color );
@@ -239,7 +240,7 @@ namespace SFML.Graphics
         static extern float sfShape_getOutlineThickness( IntPtr CPointer );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern FloatRect sfShape_getLocalBounds( IntPtr CPointer );
+        static extern RectangleF sfShape_getLocalBounds( IntPtr CPointer );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfShape_update( IntPtr CPointer );

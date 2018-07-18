@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Runtime.InteropServices;
 
 namespace SFML.Graphics
@@ -16,11 +17,11 @@ namespace SFML.Graphics
         /// <summary>
         /// Bounding rectangle of the glyph, in coordinates relative to the baseline.
         /// </summary>
-        public readonly FloatRect Bounds;
+        public readonly RectangleF Bounds;
 
         /// <summary>
         /// Texture coordinates of the glyph inside the font's texture.
         /// </summary>
-        public readonly IntRect TextureRect;
+        public readonly Rectangle TextureRect;
     }
 }

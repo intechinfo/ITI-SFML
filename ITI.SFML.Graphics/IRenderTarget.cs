@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Numerics;
 using SFML.System;
 
@@ -35,7 +36,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="view">Target view.</param>
         /// <returns>Viewport rectangle, expressed in pixels in the current target.</returns>
-        IntRect GetViewport( View view );
+        Rectangle GetViewport( View view );
 
         /// <summary>
         /// Convert a point from target coordinates to world
@@ -49,7 +50,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="point">Pixel to convert.</param>
         /// <returns>The converted point, in "world" coordinates.</returns>
-        Vector2 MapPixelToCoords( Vector2i point );
+        Vector2 MapPixelToCoords( Point point );
 
         /// <summary>
         /// Converts a point from target coordinates to world coordinates
@@ -79,7 +80,7 @@ namespace SFML.Graphics
         /// <param name="point">Pixel to convert.</param>
         /// <param name="view">The view to use for converting the point.</param>
         /// <returns>The converted point, in "world" coordinates.</returns>
-        Vector2 MapPixelToCoords( Vector2i point, View view );
+        Vector2 MapPixelToCoords( Point point, View view );
 
         /// <summary>
         /// Converts a point from world coordinates to target
@@ -93,7 +94,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="point">Point to convert.</param>
         /// <returns>The converted point, in target coordinates (pixels).</returns>
-        Vector2i MapCoordsToPixel( Vector2 point );
+        Point MapCoordsToPixel( Vector2 point );
 
         /// <summary>
         /// Converts a point from world coordinates to target coordinates.
@@ -118,7 +119,7 @@ namespace SFML.Graphics
         /// <param name="point">Point to convert.</param>
         /// <param name="view">The view to use for converting the point.</param>
         /// <returns>The converted point, in target coordinates (pixels).</returns>
-        Vector2i MapCoordsToPixel( Vector2 point, View view );
+        Point MapCoordsToPixel( Vector2 point, View view );
 
         /// <summary>
         /// Clears the entire target with black color.

@@ -1,9 +1,7 @@
 using SFML.Graphics;
-using SFML.System;
 using System;
-using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
+using Rectangle = System.Drawing.Rectangle;
 
 namespace DemoApp.EffectDemo
 {
@@ -38,7 +36,7 @@ namespace DemoApp.EffectDemo
             _entities = new Sprite[6];
             for( var i = 0; i < _entities.Length; ++i )
             {
-                _entities[i] = new Sprite( _entityTexture, new IntRect( 96 * i, 0, 96, 96 ) );
+                _entities[i] = new Sprite( _entityTexture, new Rectangle( 96 * i, 0, 96, 96 ) );
             }
 
             // Load the shader

@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Security;
 using System.Runtime.InteropServices;
 using SFML.System;
@@ -39,7 +40,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="texture">Source texture to assign to the sprite.</param>
         /// <param name="rectangle">Sub-rectangle of the texture to assign to the sprite.</param>
-        public Sprite( Texture texture, IntRect rectangle )
+        public Sprite( Texture texture, Rectangle rectangle )
             : base( sfSprite_create() )
         {
             Texture = texture;
@@ -81,7 +82,7 @@ namespace SFML.Graphics
         /// <summary>
         /// Gets or sets the sub-rectangle of the source image displayed by the sprite.
         /// </summary>
-        public IntRect TextureRect
+        public Rectangle TextureRect
         {
             get { return sfSprite_getTextureRect( CPointer ); }
             set { sfSprite_setTextureRect( CPointer, value ); }
@@ -98,7 +99,7 @@ namespace SFML.Graphics
         /// </para>
         /// </summary>
         /// <returns>Local bounding rectangle of the entity.</returns>
-        public FloatRect GetLocalBounds()
+        public RectangleF GetLocalBounds()
         {
             return sfSprite_getLocalBounds( CPointer );
         }
@@ -114,7 +115,7 @@ namespace SFML.Graphics
         /// </para>
         /// </summary>
         /// <returns>Global bounding rectangle of the entity.</returns>
-        public FloatRect GetGlobalBounds()
+        public RectangleF GetGlobalBounds()
         {
             // we don't use the native getGlobalBounds function,
             // because we override the object's transform
@@ -187,13 +188,13 @@ namespace SFML.Graphics
         static extern void sfSprite_setTexture( IntPtr CPointer, IntPtr Texture, bool AdjustToNewSize );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern void sfSprite_setTextureRect( IntPtr CPointer, IntRect Rect );
+        static extern void sfSprite_setTextureRect( IntPtr CPointer, Rectangle Rect );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern IntRect sfSprite_getTextureRect( IntPtr CPointer );
+        static extern Rectangle sfSprite_getTextureRect( IntPtr CPointer );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern FloatRect sfSprite_getLocalBounds( IntPtr CPointer );
+        static extern RectangleF sfSprite_getLocalBounds( IntPtr CPointer );
         #endregion
     }
 }

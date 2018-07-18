@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Numerics;
 using System.Security;
 using System.Runtime.InteropServices;
@@ -225,7 +226,7 @@ namespace SFML.Graphics
         /// </para>
         /// </summary>
         /// <returns>Local bounding rectangle of the entity.</returns>
-        public FloatRect GetLocalBounds()
+        public RectangleF GetLocalBounds()
         {
             return sfText_getLocalBounds( CPointer );
         }
@@ -241,7 +242,7 @@ namespace SFML.Graphics
         /// </para>
         /// </summary>
         /// <returns>Global bounding rectangle of the entity.</returns>
-        public FloatRect GetGlobalBounds()
+        public RectangleF GetGlobalBounds()
         {
             // we don't use the native getGlobalBounds function,
             // because we override the object's transform
@@ -356,13 +357,13 @@ namespace SFML.Graphics
         static extern Styles sfText_getStyle( IntPtr CPointer );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern FloatRect sfText_getRect( IntPtr CPointer );
+        static extern RectangleF sfText_getRect( IntPtr CPointer );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern Vector2 sfText_findCharacterPos( IntPtr CPointer, uint Index );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern FloatRect sfText_getLocalBounds( IntPtr CPointer );
+        static extern RectangleF sfText_getLocalBounds( IntPtr CPointer );
         #endregion
     }
 }

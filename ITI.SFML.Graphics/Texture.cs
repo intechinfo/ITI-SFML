@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.IO;
@@ -33,7 +34,7 @@ namespace SFML.Graphics
         /// <param name="filename">Path of the image file to load.</param>
         /// <exception cref="LoadingFailedException" />
         public Texture( string filename )
-            : this( filename, new IntRect( 0, 0, 0, 0 ) )
+            : this( filename, new Rectangle( 0, 0, 0, 0 ) )
         {
         }
 
@@ -43,7 +44,7 @@ namespace SFML.Graphics
         /// <param name="filename">Path of the image file to load</param>
         /// <param name="area">Area of the image to load</param>
         /// <exception cref="LoadingFailedException" />
-        public Texture( string filename, IntRect area )
+        public Texture( string filename, Rectangle area )
             : base( sfTexture_createFromFile( filename, ref area ) )
         {
             if( CPointer == IntPtr.Zero )
@@ -56,7 +57,7 @@ namespace SFML.Graphics
         /// <param name="stream">Stream containing the content.</param>
         /// <exception cref="LoadingFailedException" />
         public Texture( Stream stream )
-            : this( stream, new IntRect( 0, 0, 0, 0 ) )
+            : this( stream, new Rectangle( 0, 0, 0, 0 ) )
         {
         }
 
@@ -66,7 +67,7 @@ namespace SFML.Graphics
         /// <param name="stream">Stream containing the content.</param>
         /// <param name="area">Area of the image to load</param>
         /// <exception cref="LoadingFailedException" />
-        public Texture( Stream stream, IntRect area )
+        public Texture( Stream stream, Rectangle area )
             : base( IntPtr.Zero )
         {
             using( StreamAdaptor adaptor = new StreamAdaptor( stream ) )
@@ -84,7 +85,7 @@ namespace SFML.Graphics
         /// <param name="image">Image to load to the texture.</param>
         /// <exception cref="LoadingFailedException" />
         public Texture( Image image )
-            : this( image, new IntRect( 0, 0, 0, 0 ) )
+            : this( image, new Rectangle( 0, 0, 0, 0 ) )
         {
         }
 
@@ -94,7 +95,7 @@ namespace SFML.Graphics
         /// <param name="image">Image to load to the texture.</param>
         /// <param name="area">Area of the image to load.</param>
         /// <exception cref="LoadingFailedException" />
-        public Texture( Image image, IntRect area )
+        public Texture( Image image, Rectangle area )
             : base( sfTexture_createFromImage( image.CPointer, ref area ) )
         {
             if( CPointer == IntPtr.Zero )
@@ -112,7 +113,7 @@ namespace SFML.Graphics
             GCHandle pin = GCHandle.Alloc( bytes, GCHandleType.Pinned );
             try
             {
-                IntRect rect = new IntRect( 0, 0, 0, 0 );
+                Rectangle rect = new Rectangle( 0, 0, 0, 0 );
                 CPointer = sfTexture_createFromMemory( pin.AddrOfPinnedObject(), Convert.ToUInt64( bytes.Length ), ref rect );
             }
             finally
@@ -389,16 +390,16 @@ namespace SFML.Graphics
         static extern IntPtr sfTexture_create( uint width, uint height );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfTexture_createFromFile( string filename, ref IntRect area );
+        static extern IntPtr sfTexture_createFromFile( string filename, ref Rectangle area );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfTexture_createFromStream( IntPtr stream, ref IntRect area );
+        static extern IntPtr sfTexture_createFromStream( IntPtr stream, ref Rectangle area );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfTexture_createFromImage( IntPtr image, ref IntRect area );
+        static extern IntPtr sfTexture_createFromImage( IntPtr image, ref Rectangle area );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfTexture_createFromMemory( IntPtr data, ulong size, ref IntRect area );
+        static extern IntPtr sfTexture_createFromMemory( IntPtr data, ulong size, ref Rectangle area );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern IntPtr sfTexture_copy( IntPtr texture );
@@ -452,7 +453,7 @@ namespace SFML.Graphics
         static extern uint sfTexture_getNativeHandle( IntPtr shader );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern FloatRect sfTexture_getTexCoords( IntPtr texture, IntRect rectangle );
+        static extern RectangleF sfTexture_getTexCoords( IntPtr texture, Rectangle rectangle );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern uint sfTexture_getMaximumSize();
