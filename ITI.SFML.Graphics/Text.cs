@@ -55,22 +55,12 @@ namespace SFML.Graphics
         }
 
         /// <summary>
-        /// Construct the text from a string and a font
-        /// </summary>
-        /// <param name="str">String to display</param>
-        /// <param name="font">Font to use</param>
-        public Text( string str, Font font )
-            : this( str, font, 30 )
-        {
-        }
-
-        /// <summary>
         /// Constructs the text from a string, font and size.
         /// </summary>
         /// <param name="str">String to display.</param>
         /// <param name="font">Font to use.</param>
         /// <param name="characterSize">Base characters size.</param>
-        public Text( string str, Font font, uint characterSize )
+        public Text( string str, Font font, uint characterSize = 30 )
             : base( sfText_create() )
         {
             DisplayedString = str;
@@ -180,7 +170,7 @@ namespace SFML.Graphics
         public Font Font
         {
             get { return _font; }
-            set { _font = value; sfText_setFont( CPointer, value != null ? value.CPointer : IntPtr.Zero ); }
+            set { _font = value; sfText_setFont( CPointer, value?.CPointer ?? IntPtr.Zero ); }
         }
 
         /// <summary>
@@ -271,13 +261,14 @@ namespace SFML.Graphics
         public void Draw( IRenderTarget target, in RenderStates states )
         {
             RenderStates.MarshalData marshaled = states.WithAppliedTransform( Transform ).Marshal();
-            if( target is RenderWindow )
+            switch (target)
             {
-                sfRenderWindow_drawText( ((RenderWindow)target).CPointer, CPointer, ref marshaled );
-            }
-            else if( target is RenderTexture )
-            {
-                sfRenderTexture_drawText( ((RenderTexture)target).CPointer, CPointer, ref marshaled );
+                case RenderWindow window:
+                    sfRenderWindow_drawText( window.CPointer, CPointer, ref marshaled );
+                    break;
+                case RenderTexture texture:
+                    sfRenderTexture_drawText( texture.CPointer, CPointer, ref marshaled );
+                    break;
             }
         }
 

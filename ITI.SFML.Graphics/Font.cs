@@ -147,9 +147,11 @@ namespace SFML.Graphics
         public Info GetInfo()
         {
             InfoMarshalData data = sfFont_getInfo( CPointer );
-            Info info = new Info();
+            Info info = new Info
+            {
+                Family = Marshal.PtrToStringAnsi( data.Family )
+            };
 
-            info.Family = Marshal.PtrToStringAnsi( data.Family );
 
             return info;
         }
@@ -188,7 +190,7 @@ namespace SFML.Graphics
         /// Internal constructor.
         /// </summary>
         /// <param name="cPointer">Pointer to the object in C library.</param>
-        private Font( IntPtr cPointer )
+        Font( IntPtr cPointer )
             : base( cPointer )
         {
         }

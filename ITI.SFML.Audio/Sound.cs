@@ -112,7 +112,7 @@ namespace SFML.Audio
         public SoundBuffer SoundBuffer
         {
             get { return _buffer; }
-            set { _buffer = value; sfSound_setBuffer( CPointer, value != null ? value.CPointer : IntPtr.Zero ); }
+            set { _buffer = value; sfSound_setBuffer( CPointer, value?.CPointer ?? IntPtr.Zero ); }
         }
 
         /// <summary>

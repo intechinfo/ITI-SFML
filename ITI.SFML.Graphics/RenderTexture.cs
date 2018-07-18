@@ -12,29 +12,19 @@ namespace SFML.Graphics
     public class RenderTexture : ObjectBase, IRenderTarget
     {
         /// <summary>
-        /// Creates the render-texture with the given dimensions.
-        /// </summary>
-        /// <param name="width">Width of the render-texture.</param>
-        /// <param name="height">Height of the render-texture.</param>
-        public RenderTexture( uint width, uint height )
-            : this( width, height, false )
-        {
-        }
-
-        /// <summary>
         /// Creates the render-texture with the given dimensions and
         /// an optional depth-buffer attached.
         /// </summary>
         /// <param name="width">Width of the render-texture.</param>
         /// <param name="height">Height of the render-texture.</param>
         /// <param name="depthBuffer">True to attach a depth-buffer.</param>
-        public RenderTexture( uint width, uint height, bool depthBuffer )
+        public RenderTexture( uint width, uint height, bool depthBuffer = false )
             : base( sfRenderTexture_create( width, height, depthBuffer ) )
         {
-            myDefaultView = new View( sfRenderTexture_getDefaultView( CPointer ) );
-            myTexture = new Texture( sfRenderTexture_getTexture( CPointer ) );
-            GC.SuppressFinalize( myDefaultView );
-            GC.SuppressFinalize( myTexture );
+            _myDefaultView = new View( sfRenderTexture_getDefaultView( CPointer ) );
+            Texture = new Texture( sfRenderTexture_getTexture( CPointer ) );
+            GC.SuppressFinalize( _myDefaultView );
+            GC.SuppressFinalize( Texture );
         }
 
         /// <summary>
@@ -74,7 +64,7 @@ namespace SFML.Graphics
         /// </summary>
         public View DefaultView
         {
-            get { return new View( myDefaultView ); }
+            get { return new View( _myDefaultView ); }
         }
 
 
@@ -139,7 +129,7 @@ namespace SFML.Graphics
         /// <returns>The converted point, in "world" coordinates</returns>
         public Vector2f MapPixelToCoords( Vector2i point, View view )
         {
-            return sfRenderTexture_mapPixelToCoords( CPointer, point, view != null ? view.CPointer : IntPtr.Zero );
+            return sfRenderTexture_mapPixelToCoords( CPointer, point, view?.CPointer ?? IntPtr.Zero );
         }
 
         /// <summary>
@@ -180,7 +170,7 @@ namespace SFML.Graphics
         /// <returns>The converted point, in target coordinates (pixels)</returns>
         public Vector2i MapCoordsToPixel( Vector2f point, View view )
         {
-            return sfRenderTexture_mapCoordsToPixel( CPointer, point, view != null ? view.CPointer : IntPtr.Zero );
+            return sfRenderTexture_mapCoordsToPixel( CPointer, point, view?.CPointer ?? IntPtr.Zero );
         }
 
         ////////////////////////////////////////////////////////////
@@ -236,7 +226,8 @@ namespace SFML.Graphics
         ////////////////////////////////////////////////////////////
         public Texture Texture
         {
-            get { return myTexture; }
+            get;
+            set;
         }
 
         ////////////////////////////////////////////////////////////
@@ -439,17 +430,15 @@ namespace SFML.Graphics
 
             if( disposing )
             {
-                myDefaultView.Dispose();
-                myTexture.Dispose();
+                _myDefaultView.Dispose();
+                Texture.Dispose();
             }
 
             if( !disposing )
                 Context.Global.SetActive( false );
         }
 
-        private View myDefaultView = null;
-        private Texture myTexture = null;
-
+        View _myDefaultView;
         #region Imports
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern IntPtr sfRenderTexture_create( uint Width, uint Height, bool DepthBuffer );

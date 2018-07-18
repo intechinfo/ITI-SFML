@@ -114,7 +114,7 @@ namespace SFML.System
         /// Destroys the object.
         /// </summary>
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        private void Dispose( bool disposing )
+        void Dispose( bool disposing )
         {
             Marshal.FreeHGlobal( _inputStreamPtr );
         }
@@ -126,7 +126,7 @@ namespace SFML.System
         /// <param name="size">Size to read, in bytes.</param>
         /// <param name="userData">User data -- unused.</param>
         /// <returns>Number of bytes read.</returns>
-        private long Read( IntPtr data, long size, IntPtr userData )
+        long Read( IntPtr data, long size, IntPtr userData )
         {
             byte[] buffer = new byte[size];
             int count = _stream.Read( buffer, 0, (int)size );
@@ -140,7 +140,7 @@ namespace SFML.System
         /// <param name="position">New read position.</param>
         /// <param name="userData">User data -- unused.</param>
         /// <returns>Actual position</returns>
-        private long Seek( long position, IntPtr userData )
+        long Seek( long position, IntPtr userData )
         {
             return _stream.Seek( position, SeekOrigin.Begin );
         }
@@ -150,7 +150,7 @@ namespace SFML.System
         /// </summary>
         /// <param name="userData">User data -- unused</param>
         /// <returns>Current position in the stream</returns>
-        private long Tell( IntPtr userData )
+        long Tell( IntPtr userData )
         {
             return _stream.Position;
         }
@@ -160,7 +160,7 @@ namespace SFML.System
         /// </summary>
         /// <param name="userData">User data -- unused.</param>
         /// <returns>Number of bytes in the stream.</returns>
-        private long GetSize( IntPtr userData )
+        long GetSize( IntPtr userData )
         {
             return _stream.Length;
         }

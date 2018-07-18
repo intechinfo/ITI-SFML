@@ -165,13 +165,12 @@ namespace SFML.Audio
             {
                 unsafe
                 {
-                    uint Count;
-                    IntPtr* DevicesPtr = sfSoundRecorder_getAvailableDevices( out Count );
-                    string[] Devices = new string[Count];
-                    for( uint i = 0; i < Count; ++i )
-                        Devices[i] = Marshal.PtrToStringAnsi( DevicesPtr[i] );
+                    IntPtr* devicesPtr = sfSoundRecorder_getAvailableDevices( out uint count );
+                    string[] devices = new string[count];
+                    for( uint i = 0; i < count; ++i )
+                        devices[i] = Marshal.PtrToStringAnsi( devicesPtr[i] );
 
-                    return Devices;
+                    return devices;
                 }
             }
         }
@@ -220,7 +219,7 @@ namespace SFML.Audio
         /// <param name="nbSamples">Number of samples in the array</param>
         /// <param name="userData">User data -- unused</param>
         /// <returns>False to stop recording audio data, true to continue</returns>
-        private bool ProcessSamples( IntPtr samples, uint nbSamples, IntPtr userData )
+        bool ProcessSamples( IntPtr samples, uint nbSamples, IntPtr userData )
         {
             short[] samplesArray = new short[nbSamples];
             Marshal.Copy( samples, samplesArray, 0, samplesArray.Length );
@@ -228,13 +227,13 @@ namespace SFML.Audio
         }
 
         [UnmanagedFunctionPointer( CallingConvention.Cdecl )]
-        private delegate bool StartCallback();
+        delegate bool StartCallback();
 
         [UnmanagedFunctionPointer( CallingConvention.Cdecl )]
-        private delegate bool ProcessCallback( IntPtr samples, uint nbSamples, IntPtr userData );
+        delegate bool ProcessCallback( IntPtr samples, uint nbSamples, IntPtr userData );
 
         [UnmanagedFunctionPointer( CallingConvention.Cdecl )]
-        private delegate void StopCallback();
+        delegate void StopCallback();
 
         #region Imports
         [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]

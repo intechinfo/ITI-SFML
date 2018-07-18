@@ -418,7 +418,7 @@ namespace SFML.Graphics
         /// <param name="shader">Shader to bind (can be null to use no shader).</param>
         public static void Bind( Shader shader )
         {
-            sfShader_bind( shader != null ? shader.CPointer : IntPtr.Zero );
+            sfShader_bind( shader?.CPointer ?? IntPtr.Zero );
         }
 
         /// <summary>

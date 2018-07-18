@@ -30,24 +30,13 @@ namespace SFML.Graphics
         public readonly byte A;
 
         /// <summary>
-        /// Constructs the color from its red, green and blue components.
-        /// </summary>
-        /// <param name="red">Red component.</param>
-        /// <param name="green">Green component.</param>
-        /// <param name="blue">Blue component.</param>
-        public Color( byte red, byte green, byte blue ) :
-            this( red, green, blue, 255 )
-        {
-        }
-
-        /// <summary>
         /// Construct the color from its red, green, blue and alpha components.
         /// </summary>
         /// <param name="red">Red component.</param>
         /// <param name="green">Green component.</param>
         /// <param name="blue">Blue component.</param>
         /// <param name="alpha">Alpha (transparency) component.</param>
-        public Color( byte red, byte green, byte blue, byte alpha )
+        public Color( byte red, byte green, byte blue, byte alpha = 255 )
         {
             R = red;
             G = green;

@@ -14,7 +14,7 @@ namespace SFML
         /// <param name="cPointer">Internal pointer to the object in the C libraries</param>
         public ObjectBase( IntPtr cPointer )
         {
-            myCPointer = cPointer;
+            CPointer = cPointer;
         }
 
         /// <summary>
@@ -31,8 +31,8 @@ namespace SFML
         /// </summary>
         public IntPtr CPointer
         {
-            get { return myCPointer; }
-            protected set { myCPointer = value; }
+            get;
+            protected set;
         }
 
         /// <summary>
@@ -48,13 +48,11 @@ namespace SFML
         /// Destroy the object
         /// </summary>
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call?</param>
-        private void Dispose( bool disposing )
+        void Dispose( bool disposing )
         {
-            if( myCPointer != IntPtr.Zero )
-            {
-                Destroy( disposing );
-                myCPointer = IntPtr.Zero;
-            }
+            if( CPointer == IntPtr.Zero ) return;
+            Destroy( disposing );
+            CPointer = IntPtr.Zero;
         }
 
         /// <summary>
@@ -62,7 +60,5 @@ namespace SFML
         /// </summary>
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call?</param>
         protected abstract void Destroy( bool disposing );
-
-        private IntPtr myCPointer = IntPtr.Zero;
     }
 }

@@ -246,14 +246,8 @@ namespace SFML.Graphics
         /// <returns>String description of the object.</returns>
         public override string ToString()
         {
-            return string.Format( "[Transform]" +
-                   " Matrix(" +
-                   "{0}, {1}, {2}," +
-                   "{3}, {4}, {5}," +
-                   "{6}, {7}, {8}, )",
-                   m00, m01, m02,
-                   m10, m11, m12,
-                   m20, m21, m22 );
+            return "[Transform]" + " Matrix(" + $"{m00}, {m01}, {m02}," + $"{m10}, {m11}, {m12}," +
+                   $"{m20}, {m21}, {m22}, )";
         }
 
         #region Imports

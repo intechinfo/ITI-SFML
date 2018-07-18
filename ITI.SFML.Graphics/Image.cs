@@ -2,7 +2,6 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.IO;
-using SFML.Window;
 using SFML.System;
 
 namespace SFML.Graphics
@@ -96,20 +95,20 @@ namespace SFML.Graphics
         public Image( Color[,] pixels )
             : base( IntPtr.Zero )
         {
-            uint Width = (uint)pixels.GetLength( 0 );
-            uint Height = (uint)pixels.GetLength( 1 );
+            uint width = (uint)pixels.GetLength( 0 );
+            uint height = (uint)pixels.GetLength( 1 );
 
             // Transpose the array (.Net gives dimensions in reverse order of what SFML expects)
-            Color[,] transposed = new Color[Height, Width];
-            for( int x = 0; x < Width; ++x )
-                for( int y = 0; y < Height; ++y )
+            Color[,] transposed = new Color[height, width];
+            for( int x = 0; x < width; ++x )
+                for( int y = 0; y < height; ++y )
                     transposed[y, x] = pixels[x, y];
 
             unsafe
             {
-                fixed ( Color* PixelsPtr = transposed )
+                fixed ( Color* pixelsPtr = transposed )
                 {
-                    CPointer = sfImage_createFromPixels( Width, Height, (byte*)PixelsPtr );
+                    CPointer = sfImage_createFromPixels( width, height, (byte*)pixelsPtr );
                 }
             }
 
@@ -129,9 +128,9 @@ namespace SFML.Graphics
         {
             unsafe
             {
-                fixed ( byte* PixelsPtr = pixels )
+                fixed ( byte* pixelsPtr = pixels )
                 {
-                    CPointer = sfImage_createFromPixels( width, height, PixelsPtr );
+                    CPointer = sfImage_createFromPixels( width, height, pixelsPtr );
                 }
             }
 
@@ -159,20 +158,11 @@ namespace SFML.Graphics
         }
 
         /// <summary>
-        /// Creates a transparency mask from a specified colorkey.
-        /// </summary>
-        /// <param name="color">Color to become transparent.</param>
-        public void CreateMaskFromColor( Color color )
-        {
-            CreateMaskFromColor( color, 0 );
-        }
-
-        /// <summary>
         /// Create a transparency mask from a specified colorkey
         /// </summary>
         /// <param name="color">Color to become transparent.</param>
         /// <param name="alpha">Alpha value to use for transparent pixels.</param>
-        public void CreateMaskFromColor( Color color, byte alpha )
+        public void CreateMaskFromColor( Color color, byte alpha = 0 )
         {
             sfImage_createMaskFromColor( CPointer, color, alpha );
         }
@@ -199,22 +189,8 @@ namespace SFML.Graphics
         /// <param name="destX">X coordinate of the destination position</param>
         /// <param name="destY">Y coordinate of the destination position</param>
         /// <param name="sourceRect">Sub-rectangle of the source image to copy</param>
-        public void Copy( Image source, uint destX, uint destY, IntRect sourceRect )
-        {
-            Copy( source, destX, destY, sourceRect, false );
-        }
-
-        /// <summary>
-        /// Copy pixels from another image onto this one.
-        /// This function does a slow pixel copy and should only
-        /// be used at initialization time
-        /// </summary>
-        /// <param name="source">Source image to copy</param>
-        /// <param name="destX">X coordinate of the destination position</param>
-        /// <param name="destY">Y coordinate of the destination position</param>
-        /// <param name="sourceRect">Sub-rectangle of the source image to copy</param>
         /// <param name="applyAlpha">Should the copy take in account the source transparency?</param>
-        public void Copy( Image source, uint destX, uint destY, IntRect sourceRect, bool applyAlpha )
+        public void Copy( Image source, uint destX, uint destY, IntRect sourceRect, bool applyAlpha = false )
         {
             sfImage_copyImage( CPointer, source.CPointer, destX, destY, sourceRect, applyAlpha );
         }
@@ -251,9 +227,9 @@ namespace SFML.Graphics
             get
             {
                 Vector2u size = Size;
-                byte[] PixelsPtr = new byte[size.X * size.Y * 4];
-                Marshal.Copy( sfImage_getPixelsPtr( CPointer ), PixelsPtr, 0, PixelsPtr.Length );
-                return PixelsPtr;
+                byte[] pixelsPtr = new byte[size.X * size.Y * 4];
+                Marshal.Copy( sfImage_getPixelsPtr( CPointer ), pixelsPtr, 0, pixelsPtr.Length );
+                return pixelsPtr;
             }
         }
 

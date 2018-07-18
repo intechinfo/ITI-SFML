@@ -135,13 +135,14 @@ namespace SFML.Graphics
         public void Draw( IRenderTarget target, in RenderStates states )
         {
             RenderStates.MarshalData marshaled = states.Marshal();
-            if( target is RenderWindow )
+            switch (target)
             {
-                sfRenderWindow_drawVertexArray( ((RenderWindow)target).CPointer, CPointer, ref marshaled );
-            }
-            else if( target is RenderTexture )
-            {
-                sfRenderTexture_drawVertexArray( ((RenderTexture)target).CPointer, CPointer, ref marshaled );
+                case RenderWindow window:
+                    sfRenderWindow_drawVertexArray( window.CPointer, CPointer, ref marshaled );
+                    break;
+                case RenderTexture texture:
+                    sfRenderTexture_drawVertexArray( texture.CPointer, CPointer, ref marshaled );
+                    break;
             }
         }
 

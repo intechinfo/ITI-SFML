@@ -368,7 +368,7 @@ namespace SFML.Graphics
         /// <returns>The converted point, in "world" coordinates.</returns>
         public Vector2f MapPixelToCoords( Vector2i point, View view )
         {
-            return sfRenderWindow_mapPixelToCoords( CPointer, point, view != null ? view.CPointer : IntPtr.Zero );
+            return sfRenderWindow_mapPixelToCoords( CPointer, point, view?.CPointer ?? IntPtr.Zero );
         }
 
         /// <summary>
@@ -415,7 +415,7 @@ namespace SFML.Graphics
         /// <returns>The converted point, in target coordinates (pixels).</returns>
         public Vector2i MapCoordsToPixel( Vector2f point, View view )
         {
-            return sfRenderWindow_mapCoordsToPixel( CPointer, point, view != null ? view.CPointer : IntPtr.Zero );
+            return sfRenderWindow_mapCoordsToPixel( CPointer, point, view?.CPointer ?? IntPtr.Zero );
         }
 
         /// <summary>
@@ -665,7 +665,7 @@ namespace SFML.Graphics
         /// <summary>
         /// Do common initializations
         /// </summary>
-        private void Initialize()
+        void Initialize()
         {
             _defaultView = new View( sfRenderWindow_getDefaultView( CPointer ) );
             GC.SuppressFinalize( _defaultView );
