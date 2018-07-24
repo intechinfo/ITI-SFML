@@ -602,7 +602,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="eventToFill">Variable to fill with the raw pointer to the event structure</param>
         /// <returns>True if there was an event, false otherwise</returns>
-        protected override bool PollEvent( out Event eventToFill )
+        public override bool PollEvent( out Event eventToFill )
         {
             return sfRenderWindow_pollEvent( CPointer, out eventToFill );
         }
@@ -612,7 +612,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="eventToFill">Variable to fill with the raw pointer to the event structure</param>
         /// <returns>False if any error occured</returns>
-        protected override bool WaitEvent( out Event eventToFill )
+        public override bool WaitEvent( out Event eventToFill )
         {
             return sfRenderWindow_waitEvent( CPointer, out eventToFill );
         }

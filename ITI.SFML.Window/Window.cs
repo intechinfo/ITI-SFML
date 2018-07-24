@@ -370,7 +370,7 @@ namespace SFML.Window
         /// </summary>
         /// <param name="eventToFill">Variable to fill with the raw pointer to the event structure</param>
         /// <returns>True if there was an event, false otherwise</returns>
-        protected virtual bool PollEvent( out Event eventToFill )
+        public virtual bool PollEvent( out Event eventToFill )
         {
             return sfWindow_pollEvent( CPointer, out eventToFill );
         }
@@ -380,7 +380,7 @@ namespace SFML.Window
         /// </summary>
         /// <param name="eventToFill">Variable to fill with the raw pointer to the event structure</param>
         /// <returns>False if any error occured</returns>
-        protected virtual bool WaitEvent( out Event eventToFill )
+        public virtual bool WaitEvent( out Event eventToFill )
         {
             return sfWindow_waitEvent( CPointer, out eventToFill );
         }
