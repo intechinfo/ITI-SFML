@@ -565,25 +565,6 @@ namespace SFML.Graphics
         }
 
         /// <summary>
-        /// Captures the current contents of the window into an image.
-        /// </summary>
-        /// 
-        /// <remarks>
-        /// Deprecated. Use <see cref="Texture"/> and <see cref="Texture.Update(RenderWindow)"/>
-        /// instead:
-        /// <code>
-        ///    Texture texture = new Texture(window.Size);
-        ///    texture.update(window);
-        ///    Image img = texture.CopyToImage();
-        ///    </code>
-        /// </remarks>
-        [Obsolete( "Capture is deprecated, please see remarks for preferred method." )]
-        public Image Capture()
-        {
-            return new Image( sfRenderWindow_capture( CPointer ) );
-        }
-
-        /// <summary>
         /// Provides a string describing the object.
         /// </summary>
         /// <returns>String description of the object</returns>
