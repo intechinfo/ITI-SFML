@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -12,29 +14,47 @@ namespace SFML.System
         public const string System = "csfml-system-2.4.0";
         public const string Window = "csfml-window-2.4.0";
 
+        /// <summary>
+        /// Gets the list of known native file names.
+        /// </summary>
+        public static IReadOnlyList<string> KnownNames = new[] { Audio, Graphics, System, Window };
 
         /// <summary>
         /// Attempts to load native library path in runtimes, depending on the <see cref="OperatingSystem"/>
         /// relative to the given assembly location.
         /// </summary>
         /// <param name="a">Assembly from which runtimes will be searched.</param>
-        /// <param name="name">Name of the component (no extension).</param>
+        /// <param name="name">Name of the component (no extension). Must be in <see cref="KnownNames"/>.</param>
         public static void LoadNative( Assembly a, string name )
         {
+            if( !KnownNames.Contains( name ) )
+            {
+                throw new ArgumentException( $"Must be one of: {String.Join( ", ", KnownNames)}.", nameof( name ) );
+            }
             string baseDirectory = GetExecutingAssemblyDirectory( a );
-            string path = FindNativeLibraryPath( baseDirectory, name );
-            if( path == null ) throw new FileNotFoundException( $"Unable to find native file {name} from {baseDirectory}." );
-            var fName = Path.GetFileNameWithoutExtension( path );
+            string filePath = FindNativeLibraryPath( baseDirectory, name );
+            if( filePath == null ) throw new FileNotFoundException( $"Unable to find native file {name} from {baseDirectory}." );
+            var fName = Path.GetFileNameWithoutExtension( filePath );
             var local = Path.Combine( AppContext.BaseDirectory, fName );
-            if( !File.Exists( local ) ) File.Copy( path, local );
-
+            if( !File.Exists( local ) )
+            {
+                File.Copy( filePath, local );
+                var nativeDirectory = Path.GetDirectoryName( filePath );
+                foreach( var other in Directory.EnumerateFiles( nativeDirectory )
+                                               .Where( p => !KnownNames.Contains( Path.GetFileNameWithoutExtension( p ) ) ) )
+                {
+                    var otherFileName = Path.GetFileName( other );
+                    var target = Path.Combine( AppContext.BaseDirectory, otherFileName );
+                    if( !File.Exists(target )) File.Copy( other, target );
+                }
+            }
             IntPtr hLib = RuntimeInformation.IsOSPlatform( OSPlatform.Windows )
                             ? LoadWindowsLibrary( name )
                             : LoadUnixLibrary( name, RTLD_NOW );
-
+            int err = Marshal.GetLastWin32Error();
             if( hLib == IntPtr.Zero )
             {
-                    throw new FileNotFoundException( $"Unable to load '{name}' (Windows)." );
+                throw new FileNotFoundException( $"Unable to load '{name}' (Windows) - Marshal.GetLastWin32Error: {err}." );
             }
         }
 
@@ -108,7 +128,7 @@ namespace SFML.System
         [DllImport( "libdl", EntryPoint = "dlopen" )]
         static extern IntPtr LoadUnixLibrary( string path, int flags );
 
-        [DllImport( "kernel32", EntryPoint = "LoadLibrary" )]
+        [DllImport( "kernel32", EntryPoint = "LoadLibrary", SetLastError = true )]
         static extern IntPtr LoadWindowsLibrary( string path );
     }
 }

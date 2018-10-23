@@ -16,5 +16,6 @@
     <ProjectReference Include="..\..\ITI.SFML.Graphics\ITI.SFML.Graphics.csproj" />
     <ProjectReference Include="..\..\ITI.SFML.System\ITI.SFML.System.csproj" />
     <ProjectReference Include="..\..\ITI.SFML.Window\ITI.SFML.Window.csproj" />
+    <ProjectReference Include="..\..\ITI.SFML.Audio\ITI.SFML.Audio.csproj" />
   </ItemGroup>
 </Project>

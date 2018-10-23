@@ -26,6 +26,7 @@
     <PackageReference Include="ITI.SFML.Graphics" Version="0.0.0-b" />
     <PackageReference Include="ITI.SFML.System" Version="0.0.0-b" />
     <PackageReference Include="ITI.SFML.Window" Version="0.0.0-b" />
+    <PackageReference Include="ITI.SFML.Audio" Version="0.0.0-b" />
   </ItemGroup>
   
 </Project>
