@@ -241,6 +241,43 @@ namespace SFML.Graphics
                                                                    0, 0, 1 );
 
         /// <summary>
+        /// Compares this Transform to an object and checks if the object is actually
+        /// a similar transformation.
+        /// </summary>
+        /// <param name="obj">Object to check.</param>
+        /// <returns>Object and transform are equal.</returns>
+        public override bool Equals( object obj ) => (obj is Transform) && Equals( (Transform)obj );
+
+        /// <summary>
+        /// Checks wheteher this Transform is the same as another one.
+        /// Performs an element-wise comparison of the elements of this
+        /// transform with the elements of the right transform.
+        /// </summary>
+        /// <param name="transform">Transform to check.</param>
+        /// <returns>True when Transforms are equal.</returns>
+        public bool Equals( Transform transform )
+        {
+            return sfTransform_equal( in this, ref transform );
+        }
+
+        /// <summary>
+        /// Computes the hash code by (naïvely) combining the 3x3 matrix values.
+        /// </summary>
+        /// <returns>Hash code for this transform.</returns>
+        public override int GetHashCode()
+        {
+            return m00.GetHashCode()
+                    ^ m01.GetHashCode()
+                    ^ m02.GetHashCode()
+                    ^ m10.GetHashCode()
+                    ^ m11.GetHashCode()
+                    ^ m12.GetHashCode()
+                    ^ m20.GetHashCode()
+                    ^ m21.GetHashCode()
+                    ^ m22.GetHashCode();
+        }
+
+        /// <summary>
         /// Provides a string describing the object.
         /// </summary>
         /// <returns>String description of the object.</returns>
@@ -277,6 +314,10 @@ namespace SFML.Graphics
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfTransform_scaleWithCenter( ref Transform transform, float scaleX, float scaleY, float centerX, float centerY );
+
+        [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern bool sfTransform_equal( in Transform left, ref Transform right );
+
         #endregion
     }
 }

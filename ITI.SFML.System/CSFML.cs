@@ -9,10 +9,10 @@ namespace SFML.System
 {
     public static class CSFML
     {
-        public const string Audio = "csfml-audio-2.4.0";
-        public const string Graphics = "csfml-graphics-2.4.0";
-        public const string System = "csfml-system-2.4.0";
-        public const string Window = "csfml-window-2.4.0";
+        public const string Audio = "csfml-audio-2.5.0";
+        public const string Graphics = "csfml-graphics-2.5.0";
+        public const string System = "csfml-system-2.5.0";
+        public const string Window = "csfml-window-2.5.0";
 
         /// <summary>
         /// Gets the list of known native file names.

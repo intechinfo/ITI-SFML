@@ -50,19 +50,8 @@ namespace SFML.Graphics
         /// <param name="bytes">Byte array containing the file contents</param>
         /// <exception cref="LoadingFailedException" />
         public Font( byte[] bytes )
-            : base( IntPtr.Zero )
+            : this( new MemoryStream( bytes ) )
         {
-            GCHandle pin = GCHandle.Alloc( bytes, GCHandleType.Pinned );
-            try
-            {
-                CPointer = sfFont_createFromMemory( pin.AddrOfPinnedObject(), Convert.ToUInt64( bytes.Length ) );
-            }
-            finally
-            {
-                pin.Free();
-            }
-            if( CPointer == IntPtr.Zero )
-                throw new LoadingFailedException( "font" );
         }
 
         /// <summary>

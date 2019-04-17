@@ -237,6 +237,15 @@ namespace SFML.Window
         }
 
         /// <summary>
+        /// Sets the displayed cursor to a native system cursor.
+        /// </summary>
+        /// <param name="enable">The cursor to set.</param>
+        public virtual void SetMouseCursor( Cursor cursor )
+        {
+            sfWindow_setMouseCursor( CPointer, cursor.CPointer );
+        }
+
+        /// <summary>
         /// Enable / disable vertical synchronization
         /// </summary>
         /// <param name="enable">True to enable v-sync, false to deactivate</param>
@@ -877,6 +886,9 @@ namespace SFML.Window
 
         [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfWindow_setMouseCursorGrabbed( IntPtr CPointer, bool grabbed );
+
+        [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfWindow_setMouseCursor( IntPtr CPointer, IntPtr cursor );
 
         [DllImport( CSFML.Window, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfWindow_setVerticalSyncEnabled( IntPtr CPointer, bool Enable );

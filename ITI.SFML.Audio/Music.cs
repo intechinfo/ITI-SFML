@@ -96,6 +96,32 @@ namespace SFML.Audio
             sfMusic_stop( CPointer );
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [StructLayout( LayoutKind.Sequential )]
+        public readonly struct TimeSpan
+        {
+            public readonly Time Offset;
+            public readonly Time Length;
+        }
+
+        /// <summary>
+        /// Gets or sets the current loop points of the music.
+        /// Since setting performs some adjustments on the
+        /// provided values and rounds them to internal samples, getting this
+        /// value later is not guaranteed to return the same times passed
+        /// into it. However, it is guaranteed to return times that will map 
+        /// to the valid internal samples of this Music if they are later
+        /// set again.
+        /// </summary>
+        public TimeSpan LoopPoints
+        {
+            get { return sfMusic_getLoopPoints( CPointer ); }
+            set { sfMusic_setLoopPoints( CPointer, value ); }
+        }
+
         /// <summary>
         /// Gets the sample rate of the music.
         /// The sample rate is the number of audio samples played per
@@ -268,7 +294,8 @@ namespace SFML.Audio
                    " RelativeToListener(" + RelativeToListener + ")" +
                    " MinDistance(" + MinDistance + ")" +
                    " Attenuation(" + Attenuation + ")" +
-                   " PlayingOffset(" + PlayingOffset + ")";
+                   " PlayingOffset(" + PlayingOffset + ")" +
+                   " LoopPoints(" + LoopPoints + ")";
         }
 
         /// <summary>
@@ -366,6 +393,13 @@ namespace SFML.Audio
 
         [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern Time sfMusic_getPlayingOffset( IntPtr Music );
+
+        [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern TimeSpan sfMusic_getLoopPoints( IntPtr Music );
+
+        [DllImport( CSFML.Audio, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern TimeSpan sfMusic_setLoopPoints( IntPtr Music, TimeSpan timePoints );
+
         #endregion
     }
 }

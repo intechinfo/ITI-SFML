@@ -11,7 +11,7 @@ namespace SFML.Window
     /// </summary>
     public class Context : CriticalFinalizerObject
     {
-        IntPtr _this = IntPtr.Zero;
+        readonly IntPtr _this;
 
         /// <summary>
         /// Default constructor

@@ -238,6 +238,24 @@ namespace SFML.Graphics
         }
 
         /// <summary>
+        /// Gets or sets the size of the letter spacing factor
+        /// </summary>
+        public float LetterSpacing
+        {
+            get { return sfText_getLetterSpacing( CPointer ); }
+            set { sfText_setLetterSpacing( CPointer, value ); }
+        }
+
+        /// <summary>
+        /// Gets or sets the size of the line spacing factor
+        /// </summary>
+        public float LineSpacing
+        {
+            get { return sfText_getLineSpacing( CPointer ); }
+            set { sfText_setLineSpacing( CPointer, value ); }
+        }
+
+        /// <summary>
         /// Provides a string describing the object.
         /// </summary>
         /// <returns>String description of the object.</returns>
@@ -331,6 +349,12 @@ namespace SFML.Graphics
         static extern void sfText_setCharacterSize( IntPtr CPointer, uint Size );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfText_setLineSpacing( IntPtr CPointer, float spacingFactor );
+
+        [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfText_setLetterSpacing( IntPtr CPointer, float spacingFactor );
+
+        [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfText_setStyle( IntPtr CPointer, Styles Style );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
@@ -341,6 +365,12 @@ namespace SFML.Graphics
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern uint sfText_getCharacterSize( IntPtr CPointer );
+
+        [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern float sfText_getLetterSpacing( IntPtr CPointer );
+
+        [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern float sfText_getLineSpacing( IntPtr CPointer );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern Styles sfText_getStyle( IntPtr CPointer );

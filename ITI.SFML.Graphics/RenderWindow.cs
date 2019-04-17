@@ -204,6 +204,15 @@ namespace SFML.Graphics
         }
 
         /// <summary>
+        /// Sets the displayed cursor to a native system cursor.
+        /// </summary>
+        /// <param name="cursor">Native system cursor type to display.</param>
+        public override void SetMouseCursor( Cursor cursor )
+        {
+            sfRenderWindow_setMouseCursor( CPointer, cursor.CPointer );
+        }
+
+        /// <summary>
         /// Enables or disables automatic key-repeat.
         /// Automatic key-repeat is enabled by default.
         /// </summary>
@@ -731,6 +740,9 @@ namespace SFML.Graphics
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfRenderWindow_setMouseCursorGrabbed( IntPtr CPointer, bool grabbed );
+
+        [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        static extern void sfRenderWindow_setMouseCursor( IntPtr window, IntPtr cursor );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfRenderWindow_setKeyRepeatEnabled( IntPtr CPointer, bool Enable );

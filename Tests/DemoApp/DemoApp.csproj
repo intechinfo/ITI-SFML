@@ -1,9 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <LangVersion>7.3</LangVersion>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <ApplicationIcon />
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
