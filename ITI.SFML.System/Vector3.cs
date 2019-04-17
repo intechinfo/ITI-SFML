@@ -57,7 +57,7 @@ namespace SFML.System
         /// <returns>v1 - v2</returns>
         public static Vector3f operator -( Vector3f v1, Vector3f v2 )
         {
-            return new Vector3f( v1.X - v2.X, v1.Y - v2.X, v1.Z - v2.Z );
+            return new Vector3f( v1.X - v2.X, v1.Y - v2.Y, v1.Z - v2.Z );
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace SFML.System
         /// <returns>v1 + v2</returns>
         public static Vector3f operator +( Vector3f v1, Vector3f v2 )
         {
-            return new Vector3f( v1.X + v2.X, v1.Y + v2.X, v1.Z + v2.Z );
+            return new Vector3f( v1.X + v2.X, v1.Y + v2.Y, v1.Z + v2.Z );
         }
 
         /// <summary>
