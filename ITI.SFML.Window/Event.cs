@@ -85,61 +85,61 @@ namespace SFML.Window
     /// </summary>
     ////////////////////////////////////////////////////////////
     [StructLayout( LayoutKind.Sequential )]
-    public struct KeyEvent
+    public readonly struct KeyEvent
     {
         /// <summary>Code of the key (see KeyCode enum)</summary>
-        public Keyboard.Key Code;
+        public readonly Keyboard.Key Code;
 
         /// <summary>Is the Alt modifier pressed?</summary>
-        public int Alt;
+        public readonly int Alt;
 
         /// <summary>Is the Control modifier pressed?</summary>
-        public int Control;
+        public readonly int Control;
 
         /// <summary>Is the Shift modifier pressed?</summary>
-        public int Shift;
+        public readonly int Shift;
 
         /// <summary>Is the System modifier pressed?</summary>
-        public int System;
+        public readonly int System;
     }
 
     /// <summary>
     /// Text event parameters
     /// </summary>
     [StructLayout( LayoutKind.Sequential )]
-    public struct TextEvent
+    public readonly struct TextEvent
     {
         /// <summary>UTF-32 value of the character</summary>
-        public uint Unicode;
+        public readonly uint Unicode;
     }
 
     /// <summary>
     /// Mouse move event parameters
     /// </summary>
     [StructLayout( LayoutKind.Sequential )]
-    public struct MouseMoveEvent
+    public readonly struct MouseMoveEvent
     {
         /// <summary>X coordinate of the mouse cursor</summary>
-        public int X;
+        public readonly int X;
 
         /// <summary>Y coordinate of the mouse cursor</summary>
-        public int Y;
+        public readonly int Y;
     }
 
     /// <summary>
     /// Mouse buttons event parameters.
     /// </summary>
     [StructLayout( LayoutKind.Sequential )]
-    public struct MouseButtonEvent
+    public readonly struct MouseButtonEvent
     {
         /// <summary>Code of the button (see MouseButton enum)</summary>
-        public Mouse.Button Button;
+        public readonly Mouse.Button Button;
 
         /// <summary>X coordinate of the mouse cursor</summary>
-        public int X;
+        public readonly int X;
 
         /// <summary>Y coordinate of the mouse cursor</summary>
-        public int Y;
+        public readonly int Y;
     }
 
     /// <summary>
@@ -147,181 +147,181 @@ namespace SFML.Window
     /// </summary>
     [StructLayout( LayoutKind.Sequential )]
     [Obsolete( "MouseWheelEvent is deprecated, please use MouseWheelScrollEvent instead" )]
-    public struct MouseWheelEvent
+    public readonly struct MouseWheelEvent
     {
         /// <summary>Scroll amount</summary>
-        public int Delta;
+        public readonly int Delta;
 
         /// <summary>X coordinate of the mouse cursor</summary>
-        public int X;
+        public readonly int X;
 
         /// <summary>Y coordinate of the mouse cursor</summary>
-        public int Y;
+        public readonly int Y;
     }
 
     /// <summary>
     /// Mouse wheel scroll event parameters.
     /// </summary>
     [StructLayout( LayoutKind.Sequential )]
-    public struct MouseWheelScrollEvent
+    public readonly struct MouseWheelScrollEvent
     {
         /// <summary>Mouse Wheel which triggered the event</summary>
-        public Mouse.Wheel Wheel;
+        public readonly Mouse.Wheel Wheel;
 
         /// <summary>Scroll amount</summary>
-        public float Delta;
+        public readonly float Delta;
 
         /// <summary>X coordinate of the mouse cursor</summary>
-        public int X;
+        public readonly int X;
 
         /// <summary>Y coordinate of the mouse cursor</summary>
-        public int Y;
+        public readonly int Y;
     }
 
     /// <summary>
     /// Joystick axis move event parameters.
     /// </summary>
     [StructLayout( LayoutKind.Sequential )]
-    public struct JoystickMoveEvent
+    public readonly struct JoystickMoveEvent
     {
         /// <summary>Index of the joystick which triggered the event</summary>
-        public uint JoystickId;
+        public readonly uint JoystickId;
 
         /// <summary>Joystick axis (see JoyAxis enum)</summary>
-        public Joystick.Axis Axis;
+        public readonly Joystick.Axis Axis;
 
         /// <summary>Current position of the axis</summary>
-        public float Position;
+        public readonly float Position;
     }
 
     /// <summary>
     /// Joystick buttons event parameters
     /// </summary>
     [StructLayout( LayoutKind.Sequential )]
-    public struct JoystickButtonEvent
+    public readonly struct JoystickButtonEvent
     {
         /// <summary>Index of the joystick which triggered the event</summary>
-        public uint JoystickId;
+        public readonly uint JoystickId;
 
         /// <summary>Index of the button</summary>
-        public uint Button;
+        public readonly uint Button;
     }
 
     /// <summary>
     /// Joystick connect event parameters
     /// </summary>
     [StructLayout( LayoutKind.Sequential )]
-    public struct JoystickConnectEvent
+    public readonly struct JoystickConnectEvent
     {
         /// <summary>Index of the joystick which triggered the event</summary>
-        public uint JoystickId;
+        public readonly uint JoystickId;
     }
 
     /// <summary>
     /// Size event parameters
     /// </summary>
     [StructLayout( LayoutKind.Sequential )]
-    public struct SizeEvent
+    public readonly struct SizeEvent
     {
         /// <summary>New width of the window</summary>
-        public uint Width;
+        public readonly uint Width;
 
         /// <summary>New height of the window</summary>
-        public uint Height;
+        public readonly uint Height;
     }
 
     /// <summary>
     /// Touch event parameters
     /// </summary>
     [StructLayout( LayoutKind.Sequential )]
-    public struct TouchEvent
+    public readonly struct TouchEvent
     {
         /// <summary>Index of the finger in case of multi-touch events</summary>
-        public uint Finger;
+        public readonly uint Finger;
 
         /// <summary>X position of the touch, relative to the left of the owner window</summary>
-        public int X;
+        public readonly int X;
 
         /// <summary>Y position of the touch, relative to the top of the owner window</summary>
-        public int Y;
+        public readonly int Y;
     }
 
     /// <summary>
     /// Sensor event parameters
     /// </summary>
     [StructLayout( LayoutKind.Sequential )]
-    public struct SensorEvent
+    public readonly struct SensorEvent
     {
         /// <summary>Type of the sensor</summary>
-        public Sensor.Type Type;
+        public readonly Sensor.Type Type;
 
         /// <summary>Current value of the sensor on X axis</summary>
-        public float X;
+        public readonly float X;
 
         /// <summary>Current value of the sensor on Y axis</summary>
-        public float Y;
+        public readonly float Y;
 
         /// <summary>Current value of the sensor on Z axis</summary>
-        public float Z;
+        public readonly float Z;
     }
 
     /// <summary>
     /// Event defines a system event and its parameters
     /// </summary>
     [StructLayout( LayoutKind.Explicit, Size = 20 )]
-    public struct Event
+    public readonly struct Event
     {
         /// <summary>Type of event (see EventType enum)</summary>
         [FieldOffset( 0 )]
-        public EventType Type;
+        public readonly EventType Type;
 
         /// <summary>Arguments for size events (Resized)</summary>
         [FieldOffset( 4 )]
-        public SizeEvent Size;
+        public readonly SizeEvent Size;
 
         /// <summary>Arguments for key events (KeyPressed, KeyReleased)</summary>
         [FieldOffset( 4 )]
-        public KeyEvent Key;
+        public readonly KeyEvent Key;
 
         /// <summary>Arguments for text events (TextEntered)</summary>
         [FieldOffset( 4 )]
-        public TextEvent Text;
+        public readonly TextEvent Text;
 
         /// <summary>Arguments for mouse move events (MouseMoved)</summary>
         [FieldOffset( 4 )]
-        public MouseMoveEvent MouseMove;
+        public readonly MouseMoveEvent MouseMove;
 
         /// <summary>Arguments for mouse button events (MouseButtonPressed, MouseButtonReleased)</summary>
         [FieldOffset( 4 )]
-        public MouseButtonEvent MouseButton;
+        public readonly MouseButtonEvent MouseButton;
 
         /// <summary>Arguments for mouse wheel events (MouseWheelMoved)</summary>
         [FieldOffset( 4 )]
         [Obsolete( "MouseWheel is deprecated, please use MouseWheelScroll instead" )]
-        public MouseWheelEvent MouseWheel;
+        public readonly MouseWheelEvent MouseWheel;
 
         /// <summary>Arguments for mouse wheel scroll events (MouseWheelScrolled)</summary>
         [FieldOffset( 4 )]
-        public MouseWheelScrollEvent MouseWheelScroll;
+        public readonly MouseWheelScrollEvent MouseWheelScroll;
 
         /// <summary>Arguments for joystick axis events (JoystickMoved)</summary>
         [FieldOffset( 4 )]
-        public JoystickMoveEvent JoystickMove;
+        public readonly JoystickMoveEvent JoystickMove;
 
         /// <summary>Arguments for joystick button events (JoystickButtonPressed, JoystickButtonReleased)</summary>
         [FieldOffset( 4 )]
-        public JoystickButtonEvent JoystickButton;
+        public readonly JoystickButtonEvent JoystickButton;
 
         /// <summary>Arguments for joystick connect events (JoystickConnected, JoystickDisconnected)</summary>
         [FieldOffset( 4 )]
-        public JoystickConnectEvent JoystickConnect;
+        public readonly JoystickConnectEvent JoystickConnect;
 
         /// <summary>Arguments for touch events (TouchBegan, TouchMoved, TouchEnded)</summary>
         [FieldOffset( 4 )]
-        public TouchEvent Touch;
+        public readonly TouchEvent Touch;
 
         /// <summary>Arguments for sensor events (SensorChanged)</summary>
         [FieldOffset( 4 )]
-        public SensorEvent Sensor;
+        public readonly SensorEvent Sensor;
     }
 }

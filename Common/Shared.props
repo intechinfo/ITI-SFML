@@ -1,8 +1,9 @@
 <Project>
 
-  <!-- Common C# language version. -->
+  <!-- Common C# language version. All projects here allow unsafe. -->
   <PropertyGroup>
     <LangVersion>7.3</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   
   <!-- SharedDir is the /Common directory. -->

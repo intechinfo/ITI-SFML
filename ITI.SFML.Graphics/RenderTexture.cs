@@ -11,15 +11,37 @@ namespace SFML.Graphics
     /// </summary>
     public class RenderTexture : ObjectBase, IRenderTarget
     {
+        View _myDefaultView;
+
+        //
+        // This does not work!
+        // sfRenderTexture_createWithSettings is not available in CSFML 2.5.0.
+        //
+        ///// <summary>
+        ///// Create the render-texture with the given dimensions and
+        ///// a ContextSettings.
+        ///// </summary>
+        ///// <param name="width">Width of the render-texture.</param>
+        ///// <param name="height">Height of the render-texture.</param>
+        ///// <param name="settings">A ContextSettings struct representing settings for the RenderTexture.</param>
+        //public RenderTexture( uint width, uint height, ContextSettings contextSettings = default )
+        //    : base( sfRenderTexture_createWithSettings( width, height, contextSettings ) )
+        //{
+        //    _myDefaultView = new View( sfRenderTexture_getDefaultView( CPointer ) );
+        //    Texture = new Texture( sfRenderTexture_getTexture( CPointer ) );
+        //    GC.SuppressFinalize( _myDefaultView );
+        //    GC.SuppressFinalize( Texture );
+        //}
+
         /// <summary>
         /// Create the render-texture with the given dimensions and
-        /// a ContextSettings.
+        /// an optional depth-buffer attached.
         /// </summary>
-        /// <param name="width">Width of the render-texture</param>
-        /// <param name="height">Height of the render-texture</param>
-        /// <param name="settings">A ContextSettings struct representing settings for the RenderTexture</param>
-        public RenderTexture( uint width, uint height, ContextSettings contextSettings = default )
-            : base( sfRenderTexture_createWithSettings( width, height, contextSettings ) )
+        /// <param name="width">Width of the render-texture.</param>
+        /// <param name="height">Height of the render-texture.</param>
+        /// <param name="depthBuffer">Whether a depth buffer should be attached.</param>
+        public RenderTexture( uint width, uint height, bool depthBuffer = false ) :
+            base( sfRenderTexture_create( width, height, depthBuffer ) )
         {
             _myDefaultView = new View( sfRenderTexture_getDefaultView( CPointer ) );
             Texture = new Texture( sfRenderTexture_getTexture( CPointer ) );
@@ -54,22 +76,16 @@ namespace SFML.Graphics
         /// <summary>
         /// Gets the size of the rendering region of the render texture.
         /// </summary>
-        public Vector2u Size
-        {
-            get { return sfRenderTexture_getSize( CPointer ); }
-        }
+        public Vector2u Size => sfRenderTexture_getSize( CPointer ); 
 
         /// <summary>
         /// Gets the default view of the render texture.
+        /// TODO: Defines a IReadOnlyView and expose it here?
         /// </summary>
-        public View DefaultView
-        {
-            get { return new View( _myDefaultView ); }
-        }
-
+        public View DefaultView => new View( _myDefaultView ); 
 
         /// <summary>
-        /// Gets or Sets the current active view
+        /// Gets or Sets the current active view.
         /// </summary>
         public View View
         {
@@ -82,10 +98,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="view">Target view</param>
         /// <returns>Viewport rectangle, expressed in pixels in the current target</returns>
-        public IntRect GetViewport( View view )
-        {
-            return sfRenderTexture_getViewport( CPointer, view.CPointer );
-        }
+        public IntRect GetViewport( View view ) => sfRenderTexture_getViewport( CPointer, view.CPointer );
 
         /// <summary>
         /// Convert a point from target coordinates to world
@@ -99,10 +112,7 @@ namespace SFML.Graphics
         /// </summary>
         /// <param name="point">Pixel to convert</param>
         /// <returns>The converted point, in "world" coordinates</returns>
-        public Vector2f MapPixelToCoords( Vector2i point )
-        {
-            return MapPixelToCoords( point, View );
-        }
+        public Vector2f MapPixelToCoords( Vector2i point ) => MapPixelToCoords( point, View );
 
         /// <summary>
         /// Converts a point from target coordinates to world coordinates.
@@ -226,9 +236,9 @@ namespace SFML.Graphics
         }
 
         /// <summary>
-        /// Target texture of the render texture
+        /// Gets the target texture of the render texture
         /// </summary>
-        public Texture Texture { get; set; }
+        public Texture Texture { get; }
 
         /// <summary>
         /// Gets the maximum anti-aliasing level supported by the system.
@@ -422,15 +432,17 @@ namespace SFML.Graphics
                 Context.Global.SetActive( false );
         }
 
-        View _myDefaultView;
-
         #region Imports
-        [Obsolete( "sfRenderTexture_create is obselete. Use sfRenderTexture_createWithSettings instead." )]
+        // This is not yet obsolete!
+        // [Obsolete( "sfRenderTexture_create is obselete. Use sfRenderTexture_createWithSettings instead." )]
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern IntPtr sfRenderTexture_create( uint Width, uint Height, bool DepthBuffer );
 
-        [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfRenderTexture_createWithSettings( uint Width, uint Height, ContextSettings Settings );
+        //
+        // Not found in CSFML 2.5.0.
+        //
+        //[DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
+        //static extern IntPtr sfRenderTexture_createWithSettings( uint Width, uint Height, ContextSettings Settings );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfRenderTexture_destroy( IntPtr CPointer );

@@ -578,18 +578,23 @@ namespace SFML.Graphics
         /// </summary>
         /// 
         /// <remarks>
-        /// Deprecated. Use <see cref="Texture"/> and <see cref="Texture.Update(RenderWindow)"/>
-        /// instead:
+        /// This uses <see cref="Texture"/> and <see cref="Texture.Update(RenderWindow)"/>:
         /// <code>
-        ///    Texture texture = new Texture(window.Size);
-        ///    texture.update(window);
-        ///    Image img = texture.CopyToImage();
+        ///    Image img;
+        ///    using( Texture texture = new Texture( window.Size ) )
+        ///    {
+        ///       texture.update(window);
+        ///       img = texture.CopyToImage();
+        ///    }
         ///    </code>
         /// </remarks>
-        [Obsolete( "Capture is deprecated, please see remarks for preferred method." )]
         public Image Capture()
         {
-            return new Image( sfRenderWindow_capture( CPointer ) );
+            using( Texture texture = new Texture( Size ) )
+            {
+                texture.Update( this );
+                return texture.CopyToImage();
+            }
         }
 
         /// <summary>
@@ -800,9 +805,6 @@ namespace SFML.Graphics
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern void sfRenderWindow_resetGLStates( IntPtr CPointer );
-
-        [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr sfRenderWindow_capture( IntPtr CPointer );
 
         [DllImport( CSFML.Graphics, CallingConvention = CallingConvention.Cdecl ), SuppressUnmanagedCodeSecurity]
         static extern Vector2i sfMouse_getPositionRenderWindow( IntPtr CPointer );

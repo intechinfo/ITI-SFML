@@ -12,11 +12,8 @@ namespace DemoApp
         /// </summary>
         static void Main()
         {
-            SFML.GraphicsNative.Load();
-            SFML.AudioNative.Load();
-            var w = new EffectDemo.EffectDemoWindow();
-            // Start the game loop
             var clock = new Clock();
+            var w = new EffectDemo.EffectDemoWindow();
             while( w.IsOpen )
             {
                 // Process events

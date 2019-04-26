@@ -31,6 +31,7 @@ namespace DemoApp.EffectDemo
                 new StormBlinkEffect(_font),
                 new EdgeEffect(_font)
             };
+
             // Create the messages background
             _textBackgroundTexture = new Texture( "resources/text-background.png" );
             _textBackground = new Sprite( _textBackgroundTexture );
@@ -104,6 +105,7 @@ namespace DemoApp.EffectDemo
                 else _currentEffect++;
                 _description.DisplayedString = "Current effect: " + _effects[_currentEffect].Name;
             }
+
             base.OnKeyPressed( e );
         }
     }

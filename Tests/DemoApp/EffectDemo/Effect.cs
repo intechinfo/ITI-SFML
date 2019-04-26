@@ -43,7 +43,9 @@ namespace DemoApp.EffectDemo
         }
 
         protected abstract void OnUpdate( float time, float x, float y );
+
         protected abstract void OnDraw( IRenderTarget target, in RenderStates states );
+
         public abstract void Dispose();
 
     }

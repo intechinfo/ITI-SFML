@@ -15,7 +15,7 @@ namespace SFML.Graphics
         readonly bool _external;
 
         /// <summary>
-        /// Constructs the texture.
+        /// Initializes a new texture.
         /// </summary>
         /// <param name="width">Texture width</param>
         /// <param name="height">Texture height</param>
@@ -28,7 +28,17 @@ namespace SFML.Graphics
         }
 
         /// <summary>
-        /// Constructs the texture from a file.
+        /// Initializes a new texture.
+        /// </summary>
+        /// <param name="size">Size of the texture to create.</param>
+        /// <exception cref="LoadingFailedException" />
+        public Texture( Vector2u size )
+            : this( size.X, size.Y )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new texture from a file.
         /// </summary>
         /// <param name="filename">Path of the image file to load.</param>
         /// <exception cref="LoadingFailedException" />
