@@ -280,7 +280,7 @@ namespace SFML.Graphics
         /// Handle the destruction of the object
         /// </summary>
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        protected override void Destroy( bool disposing )
+        protected override void OnDispose( bool disposing )
         {
             sfImage_destroy( CPointer );
         }

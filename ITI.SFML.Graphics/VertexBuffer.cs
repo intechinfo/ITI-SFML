@@ -10,8 +10,7 @@ namespace SFML.Graphics
         /// <summary>
         /// Usage specifiers.
         /// <para>
-        /// If data is going to be updated once or more every frame,
-        /// set the usage to Stream.
+        /// If data is going to be updated once or more every frame, set the usage to Stream.
         /// If data is going to be set once and used for a long time without being
         /// modified, set the usage to Static.
         /// For everything else Dynamic should be a good compromise.
@@ -19,8 +18,20 @@ namespace SFML.Graphics
         /// </summary>
         public enum UsageSpecifier
         {
+            /// <summary>
+            /// Data is going to be updated once or more every frame.
+            /// </summary>
             Stream,
+
+            /// <summary>
+            /// Data is updated but not as much as in <see cref="Stream"/> and less than
+            /// the <see cref="Static"/> usage.
+            /// </summary>
             Dynamic,
+
+            /// <summary>
+            /// Data is going to be set once and used for a long time without being modified.
+            /// </summary>
             Static
         }
 
@@ -223,7 +234,7 @@ namespace SFML.Graphics
         /// Handles the destruction of the object.
         /// </summary>
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        protected override void Destroy( bool disposing )
+        protected override void OnDispose( bool disposing )
         {
             sfVertexBuffer_destroy( CPointer);
         }

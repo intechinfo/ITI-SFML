@@ -223,6 +223,7 @@ namespace SFML.Window
             /// <summary>The total number of keyboard keys</summary>
             KeyCount, // Keep last
 
+#pragma warning disable CS1591
             // Deprecated backwards compatible stuff
             [Obsolete( "Deprecated: Use Hyphen instead." )]
             Dash = Hyphen,
@@ -234,6 +235,8 @@ namespace SFML.Window
             BackSlash = Backslash,
             [Obsolete( "Deprecated: Use Semicolon instead." )]
             SemiColon = Semicolon
+#pragma warning restore CS1591
+
         };
 
         /// <summary>

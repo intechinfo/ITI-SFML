@@ -103,7 +103,14 @@ namespace SFML.Audio
         [StructLayout( LayoutKind.Sequential )]
         public readonly struct TimeSpan
         {
+            /// <summary>
+            /// The offset in the Music.
+            /// </summary>
             public readonly Time Offset;
+
+            /// <summary>
+            /// The length of this span.
+            /// </summary>
             public readonly Time Length;
         }
 
@@ -302,7 +309,7 @@ namespace SFML.Audio
         /// Handle the destruction of the object
         /// </summary>
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        protected override void Destroy( bool disposing )
+        protected override void OnDispose( bool disposing )
         {
             if( disposing )
             {

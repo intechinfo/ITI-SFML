@@ -7,6 +7,8 @@ using System.Runtime.InteropServices;
 
 namespace SFML.System
 {
+    #pragma warning disable CS1591
+
     public static class CSFML
     {
         public const string Audio = "csfml-audio";

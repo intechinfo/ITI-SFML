@@ -79,11 +79,9 @@ namespace SFML.Window
         SensorChanged
     }
 
-    ////////////////////////////////////////////////////////////
     /// <summary>
     /// Keyboard event parameters
     /// </summary>
-    ////////////////////////////////////////////////////////////
     [StructLayout( LayoutKind.Sequential )]
     public readonly struct KeyEvent
     {
@@ -165,16 +163,24 @@ namespace SFML.Window
     [StructLayout( LayoutKind.Sequential )]
     public readonly struct MouseWheelScrollEvent
     {
-        /// <summary>Mouse Wheel which triggered the event</summary>
+        /// <summary>
+        /// Mouse Wheel which triggered the event.
+        /// </summary>
         public readonly Mouse.Wheel Wheel;
 
-        /// <summary>Scroll amount</summary>
+        /// <summary>
+        /// Scroll amount.
+        /// </summary>
         public readonly float Delta;
 
-        /// <summary>X coordinate of the mouse cursor</summary>
+        /// <summary>
+        /// X coordinate of the mouse cursor.
+        /// </summary>
         public readonly int X;
 
-        /// <summary>Y coordinate of the mouse cursor</summary>
+        /// <summary>
+        /// Y coordinate of the mouse cursor.
+        /// </summary>
         public readonly int Y;
     }
 
@@ -184,26 +190,36 @@ namespace SFML.Window
     [StructLayout( LayoutKind.Sequential )]
     public readonly struct JoystickMoveEvent
     {
-        /// <summary>Index of the joystick which triggered the event</summary>
+        /// <summary>
+        /// Index of the joystick which triggered the event.
+        /// </summary>
         public readonly uint JoystickId;
 
-        /// <summary>Joystick axis (see JoyAxis enum)</summary>
+        /// <summary>
+        /// Joystick axis (see <see cref="Joystick.Axis"/> enum).
+        /// </summary>
         public readonly Joystick.Axis Axis;
 
-        /// <summary>Current position of the axis</summary>
+        /// <summary>
+        /// Current position of the axis.
+        /// </summary>
         public readonly float Position;
     }
 
     /// <summary>
-    /// Joystick buttons event parameters
+    /// Joystick buttons event parameters.
     /// </summary>
     [StructLayout( LayoutKind.Sequential )]
     public readonly struct JoystickButtonEvent
     {
-        /// <summary>Index of the joystick which triggered the event</summary>
+        /// <summary>
+        /// Index of the joystick which triggered the event.
+        /// </summary>
         public readonly uint JoystickId;
 
-        /// <summary>Index of the button</summary>
+        /// <summary>
+        /// Index of the button.
+        /// </summary>
         public readonly uint Button;
     }
 
@@ -213,20 +229,26 @@ namespace SFML.Window
     [StructLayout( LayoutKind.Sequential )]
     public readonly struct JoystickConnectEvent
     {
-        /// <summary>Index of the joystick which triggered the event</summary>
+        /// <summary>
+        /// Index of the joystick which triggered the event.
+        /// </summary>
         public readonly uint JoystickId;
     }
 
     /// <summary>
-    /// Size event parameters
+    /// Size event parameters.
     /// </summary>
     [StructLayout( LayoutKind.Sequential )]
     public readonly struct SizeEvent
     {
-        /// <summary>New width of the window</summary>
+        /// <summary>
+        /// New width of the window.
+        /// </summary>
         public readonly uint Width;
 
-        /// <summary>New height of the window</summary>
+        /// <summary>
+        /// New height of the window.
+        /// </summary>
         public readonly uint Height;
     }
 
@@ -236,13 +258,19 @@ namespace SFML.Window
     [StructLayout( LayoutKind.Sequential )]
     public readonly struct TouchEvent
     {
-        /// <summary>Index of the finger in case of multi-touch events</summary>
+        /// <summary>
+        /// Index of the finger in case of multi-touch events.
+        /// </summary>
         public readonly uint Finger;
 
-        /// <summary>X position of the touch, relative to the left of the owner window</summary>
+        /// <summary>
+        /// X position of the touch, relative to the left of the owner window.
+        /// </summary>
         public readonly int X;
 
-        /// <summary>Y position of the touch, relative to the top of the owner window</summary>
+        /// <summary>
+        /// Y position of the touch, relative to the top of the owner window.
+        /// </summary>
         public readonly int Y;
     }
 
@@ -252,16 +280,24 @@ namespace SFML.Window
     [StructLayout( LayoutKind.Sequential )]
     public readonly struct SensorEvent
     {
-        /// <summary>Type of the sensor</summary>
+        /// <summary>
+        /// Type of the sensor.
+        /// </summary>
         public readonly Sensor.Type Type;
 
-        /// <summary>Current value of the sensor on X axis</summary>
+        /// <summary>
+        /// Current value of the sensor on X axis.
+        /// </summary>
         public readonly float X;
 
-        /// <summary>Current value of the sensor on Y axis</summary>
+        /// <summary>
+        /// Current value of the sensor on Y axis.
+        /// </summary>
         public readonly float Y;
 
-        /// <summary>Current value of the sensor on Z axis</summary>
+        /// <summary>
+        /// Current value of the sensor on Z axis.
+        /// </summary>
         public readonly float Z;
     }
 

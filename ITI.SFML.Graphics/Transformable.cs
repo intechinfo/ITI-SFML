@@ -180,7 +180,7 @@ namespace SFML.Graphics
         /// Handle the destruction of the object
         /// </summary>
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        protected override void Destroy( bool disposing )
+        protected override void OnDispose( bool disposing )
         {
             // Does nothing, this instance is either pure C# (if created by the user)
             // or not the final object (if used as a base for a drawable class)

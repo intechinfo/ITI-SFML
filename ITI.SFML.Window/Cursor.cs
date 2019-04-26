@@ -27,6 +27,7 @@ namespace SFML.Window
             /// Linux:   Yes
             /// </summary>
             Arrow,
+
             /// <summary>
             /// Busy arrow cursor
             /// Windows: Yes
@@ -41,6 +42,7 @@ namespace SFML.Window
             /// Linux:   Yes
             /// </summary>
             Wait,
+
             /// <summary>
             /// I-beam, cursor when hovering over a field allowing text entry
             /// Windows: Yes
@@ -48,6 +50,7 @@ namespace SFML.Window
             /// Linux:   Yes
             /// </summary>
             Text,
+
             /// <summary>
             /// Pointing hand cursor
             /// Windows: Yes
@@ -55,6 +58,7 @@ namespace SFML.Window
             /// Linux:   Yes
             /// </summary>
             Hand,
+
             /// <summary>
             /// Horizontal double arrow cursor
             /// Windows: Yes
@@ -62,6 +66,7 @@ namespace SFML.Window
             /// Linux:   Yes
             /// </summary>
             SizeHorinzontal,
+
             /// <summary>
             /// Vertical double arrow cursor
             /// Windows: Yes
@@ -69,6 +74,7 @@ namespace SFML.Window
             /// Linux:   Yes
             /// </summary>
             SizeVertical,
+
             /// <summary>
             /// Double arrow cursor going from top-left to bottom-right
             /// Windows: Yes
@@ -76,6 +82,7 @@ namespace SFML.Window
             /// Linux:   No
             /// </summary>
             SizeTopLeftBottomRight,
+
             /// <summary>
             /// Double arrow cursor going from bottom-left to top-right
             /// Windows: Yes
@@ -83,6 +90,7 @@ namespace SFML.Window
             /// Linux:   No
             /// </summary>
             SizeBottomLeftTopRight,
+
             /// <summary>
             /// Combination of SizeHorizontal and SizeVertical
             /// Windows: Yes
@@ -90,6 +98,7 @@ namespace SFML.Window
             /// Linux:   Yes
             /// </summary>
             SizeAll,
+
             /// <summary>
             /// Crosshair cursor
             /// Windows: Yes
@@ -97,6 +106,7 @@ namespace SFML.Window
             /// Linux:   Yes
             /// </summary>
             Cross,
+
             /// <summary>
             /// Help cursor
             /// Windows: Yes
@@ -104,6 +114,7 @@ namespace SFML.Window
             /// Linux:   Yes
             /// </summary>
             Help,
+
             /// <summary>
             /// Action not allowed cursor
             /// Windows: Yes
@@ -169,7 +180,11 @@ namespace SFML.Window
             }
         }
 
-        protected override void Destroy( bool disposing )
+        /// <summary>
+        /// Destroys  
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected override void OnDispose( bool disposing )
         {
             sfCursor_destroy( CPointer);
         }

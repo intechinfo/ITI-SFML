@@ -239,16 +239,16 @@ namespace SFML.Window
         /// <summary>
         /// Sets the displayed cursor to a native system cursor.
         /// </summary>
-        /// <param name="enable">The cursor to set.</param>
+        /// <param name="cursor">The cursor to set.</param>
         public virtual void SetMouseCursor( Cursor cursor )
         {
             sfWindow_setMouseCursor( CPointer, cursor.CPointer );
         }
 
         /// <summary>
-        /// Enable / disable vertical synchronization
+        /// Enables/disables vertical synchronization.
         /// </summary>
-        /// <param name="enable">True to enable v-sync, false to deactivate</param>
+        /// <param name="enable">True to enable v-sync, false to deactivate.</param>
         public virtual void SetVerticalSyncEnabled( bool enable )
         {
             sfWindow_setVerticalSyncEnabled( CPointer, enable );
@@ -256,9 +256,9 @@ namespace SFML.Window
 
         /// <summary>
         /// Enable or disable automatic key-repeat.
-        /// Automatic key-repeat is enabled by default
+        /// Automatic key-repeat is enabled by default.
         /// </summary>
-        /// <param name="enable">True to enable, false to disable</param>
+        /// <param name="enable">True to enable, false to disable.</param>
         public virtual void SetKeyRepeatEnabled( bool enable )
         {
             sfWindow_setKeyRepeatEnabled( CPointer, enable );
@@ -432,7 +432,7 @@ namespace SFML.Window
         /// Handle the destruction of the object
         /// </summary>
         /// <param name="disposing">Is the GC disposing the object, or is it an explicit call ?</param>
-        protected override void Destroy( bool disposing )
+        protected override void OnDispose( bool disposing )
         {
             sfWindow_destroy( CPointer );
         }

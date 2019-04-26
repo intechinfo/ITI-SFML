@@ -6,6 +6,20 @@
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   
+  <!--<SourceLink>: is enabled only for Cake build. -->
+  <PropertyGroup>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(CakeBuild)' == 'true' ">
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(CakeBuild)' == 'true' ">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
+  </ItemGroup>
+  <!--</SourceLink>-->
+
+
   <!-- SharedDir is the /Common directory. -->
   <PropertyGroup>
     <SharedDir>$(MSBuildThisFileDirectory)</SharedDir>
@@ -49,7 +63,7 @@
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
 
-    <!-- Invenietis standard properties. -->
+    <!-- INTECH standard properties. -->
     <Copyright>Copyright INTECH INFO 2018-$([System.DateTime]::UtcNow.ToString("yyyy"))</Copyright>
     <Company>INTECH INFO</Company>
     <Authors>INTECH INFO</Authors>
