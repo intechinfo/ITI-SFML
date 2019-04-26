@@ -75,7 +75,7 @@ namespace CodeCake
                 .IsDependentOn( "Clean" )
                 .Does( () =>
                 {
-                    StandardSolutionBuild( solutionFileName, gitInfo, globalInfo.BuildConfiguration );
+                    StandardSolutionBuild( solutionFileName, gitInfo, globalInfo.BuildConfiguration, "DemoAppWithPackages" );
                 } );
 
             Task( "Create-NuGet-Packages" )
