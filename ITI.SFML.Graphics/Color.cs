@@ -1,0 +1,206 @@
+using System;
+using System.Runtime.InteropServices;
+
+namespace SFML.Graphics
+{
+    /// <summary>
+    /// Immutable value type for manipulating 32-bits RGBA colors.
+    /// </summary>
+    [StructLayout( LayoutKind.Sequential )]
+    public readonly struct Color : IEquatable<Color>
+    {
+        /// <summary>
+        /// Red component of the color.
+        /// </summary>
+        public readonly byte R;
+
+        /// <summary>
+        /// Green component of the color.
+        /// </summary>
+        public readonly byte G;
+
+        /// <summary>
+        /// Blue component of the color.
+        /// </summary>
+        public readonly byte B;
+
+        /// <summary>
+        /// Alpha (transparent) component of the color.
+        /// </summary>
+        public readonly byte A;
+
+        /// <summary>
+        /// Construct the color from its red, green, blue and alpha components.
+        /// </summary>
+        /// <param name="red">Red component.</param>
+        /// <param name="green">Green component.</param>
+        /// <param name="blue">Blue component.</param>
+        /// <param name="alpha">Alpha (transparency) component.</param>
+        public Color( byte red, byte green, byte blue, byte alpha = 255 )
+        {
+            R = red;
+            G = green;
+            B = blue;
+            A = alpha;
+        }
+
+        /// <summary>
+        /// Construct the color from 32-bit unsigned integer
+        /// </summary>
+        /// <param name="color">Number containing the RGBA components (in that order)</param>
+        public Color( uint color )
+        {
+            unchecked
+            {
+                R = (byte)(color >> 24);
+                G = (byte)(color >> 16);
+                B = (byte)(color >> 8);
+                A = (byte)color;
+            }
+        }
+
+        /// <summary>
+        /// Constructs the color from another.
+        /// </summary>
+        /// <param name="color">Color to copy</param>
+        public Color( Color color ) :
+            this( color.R, color.G, color.B, color.A )
+        {
+        }
+
+        /// <summary>
+        /// Converts a color to a 32-bit unsigned integer.
+        /// </summary>
+        /// <returns>Color represented as a 32-bit unsigned integer.</returns>
+        public uint ToInteger()
+        {
+            return (uint)((R << 24) | (G << 16) | (B << 8) | A);
+        }
+
+        /// <summary>
+        /// Provides a string describing the object.
+        /// </summary>
+        /// <returns>String description of the object</returns>
+        public override string ToString()
+        {
+            return "[Color]" +
+                   " R(" + R + ")" +
+                   " G(" + G + ")" +
+                   " B(" + B + ")" +
+                   " A(" + A + ")";
+        }
+
+        /// <summary>
+        /// Compares color and object and checks if they are equal.
+        /// </summary>
+        /// <param name="obj">Object to check.</param>
+        /// <returns>Object and color are equal.</returns>
+        public override bool Equals( object obj ) => obj is Color c && Equals( c );
+
+        /// <summary>
+        /// Compare stwo colors and checks if they are equal
+        /// </summary>
+        /// <param name="other">Color to check</param>
+        /// <returns>Colors are equal</returns>
+        public bool Equals( Color other )
+        {
+            return (R == other.R) &&
+                   (G == other.G) &&
+                   (B == other.B) &&
+                   (A == other.A);
+        }
+
+        /// <summary>
+        /// Provides a integer describing the object.
+        /// </summary>
+        /// <returns>Integer description of the object.</returns>
+        public override int GetHashCode()
+        {
+            return (R << 24) | (G << 16) | (B << 8) | A;
+        }
+
+        /// <summary>
+        /// Compares two colors and checks if they are equal.
+        /// </summary>
+        /// <returns>True if colors are equal, false otherwise.</returns>
+        public static bool operator ==( Color left, Color right )
+        {
+            return left.Equals( right );
+        }
+
+        /// <summary>
+        /// Compares two colors and checks if they are not equal.
+        /// </summary>
+        /// <returns>True if colors are different, false if they are equal.</returns>
+        public static bool operator !=( Color left, Color right )
+        {
+            return !left.Equals( right );
+        }
+
+        /// <summary>
+        /// This operator returns the component-wise sum of two colors.
+        /// Components that exceed 255 are clamped to 255.
+        /// </summary>
+        /// <returns>Result of left + right</returns>
+        public static Color operator +( Color left, Color right )
+        {
+            return new Color( (byte)Math.Min( left.R + right.R, 255 ),
+                             (byte)Math.Min( left.G + right.G, 255 ),
+                             (byte)Math.Min( left.B + right.B, 255 ),
+                             (byte)Math.Min( left.A + right.A, 255 ) );
+        }
+
+        /// <summary>
+        /// This operator returns the component-wise subtraction of two colors.
+        /// Components below 0 are clamped to 0.
+        /// </summary>
+        /// <returns>Result of left - right</returns>
+        public static Color operator -( Color left, Color right )
+        {
+            return new Color( (byte)Math.Max( left.R - right.R, 0 ),
+                             (byte)Math.Max( left.G - right.G, 0 ),
+                             (byte)Math.Max( left.B - right.B, 0 ),
+                             (byte)Math.Max( left.A - right.A, 0 ) );
+        }
+
+        /// <summary>
+        /// This operator returns the component-wise multiplication of two colors.
+        /// Components above 255 are clamped to 255.
+        /// </summary>
+        /// <returns>Result of left * right.</returns>
+        public static Color operator *( Color left, Color right )
+        {
+            return new Color( (byte)((int)left.R * right.R / 255),
+                             (byte)((int)left.G * right.G / 255),
+                             (byte)((int)left.B * right.B / 255),
+                             (byte)((int)left.A * right.A / 255) );
+        }
+
+        /// <summary>Predefined black color</summary>
+        public static readonly Color Black = new Color( 0, 0, 0 );
+
+        /// <summary>Predefined white color</summary>
+        public static readonly Color White = new Color( 255, 255, 255 );
+
+        /// <summary>Predefined red color</summary>
+        public static readonly Color Red = new Color( 255, 0, 0 );
+
+        /// <summary>Predefined green color</summary>
+        public static readonly Color Green = new Color( 0, 255, 0 );
+
+        /// <summary>Predefined blue color</summary>
+        public static readonly Color Blue = new Color( 0, 0, 255 );
+
+        /// <summary>Predefined yellow color</summary>
+        public static readonly Color Yellow = new Color( 255, 255, 0 );
+
+        /// <summary>Predefined magenta color</summary>
+        public static readonly Color Magenta = new Color( 255, 0, 255 );
+
+        /// <summary>Predefined cyan color</summary>
+        public static readonly Color Cyan = new Color( 0, 255, 255 );
+
+        /// <summary>Predefined (black) transparent color</summary>
+        public static readonly Color Transparent = new Color( 0, 0, 0, 0 );
+    }
+}

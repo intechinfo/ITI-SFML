@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\DemoApp\resources\*">
+      <Link>resources\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <Visible>true</Visible>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Include="..\..\DemoApp\**\*.cs" Exclude="..\..\DemoApp\obj\**">
+      <Link>Include\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <Visible>true</Visible>
+    </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="ITI.SFML.Graphics" Version="0.2.0-r" />
+    <PackageReference Include="ITI.SFML.System" Version="0.2.0-r" />
+    <PackageReference Include="ITI.SFML.Window" Version="0.2.0-r" />
+    <PackageReference Include="ITI.SFML.Audio" Version="0.2.0-r" />
+  </ItemGroup>
+  
+</Project>

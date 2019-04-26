@@ -1,10 +1,6 @@
 obj/
 lib/
-examples/*/*.dll
-examples/*/*.xml
-*.exe
-*.manifest
-*.pdb
-*.suo
-*.csproj.user
-*.VC.db
+bin/
+.vs/
+*.user
+/CodeCakeBuilder/Releases/

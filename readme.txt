@@ -1,3 +1,11 @@
+ITI-SFML is based on SFML.Net (see below).
+It provides:
+- readonly structures (and fields) as much as possible.
+- Immutable Transform, RenderStates Vectors, etc. and an explicit MutableTransform.
+- Nuget packages that embedds the native windows csfml dlls (with an infamous - but transparent - way to load them).
+- Unified DemoApp that insists on releasing/dispose the resources used.
+
+
 SFML.Net - Simple and Fast Multimedia Library for .Net
 ======================================================
 
