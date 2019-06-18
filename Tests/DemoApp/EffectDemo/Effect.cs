@@ -11,13 +11,19 @@ namespace DemoApp.EffectDemo
     /// </summary>
     abstract class Effect : IDrawable, IDisposable
     {
-        protected Effect( string name, Font font )
+        protected Effect( string name, string explain, string code, Font font )
         {
             Font = font;
             Name = name;
+            Explain = explain;
+            Code = code;
         }
 
         public string Name { get; }
+
+        public string Explain { get; }
+
+        public string Code { get; }
 
         protected Font Font { get; }
 

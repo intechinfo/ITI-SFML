@@ -8,6 +8,7 @@ namespace DemoApp.EffectDemo
     /// <summary>
     /// "Pixelate" fragment shader.
     /// </summary>
+    
     class PixelateEffect : Effect
     {
         readonly Texture _texture;
@@ -15,7 +16,7 @@ namespace DemoApp.EffectDemo
         readonly Shader _shader;
 
         public PixelateEffect( Font font )
-            : base( "pixelate", font )
+            : base( "pixelate", "Export this ladybug into minecraft", "resources/pixelate.frag" , font )
         {
             // Load the texture and initialize the sprite
             _texture = new Texture( "resources/background.jpg" );

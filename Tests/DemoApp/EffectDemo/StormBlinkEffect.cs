@@ -16,7 +16,7 @@ namespace DemoApp.EffectDemo
         readonly Shader _shader;
 
         public StormBlinkEffect( Font font )
-            : base( "storm + blink", font )
+            : base( "storm + blink", "Dust of storm arround cursor", "resources/blink.frag", font )
         {
             var random = new Random();
             // Create the points
@@ -38,7 +38,7 @@ namespace DemoApp.EffectDemo
         protected override void OnUpdate( float time, float x, float y )
         {
             var radius = 200 + (float)Math.Cos( time ) * 150;
-            _shader.SetUniform( "storm_position", new Vector2f( x * 800, y * 600 ) );
+            _shader.SetUniform( "storm_position", new Vector2f( x * 1300, y * 600 ) );
             _shader.SetUniform( "storm_inner_radius", radius / 3 );
             _shader.SetUniform( "storm_total_radius", radius );
             _shader.SetUniform( "blink_alpha", 0.5F + (float)Math.Cos( time * 3 ) * 0.25F );

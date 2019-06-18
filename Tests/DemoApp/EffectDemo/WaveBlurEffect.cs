@@ -15,7 +15,7 @@ namespace DemoApp.EffectDemo
         readonly Shader _shader;
 
         public WaveBlurEffect( Font font )
-            : base( "wave + blur", font )
+            : base( "wave + blur", "waving text and blur kinda like a flag", "resources/blur.frag" ,font )
         {
             // Create the text
             _text = new Text();

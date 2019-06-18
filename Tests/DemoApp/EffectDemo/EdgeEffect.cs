@@ -17,7 +17,7 @@ namespace DemoApp.EffectDemo
         readonly Shader _shader;
 
         public EdgeEffect( Font font )
-            : base( "edge post-effect", font )
+            : base( "edge post-effect", "roaming objects", "resources/disco.frag" ,font )
         {
             // Creates the off-screen surface.
             _surface = new RenderTexture( 800, 600 );
